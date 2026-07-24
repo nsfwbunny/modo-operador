@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#080808"/>
+      <stop offset="100%" style="stop-color:#0f110a"/>
+    </linearGradient>
+    <filter id="blur1"><feGaussianBlur stdDeviation="60"/></filter>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <ellipse cx="650" cy="200" rx="300" ry="200" fill="#c8f066" opacity="0.06" filter="url(#blur1)"/>
+  <ellipse cx="150" cy="780" rx="250" ry="180" fill="#c8f066" opacity="0.04" filter="url(#blur1)"/>
+  <g stroke="#ffffff" stroke-width="0.4" opacity="0.04">
+    <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="500" x2="800" y2="500"/><line x1="0" y1="600" x2="800" y2="600"/>
+    <line x1="0" y1="700" x2="800" y2="700"/><line x1="0" y1="800" x2="800" y2="800"/>
+    <line x1="100" y1="0" x2="100" y2="1000"/><line x1="200" y1="0" x2="200" y2="1000"/>
+    <line x1="300" y1="0" x2="300" y2="1000"/><line x1="400" y1="0" x2="400" y2="1000"/>
+    <line x1="500" y1="0" x2="500" y2="1000"/><line x1="600" y1="0" x2="600" y2="1000"/>
+    <line x1="700" y1="0" x2="700" y2="1000"/>
+  </g>
+  <g transform="translate(60,60)">
+    <rect x="0" y="0" width="18" height="18" rx="2" fill="#c8f066" opacity="0.9"/>
+    <rect x="22" y="0" width="18" height="18" rx="2" fill="#c8f066" opacity="0.4"/>
+    <rect x="0" y="22" width="18" height="18" rx="2" fill="#c8f066" opacity="0.4"/>
+    <rect x="22" y="22" width="18" height="18" rx="2" fill="#c8f066" opacity="0.15"/>
+  </g>
+  <text x="110" y="79" font-family="'Courier New',monospace" font-size="11" font-weight="600" fill="#c8f066" opacity="0.7" letter-spacing="3">MODO OPERADOR</text>
+  <rect x="670" y="58" width="72" height="24" rx="12" fill="#c8f066" opacity="0.1" stroke="#c8f066" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="706" y="74" font-family="'Courier New',monospace" font-size="10" fill="#c8f066" opacity="0.7" text-anchor="middle" letter-spacing="1">2026</text>
+  <line x1="60" y1="108" x2="740" y2="108" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <rect x="60" y="180" width="4" height="120" rx="2" fill="#c8f066"/>
+  <text x="80" y="260" font-family="Georgia,'Times New Roman',serif" font-size="96" font-weight="400" fill="#ffffff" opacity="0.95" letter-spacing="-2">Modo</text>
+  <text x="80" y="360" font-family="Georgia,'Times New Roman',serif" font-size="96" font-weight="400" fill="#c8f066" font-style="italic" letter-spacing="-2">Operador</text>
+  <text x="80" y="420" font-family="'Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="300" fill="#6b6966" letter-spacing="0.5">Do prompt ao sistema. Jules, MCP e agentes reais.</text>
+  <line x1="60" y1="460" x2="400" y2="460" stroke="#c8f066" stroke-width="0.8" opacity="0.3"/>
+  <g transform="translate(60,480)">
+    <rect x="0" y="0" width="72" height="26" rx="13" fill="#c8f066" opacity="0.1" stroke="#c8f066" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="36" y="17" font-family="'Courier New',monospace" font-size="10" fill="#c8f066" opacity="0.8" text-anchor="middle" letter-spacing="0.5">Jules</text>
+    <rect x="80" y="0" width="60" height="26" rx="13" fill="#c8f066" opacity="0.1" stroke="#c8f066" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="110" y="17" font-family="'Courier New',monospace" font-size="10" fill="#c8f066" opacity="0.8" text-anchor="middle" letter-spacing="0.5">MCP</text>
+    <rect x="148" y="0" width="100" height="26" rx="13" fill="#c8f066" opacity="0.1" stroke="#c8f066" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="198" y="17" font-family="'Courier New',monospace" font-size="10" fill="#c8f066" opacity="0.8" text-anchor="middle" letter-spacing="0.5">Antigravity</text>
+    <rect x="256" y="0" width="72" height="26" rx="13" fill="#c8f066" opacity="0.1" stroke="#c8f066" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="292" y="17" font-family="'Courier New',monospace" font-size="10" fill="#c8f066" opacity="0.8" text-anchor="middle" letter-spacing="0.5">GitHub</text>
+  </g>
+  <circle cx="160" cy="660" r="40" fill="none" stroke="#c8f066" stroke-width="1" opacity="0.5"/>
+  <circle cx="160" cy="660" r="34" fill="#c8f066" opacity="0.04"/>
+  <text x="160" y="655" font-family="'Courier New',monospace" font-size="9" fill="#c8f066" opacity="0.6" text-anchor="middle">01</text>
+  <text x="160" y="669" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" fill="#ffffff" opacity="0.5" text-anchor="middle">Intenção</text>
+  <line x1="202" y1="660" x2="258" y2="660" stroke="#c8f066" stroke-width="0.8" opacity="0.3"/>
+  <polygon points="258,656 268,660 258,664" fill="#c8f066" opacity="0.3"/>
+  <circle cx="310" cy="660" r="40" fill="none" stroke="#c8f066" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="310" cy="660" r="34" fill="#c8f066" opacity="0.08"/>
+  <text x="310" y="655" font-family="'Courier New',monospace" font-size="9" fill="#c8f066" opacity="0.9" text-anchor="middle">02</text>
+  <text x="310" y="669" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" fill="#c8f066" opacity="0.9" text-anchor="middle" font-weight="600">Agente</text>
+  <line x1="352" y1="660" x2="408" y2="660" stroke="#c8f066" stroke-width="0.8" opacity="0.3"/>
+  <polygon points="408,656 418,660 408,664" fill="#c8f066" opacity="0.3"/>
+  <circle cx="460" cy="660" r="40" fill="none" stroke="#c8f066" stroke-width="1" opacity="0.5"/>
+  <circle cx="460" cy="660" r="34" fill="#c8f066" opacity="0.04"/>
+  <text x="460" y="655" font-family="'Courier New',monospace" font-size="9" fill="#c8f066" opacity="0.6" text-anchor="middle">03</text>
+  <text x="460" y="669" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" fill="#ffffff" opacity="0.5" text-anchor="middle">Sistema</text>
+  <line x1="502" y1="660" x2="558" y2="660" stroke="#c8f066" stroke-width="0.8" opacity="0.3"/>
+  <polygon points="558,656 568,660 558,664" fill="#c8f066" opacity="0.3"/>
+  <circle cx="620" cy="660" r="40" fill="none" stroke="#c8f066" stroke-width="1" opacity="0.5"/>
+  <circle cx="620" cy="660" r="34" fill="#c8f066" opacity="0.04"/>
+  <text x="620" y="655" font-family="'Courier New',monospace" font-size="9" fill="#c8f066" opacity="0.6" text-anchor="middle">04</text>
+  <text x="620" y="669" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" fill="#ffffff" opacity="0.5" text-anchor="middle">Resultado</text>
+  <text x="160" y="718" font-family="'Courier New',monospace" font-size="8" fill="#3a3a38" text-anchor="middle">você define</text>
+  <text x="310" y="718" font-family="'Courier New',monospace" font-size="8" fill="#c8f066" opacity="0.4" text-anchor="middle">executa sozinho</text>
+  <text x="460" y="718" font-family="'Courier New',monospace" font-size="8" fill="#3a3a38" text-anchor="middle">opera 24h</text>
+  <text x="620" y="718" font-family="'Courier New',monospace" font-size="8" fill="#3a3a38" text-anchor="middle">você escala</text>
+  <line x1="60" y1="800" x2="740" y2="800" stroke="#ffffff" stroke-width="0.5" opacity="0.06"/>
+  <text x="60" y="850" font-family="Georgia,serif" font-size="18" fill="#ffffff" opacity="0.15" font-style="italic">"Não é curso. É sistema documentado."</text>
+  <g transform="translate(60,880)">
+    <circle cx="6" cy="6" r="4" fill="#c8f066"/>
+    <text x="18" y="10" font-family="'Courier New',monospace" font-size="10" fill="#6b6966" letter-spacing="0.5">Prova pública: github.com/nsfwbunny/modo-operador</text>
+  </g>
+  <text x="740" y="960" font-family="'Courier New',monospace" font-size="11" fill="#c8f066" opacity="0.4" text-anchor="end" letter-spacing="1">EARLY ACCESS</text>
+  <line x1="0" y1="990" x2="800" y2="990" stroke="#c8f066" stroke-width="1" opacity="0.15"/>
+</svg>
