@@ -1,113 +1,128 @@
 # Capítulo 3 — Agentes como unidade de trabalho
 
-## Objetivo
-
-Explicar o que é um agente de IA na prática e como usá-lo como unidade de execução — não como assistente. Usando JARVAS 2 como sistema real de referência.
+> Um agente não é um chatbot mais esperto. É uma unidade autônoma de execução com acesso a ferramentas, contexto e capacidade de agir no mundo.
 
 ---
 
-## 1. O que diferencia um agente de um chatbot
+## O que é um agente de verdade
 
-Um chatbot responde. Um agente executa.
+A palavra "agente" foi diluída. Todo produto de IA agora se chama agente.
 
-A diferença não é de inteligência — é de arquitetura. Um chatbot recebe um prompt e devolve texto. Um agente recebe um objetivo, planeja passos, executa ações no mundo real (criar arquivos, abrir PRs, rodar scripts, acessar APIs) e registra o resultado para usar no próximo ciclo.
+Para os fins deste playbook, agente é:
 
-| Chatbot | Agente |
-|---|---|
-| Você digita, ele responde | Você define objetivo, ele executa |
-| Resultado é texto | Resultado é ação no mundo |
-| Cada conversa começa do zero | Tem memória de execuções anteriores |
-| Você copia e cola | Ele commita, cria, envia |
-| Sem loop de feedback | Aprende com resultados passados |
+> **Um modelo de linguagem com acesso a ferramentas que pode executar sequências de ações para atingir um objetivo, tomando decisões intermediárias sem intervenção humana a cada passo.**
 
----
+Os três componentes críticos:
+- **Modelo** — o cérebro (GPT-4o, Gemini, Claude)
+- **Ferramentas** — o que o agente pode fazer (ler arquivos, escrever código, chamar APIs, buscar na web)
+- **Loop de execução** — o agente age, observa o resultado, decide o próximo passo
 
-## 2. Os dois tipos de agente que importam agora
-
-**Agentes conectados a ferramentas externas** (Jules, Antigravity):
-Operam em repositórios, filesystems e APIs. Você dá a tarefa, eles executam de forma assíncrona e entregam um resultado verificável (PR, arquivo, commit).
-
-**Agentes autônomos locais** (JARVAS 2, sistemas customizados):
-Rodam na sua máquina. Você define o objetivo, o agente planeja, simula, pede aprovação para ações críticas e executa em loop. O estado é 100% seu — sem nuvem, sem dependência externa.
-
-Para quem está começando: Jules e Antigravity são o caminho mais rápido. Para quem quer soberania total: um agente local como JARVAS 2 é o objetivo de longo prazo.
+Sem ferramentas, é só geração de texto.
+Sem loop de execução, é só uma resposta.
 
 ---
 
-## 3. Como dar uma tarefa real sem perder controle
+## Os três tipos de agente que você vai usar
 
-O erro mais comum: prompt vago. "Melhore meu projeto" não é uma tarefa para agente — é um convite para invenção.
+### Tipo 1 — Agente de coding (Jules)
+Especializado em repositórios. Lê código, escreve código, testa, cria branches, abre PRs.
 
-Uma tarefa real para agente tem:
-1. **Escopo fechado** — lista exata de arquivos ou pastas envolvidos
-2. **Ações determinísticas** — "criar", "atualizar campo X", "abrir PR com título Y"
-3. **Restrições explícitas** — o que não fazer é tão importante quanto o que fazer
-4. **Entrega verificável** — o que você vai checar para confirmar que funcionou
+**Quando usar:** build, refactor, documentação técnica, testes automatizados.
 
-Exemplo ruim:
-```
-Organize meu repositório
-```
+**O que faz sozinho:** análise do repositório, escrita de código com contexto do projeto, commit com mensagem semântica, abertura de PR com description.
 
-Exemplo bom:
-```
-Verifique se as pastas docs/, playbook/ e proofs/ existem.
-Se alguma estiver faltando, crie um arquivo .gitkeep dentro.
-Não altere nenhum arquivo existente.
-Abra um PR com título "chore: scaffold validation".
-```
+**O que precisa de você:** spec clara da tarefa, aprovação do PR, definição de critérios de aceite.
 
----
+### Tipo 2 — Agente de orquestração (MCP + Antigravity)
+Conecta ferramentas e gerencia fluxos. Não escreve código — coordena quem escreve e o que acontece com o resultado.
 
-## 4. Gates de aprovação — quando deixar o agente rodar sozinho
+**Quando usar:** workflows multi-passo, integração entre sistemas, automações que cruzam múltiplas ferramentas.
 
-Todo agente precisa de um gate — um ponto onde a execução para e espera aprovação humana antes de continuar.
+**O que faz sozinho:** chamar APIs, passar dados entre sistemas, acionar outros agentes, gerenciar estado.
 
-A arquitetura do JARVAS 2 formaliza isso em três níveis de risco:
+**O que precisa de você:** definição do fluxo completo, tratamento de edge cases, monitoramento de falhas.
 
-| Nível | Tipo de ação | Comportamento |
-|---|---|---|
-| Baixo | Leitura, busca, geração de texto | Executa sem parar |
-| Médio | Criação de arquivos, commits, PRs | Para, exibe proposta, aguarda OK |
-| Alto | Deploy, envio de email, pagamento, delete | Bloqueado até autorização explícita |
+### Tipo 3 — Agente de pesquisa (Perplexity MCP)
+Busca, filtra e sintetiza informação em tempo real. Retorna dados estruturados que outros agentes consomem.
 
-Para Jules e Antigravity o gate é o PR: o agente não faz merge sozinho. Você revisa e aprova. Esse é o mínimo viável de controle.
+**Quando usar:** validação de mercado, monitoramento de concorrência, pesquisa para conteúdo, dados em tempo real.
+
+**O que faz sozinho:** múltiplas buscas paralelas, síntese de resultados, formatação para downstream.
+
+**O que precisa de você:** definição do que é relevante vs. ruído, critérios de qualidade.
 
 ---
 
-## 5. Caso real — JARVAS 2
+## Como dar tarefas para agentes
 
-**Sistema:** agente autônomo local, Python, rodando 100% na máquina do operador.
+O erro mais comum: tratar agente como chatbot e dar tarefas vagas.
 
-**Arquitetura real implementada:**
+**Errado:**
 ```
-Objetivo → Planner → Simulator (dry-run) → Human Gate → Execution → SQLite Memory → loop
+"Melhora o README do projeto"
 ```
 
-**O que já funciona hoje:**
-- Orquestrador CLI (`main.py`) inicializa o loop de execução
-- Dashboard local (`uvicorn dashboard.app:app`) exposta em `localhost:8000`
-- Fila de tarefas com inspeção via `/tasks` e `/queue`
-- Gate de aprovação via `/approvals` e `/approve-task`
-- Audit trail com snapshot e rollback via `/audit/{id}/rollback`
-- Simulação de workflow via `/simulate/workflow` antes de executar
-- Capability Registry: mapa de permissões por ferramenta
+**Certo:**
+```
+Lê o arquivo README.md atual.
+O produto é um playbook de IA operacional chamado Modo Operador.
+Reescreve a seção '## O que é o Modo Operador' para:
+- Ser mais direto (máx 3 parágrafos)
+- Remover a linguagem de marketing genérica
+- Deixar claro que é um sistema documentado, não um curso
+- Manter o tom técnico mas acessível
+Faz commit com mensagem: docs: rewrite what-is section para clareza
+```
 
-**Stack:** Python 3.10+, FastAPI, SQLite, Playwright, JSON local — zero dependência de cloud.
-
-**Repositório:** https://github.com/nsfwbunny/jarvas-2
-
-**O que este caso prova:**
-Você pode construir um agente autônomo real — com memória, gate de aprovação e audit trail — usando só Python e ferramentas open source. Sem assinar nenhum serviço de agente externo.
+Especificidade é respeito pelo tempo do agente — e pelo seu.
 
 ---
 
-## O que você faz agora
+## A anatomia de uma boa spec para agente
 
-Se quiser começar com agentes hoje, o caminho mais curto é:
+```markdown
+## Contexto
+[O que o agente precisa saber sobre o projeto/estado atual]
 
-1. Use Jules para tarefas de repositório (Capítulo 4 deste playbook)
-2. Use Antigravity para tarefas de criação de arquivos e escrita determinística
-3. Quando precisar de loop autônomo real com memória — estude a arquitetura do JARVAS 2
+## Tarefa
+[O que deve ser feito, em linguagem precisa]
 
-A progressão natural: prompt → Jules/Antigravity → agente local → swarm.
+## Critérios de aceite
+[Como saber que está correto]
+
+## Restrições
+[O que NÃO fazer]
+
+## Output esperado
+[Formato, localização, nome de arquivo, mensagem de commit]
+```
+
+Esse template funciona para Jules, para automações MCP e para qualquer agente de execução.
+
+---
+
+## Quando não usar agente
+
+Agente não é a resposta para tudo.
+
+**Não use agente quando:**
+- A tarefa leva menos de 2 minutos para você fazer manualmente
+- O critério de aceite é subjetivo e você não consegue descrever o que "certo" significa
+- A tarefa requer julgamento que só você tem (estratégia, relacionamento, intuição de produto)
+- O custo de erro é alto e não existe loop de revisão antes do impacto
+
+**Use agente quando:**
+- A tarefa é repetitiva e bem definida
+- Você consegue descrever o output correto com precisão
+- O loop de revisão é mais rápido que fazer manualmente
+- O volume justifica o setup inicial
+
+---
+
+## Resumo operacional
+
+- Agente = modelo + ferramentas + loop de execução
+- Três tipos: coding (Jules), orquestração (MCP), pesquisa (Perplexity)
+- Spec específica = resultado utilizável
+- Use o template: contexto + tarefa + critérios + restrições + output
+- Não automatize o que não está bem definido

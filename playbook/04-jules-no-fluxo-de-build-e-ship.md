@@ -1,104 +1,151 @@
 # Capítulo 4 — Jules no fluxo de build e ship
 
-## Objetivo
-
-Mostrar como usar Jules para construir e entregar código, documentação e estrutura de projeto sem depender de IDE ou terminal — usando um caso real executado neste próprio repositório como exemplo.
+> Jules é o agente de coding do Google Labs. Ele lê seu repositório, escreve código com contexto real do projeto e abre PRs. Você revisa e faz merge. Sem terminal, sem setup, sem IDE aberta.
 
 ---
 
-## 1. O que é Jules e como ele se conecta ao GitHub
+## O que Jules faz na prática
 
-Jules é um agente de IA da Google que opera diretamente em repositórios GitHub. Você conecta um repositório, dá uma tarefa em linguagem natural, e o Jules executa: cria arquivos, modifica código, abre pull requests.
+Jules não é um autocomplete. Ele é um agente assíncrono:
 
-A diferença em relação a usar ChatGPT ou Claude diretamente: o Jules não te entrega texto para você copiar e colar. Ele opera no repositório, faz o commit e abre o PR. Você revisa e aprova.
+1. Você descreve a tarefa em linguagem natural
+2. Jules analisa o repositório completo
+3. Escreve o código (ou documentação, ou configuração)
+4. Cria um branch com nome semântico
+5. Abre um PR com description detalhando o que foi feito e por quê
+6. Você lê, revisa, aprova ou pede ajuste
+7. Merge
 
-**Como conectar:**
-1. Acesse https://jules.google.com
-2. Clique em "New Task"
-3. Selecione o repositório GitHub (precisa autorizar acesso na primeira vez)
-4. Selecione o branch de trabalho
-5. Cole o prompt da tarefa
-6. Aguarde — Jules executa de forma assíncrona, você recebe notificação quando termina
-
----
-
-## 2. Tarefas que Jules executa bem
-
-- Criar estrutura de pastas e arquivos de scaffold
-- Escrever e atualizar arquivos Markdown (docs, READMEs, changelogs)
-- Modificar campos específicos em arquivos existentes sem alterar o resto
-- Criar arquivos de configuração (JSON, YAML, TOML)
-- Adicionar rodapés, cabeçalhos e metadados em arquivos existentes
-- Abrir PR com título e body já definidos no prompt
-
-Regra: quanto mais determinístico o prompt, mais fiel a execução. Instrua linha por linha. Não deixe espaço para o Jules "decidir" o que fazer.
+O repositório `modo-operador` foi parcialmente construído com Jules. Os commits estão no histórico público — auditável por qualquer pessoa.
 
 ---
 
-## 3. Tarefas que Jules não deve executar sozinho
+## Como configurar Jules no seu repositório
 
-- Escrever conteúdo de produto (capítulos, copy, argumentos de venda)
-- Tomar decisões de arquitetura sem especificação prévia
-- Refatorar código crítico sem gate de revisão humana
-- Fazer merge direto em `main` sem PR
-- Qualquer ação com efeito externo (deploy, envio de email, publicação)
+### Pré-requisitos
+- Conta Google com acesso ao Jules (labs.google/jules)
+- Repositório GitHub conectado
+- Permissões de write no repo
 
-Regra: Jules é execução dentro de um branch. O merge é sempre gate humano.
+### Setup
+1. Acesse `labs.google/jules`
+2. Conecte sua conta GitHub
+3. Selecione o repositório
+4. Jules faz um scan inicial da estrutura do projeto
 
----
-
-## 4. Como revisar e aprovar um PR gerado por Jules
-
-Depois que Jules termina, ele abre um PR. Antes de fazer merge:
-
-1. Abra o PR no GitHub
-2. Vá em "Files changed"
-3. Verifique arquivo por arquivo: Jules fez só o que foi pedido?
-4. Se algum arquivo foi alterado fora do escopo, não faça merge — comente e peça correção
-5. Se estiver correto, faça merge com squash (um commit limpo no histórico)
+Presto. Jules agora tem contexto do seu repo.
 
 ---
 
-## 5. Caso real — scaffold do modo-operador
+## A anatomia de uma boa tarefa para Jules
 
-Este capítulo foi escrito depois de uma execução real. Aqui estão os fatos:
+Jules funciona melhor com tarefas que têm:
+- **Escopo claro** — um problema específico, não "melhora tudo"
+- **Contexto de arquivo** — mencione os arquivos relevantes
+- **Critério de aceite** — como saber que está correto
+- **Restrição de estilo** — se houver padrão de código a seguir
 
-**Data:** 2026-07-24
+**Exemplo real usado neste projeto:**
 
-**Tarefa dada ao Jules:**
-Validar a estrutura de pastas do repositório `modo-operador`, verificar arquivos obrigatórios, atualizar campos específicos em dois arquivos e abrir PR.
+```
+Lê os arquivos em playbook/. São skeletons vazios com seção '## Notas de desenvolvimento' marcadas como PENDENTE.
 
-**O que Jules fez:**
-- Verificou estrutura de pastas
-- Atualizou `README.md`: trocou emojis por texto limpo, adicionou linha de rodapé
-- Atualizou `proofs/cases/jules-github.md`: preencheu campos Sistema construído, Stack, Evidencia e Status
-- Abriu PR #3 com título e body corretos
+Escreve o conteúdo completo do capítulo 03-agentes-como-unidade-de-trabalho.md.
 
-**O que Jules não fez:**
-- Não alterou conteúdo dos capítulos do playbook
-- Não inventou dados
-- Não abriu PR direto para `main` (foi para o branch correto)
+O tom é técnico mas direto — sem linguagem de curso online, sem motivação vazia.
+O leitor já sabe o que é IA. Quer saber como operar.
 
-**Resultado:**
-- PR #3 aberto: https://github.com/nsfwbunny/modo-operador/pull/3
-- Task Jules: https://jules.google.com/task/9025743338291513607
-- Merge feito com squash, histórico limpo
-- Arquivos alterados: 2
-- Linhas adicionadas: 8 | Linhas removidas: 6
-
-**Conclusão do caso:**
-Jules executou dentro do escopo. O prompt determinístico funcionou. O fluxo completo — prompt → execução assíncrona → PR → revisão → merge — levou menos de 10 minutos com zero uso de terminal.
+Usa os mesmos padrões de formatação dos capítulos que já têm conteúdo.
+Faz commit no branch main com mensagem: feat(playbook): cap 03 completo.
+```
 
 ---
 
-## O que você faz agora
+## Padrões de uso no dia a dia
 
-1. Acesse https://jules.google.com
-2. Conecte ao seu repositório
-3. Copie o prompt em `prompts/jules-task-active.md` como base
-4. Adapte para sua tarefa específica
-5. Aguarde o PR
-6. Revise arquivo por arquivo
-7. Faça merge só se estiver dentro do escopo
+### Padrão 1 — Feature nova
+```
+Contexto: [descreve o projeto e o estado atual]
+Tarefa: implementa [feature] em [arquivo]
+Critério: [como testar que funciona]
+Estilo: [linguagem, framework, convenções]
+```
 
-Esse fluxo funciona para qualquer repositório. Não é necessário saber programar para usar Jules em tarefas de documentação, scaffold e organização.
+### Padrão 2 — Documentação
+```
+Lê [arquivo de código].
+Escreve documentação em [destino] explicando:
+- O que faz
+- Como usar
+- Exemplos de uso reais
+Formato: Markdown. Sem jargão desnecessário.
+```
+
+### Padrão 3 — Refactor
+```
+O arquivo [X] tem o problema [Y].
+Refatora para [Z] sem quebrar [funcionalidade existente].
+Adiciona comentários onde a lógica não é óbvia.
+Critério: os testes existentes devem continuar passando.
+```
+
+### Padrão 4 — Config e infra
+```
+Configura [ferramenta] no projeto.
+Arquivo de config em [caminho].
+Variáveis de ambiente necessárias: [lista].
+Não commita secrets — usa nomes de env vars.
+```
+
+---
+
+## Revisando PRs do Jules
+
+O PR do Jules tem description automática. Leia ela antes do código.
+
+O que verificar na revisão:
+
+1. **A tarefa foi entendida corretamente?** Jules às vezes interpreta diferente do esperado
+2. **Há efeitos colaterais?** Mudanças em arquivos que você não pediu
+3. **O estilo segue o padrão?** Nomes de variáveis, formatação, comentários
+4. **Os edge cases foram tratados?** Ou Jules assumiu o happy path
+
+Se algo estiver errado, comente no PR com instrução específica. Jules lê o feedback e revisa.
+
+---
+
+## Limitações reais do Jules
+
+Jules não é perfeito. Limitações que você vai encontrar:
+
+- **Contexto de projeto muito grande**: Jules pode perder detalhes em repos com muitos arquivos. Ajuda dar contexto explícito nos arquivos relevantes
+- **Lógica de negócio complexa**: Jules não conhece suas regras não escritas. Coloque-as na spec
+- **Testes falhando**: Jules nem sempre roda os testes antes de commitar. Verifique o CI
+- **Dependências externas**: Jules pode sugerir bibliotecas que não estão no seu stack. Especifique o que pode e o que não pode usar
+
+---
+
+## Jules + MCP — a combinação real
+
+Jules sozinho é poderoso. Jules com MCP é um sistema.
+
+Exemplo de fluxo real:
+
+1. Perplexity MCP pesquisa tendências de mercado
+2. Benni Control Plane salva o resultado como snapshot
+3. Jules lê o snapshot e escreve um capítulo do playbook baseado nos dados
+4. GitHub MCP cria a issue e acompanha o PR
+5. Você revisa e faz merge
+
+Cada passo é rastreável. O Decision Ledger registra as decisões. O histórico de commits é a evidência.
+
+---
+
+## Resumo operacional
+
+- Jules = agente assíncrono de coding integrado ao GitHub
+- Setup: conecta GitHub, seleciona repo, começa a dar tarefas
+- Spec boa: escopo + contexto de arquivo + critério + restrição de estilo
+- Revisão: description do PR primeiro, depois o diff
+- Limitações: contexto grande, lógica não escrita, dependências
+- Jules + MCP = sistema completo de build e ship
