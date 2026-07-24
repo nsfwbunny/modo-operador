@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modo Operador — IA como sistema de execução</title>
 <meta name="description" content="Saia do ciclo prompt → resposta. Aprenda a operar IA como sistema real: Jules, MCP, agentes e automações que entregam resultado sem depender de você 24h.">
+<!-- OG / Social -->
+<meta property="og:title" content="Modo Operador — IA como sistema de execução">
+<meta property="og:description" content="Jules, MCP, Antigravity. Do prompt ao sistema. Produto digital por quem já opera assim.">
+<meta property="og:url" content="https://nsfwbunny.github.io/modo-operador/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -53,13 +59,11 @@ img,picture,video,canvas,svg{display:block;max-width:100%}
 p,li{max-width:72ch;text-wrap:pretty}
 h1,h2,h3,h4{text-wrap:balance;line-height:1.1}
 
-/* Canvas 3D */
 #bg-canvas{
   position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;
   pointer-events:none;
 }
 
-/* Layout */
 .container{max-width:1100px;margin-inline:auto;padding-inline:var(--space-6);position:relative;z-index:1}
 .container--narrow{max-width:720px;margin-inline:auto;padding-inline:var(--space-6);position:relative;z-index:1}
 
@@ -211,9 +215,6 @@ section{padding-block:clamp(var(--space-16),8vw,var(--space-24));position:relati
   background:var(--bg);
   padding:var(--space-8);
 }
-.problem-cell--before{
-  border-right:none;
-}
 .problem-cell h3{
   font-size:var(--text-xs);
   font-weight:600;
@@ -274,7 +275,6 @@ section{padding-block:clamp(var(--space-16),8vw,var(--space-24));position:relati
 .pillar{
   background:var(--bg);
   padding:var(--space-8) var(--space-6);
-  position:relative;
   transition:background 0.3s ease;
 }
 .pillar:hover{background:var(--surface)}
@@ -366,9 +366,7 @@ section{padding-block:clamp(var(--space-16),8vw,var(--space-24));position:relati
   color:var(--text-muted);
   line-height:1.6;
 }
-.stack-card-large{
-  grid-column:span 2;
-}
+.stack-card-large{grid-column:span 2}
 
 /* PROOF */
 .proof-section{
@@ -497,32 +495,73 @@ section{padding-block:clamp(var(--space-16),8vw,var(--space-24));position:relati
   letter-spacing:0.04em;
 }
 
-/* WAITLIST FORM */
-.form-inline{
-  display:flex;gap:var(--space-2);max-width:440px;
-  border:1px solid var(--border);
-  border-radius:var(--radius-full);
-  padding:var(--space-2);
+/* PRICE CARD */
+.price-card{
+  display:inline-flex;flex-direction:column;align-items:center;
   background:var(--surface);
-  margin:0 auto;
+  border:1px solid rgba(200,240,102,0.25);
+  border-radius:var(--radius-xl);
+  padding:var(--space-8) var(--space-12);
+  gap:var(--space-6);
+  position:relative;
+  overflow:hidden;
 }
-.form-inline input{
-  flex:1;background:transparent;border:none;
-  padding:var(--space-2) var(--space-4);
-  color:var(--text);font-size:var(--text-sm);
-  outline:none;
+.price-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
 }
-.form-inline input::placeholder{color:var(--text-muted)}
-.form-inline button{
+.price-badge{
+  font-size:var(--text-xs);
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--accent);
+  background:var(--accent-dim);
+  border:1px solid rgba(200,240,102,0.2);
+  border-radius:var(--radius-full);
+  padding:0.3rem 0.8rem;
+}
+.price-value{
+  font-family:var(--font-display);
+  font-size:var(--text-2xl);
+  color:#fff;
+  line-height:1;
+}
+.price-value span{
+  font-family:var(--font-body);
+  font-size:var(--text-base);
+  color:var(--text-muted);
+  font-weight:400;
+}
+.price-includes{
+  list-style:none;
+  text-align:left;
+  display:flex;flex-direction:column;gap:var(--space-3);
+}
+.price-includes li{
+  font-size:var(--text-sm);
+  color:var(--text-muted);
+  display:flex;align-items:center;gap:var(--space-3);
+}
+.price-includes li::before{
+  content:'✓';
+  color:var(--accent);
+  font-weight:700;
+  flex-shrink:0;
+}
+.btn-cta-large{
   background:var(--accent);color:#080808;
   border:none;border-radius:var(--radius-full);
-  padding:0.6rem 1.2rem;
-  font-size:var(--text-sm);font-weight:600;
-  cursor:pointer;
+  padding:1.1rem 2.4rem;
+  font-size:var(--text-base);font-weight:700;
+  text-decoration:none;
   transition:all 0.2s ease;
-  white-space:nowrap;
+  display:inline-flex;align-items:center;gap:var(--space-2);
+  width:100%;
+  justify-content:center;
 }
-.form-inline button:hover{background:#d4f577}
+.btn-cta-large:hover{background:#d4f577;transform:translateY(-2px);box-shadow:0 16px 40px var(--accent-glow)}
 
 /* FOOTER */
 footer{
@@ -545,25 +584,19 @@ footer{
 }
 .footer-links a:hover{color:var(--text)}
 
-/* DIVIDER */
 .divider{height:1px;background:var(--border);position:relative;z-index:1}
 
-/* SCROLL REVEAL */
 [data-reveal]{
   opacity:0;
   transform:translateY(24px);
   transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1);
 }
-[data-reveal].revealed{
-  opacity:1;
-  transform:translateY(0);
-}
+[data-reveal].revealed{opacity:1;transform:translateY(0)}
 [data-reveal-delay="1"]{transition-delay:0.1s}
 [data-reveal-delay="2"]{transition-delay:0.2s}
 [data-reveal-delay="3"]{transition-delay:0.3s}
 [data-reveal-delay="4"]{transition-delay:0.4s}
 
-/* RESPONSIVE */
 @media(max-width:768px){
   .problem-grid{grid-template-columns:1fr}
   .what-header{grid-template-columns:1fr}
@@ -573,6 +606,7 @@ footer{
   .principles-grid{grid-template-columns:1fr}
   .footer-inner{flex-direction:column;align-items:flex-start}
   .proof-item{flex-direction:column;gap:var(--space-3)}
+  .price-card{padding:var(--space-6) var(--space-8)}
 }
 @media(max-width:480px){
   .pillars{grid-template-columns:1fr}
@@ -599,7 +633,7 @@ footer{
     </svg>
     <span>Modo Operador</span>
   </a>
-  <a href="#waitlist" class="nav-cta">Entrar na waitlist</a>
+  <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener noreferrer" class="nav-cta">Comprar agora</a>
 </nav>
 
 <!-- HERO -->
@@ -607,7 +641,7 @@ footer{
   <div class="container">
     <div class="hero-eyebrow" data-reveal>
       <span class="dot" aria-hidden="true"></span>
-      Sistema em construção
+      Produto no ar — acesso imediato
     </div>
     <h1 data-reveal data-reveal-delay="1">
       Operar IA é diferente de
@@ -619,8 +653,8 @@ footer{
       Este é o sistema documentado por quem já opera assim.
     </p>
     <div class="hero-actions" data-reveal data-reveal-delay="3">
-      <a href="#waitlist" class="btn-primary">
-        Quero entrar na waitlist
+      <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener noreferrer" class="btn-primary">
+        Quero o Modo Operador
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
       <a href="https://github.com/nsfwbunny/modo-operador" target="_blank" rel="noopener noreferrer" class="btn-ghost">Ver no GitHub ↗</a>
@@ -643,7 +677,7 @@ footer{
       Os cursos ficaram <em style="font-style:italic;color:var(--accent)">para trás.</em>
     </h2>
     <div class="problem-grid" data-reveal data-reveal-delay="2">
-      <div class="problem-cell problem-cell--before">
+      <div class="problem-cell">
         <h3>Ciclo 2024 — ainda ensinado por 99% dos cursos</h3>
         <div class="code-flow">
           <div class="item current"><span class="arrow">01</span> Prompt</div>
@@ -783,16 +817,17 @@ footer{
         </div>
       </div>
       <div class="proof-item">
-        <div class="proof-status proof-status--building" aria-label="Em construção"></div>
+        <div class="proof-status proof-status--live" aria-label="Live"></div>
         <div>
-          <h4>Playbook completo — em escrita</h4>
-          <p>Capítulos documentando cada módulo do sistema. Abre quando estiver completo.</p>
+          <h4>Produto ativo no Cakto</h4>
+          <p>Compra real, entrega imediata. Link de pagamento verificável.</p>
+          <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener noreferrer" class="proof-link">pay.cakto.com.br ↗</a>
         </div>
       </div>
       <div class="proof-item">
         <div class="proof-status proof-status--building" aria-label="Em construção"></div>
         <div>
-          <h4>Cases com evidência de receita — pendente</h4>
+          <h4>Cases com evidência de receita — em andamento</h4>
           <p>Números reais, telas reais. Nada entra aqui sem screenshot ou log verificável.</p>
         </div>
       </div>
@@ -817,8 +852,8 @@ footer{
       </div>
       <div class="principle">
         <p class="principle-num">02</p>
-        <h3>A oferta abre depois da prova</h3>
-        <p>O produto não estará à venda até o playbook estar completo e os cases estarem publicados. Waitlist primeiro.</p>
+        <h3>Acesso imediato, atualização contínua</h3>
+        <p>Você compra hoje e recebe tudo que existe. Cada novo módulo entregue entra automaticamente sem custo adicional.</p>
       </div>
       <div class="principle">
         <p class="principle-num">03</p>
@@ -836,23 +871,33 @@ footer{
 
 <div class="divider"></div>
 
-<!-- CTA / WAITLIST -->
-<section class="cta-section" id="waitlist">
+<!-- CTA COMPRA -->
+<section class="cta-section" id="comprar">
   <div class="container--narrow">
-    <p class="section-label" style="text-align:center" data-reveal>Waitlist</p>
+    <p class="section-label" style="text-align:center" data-reveal>Acesso imediato</p>
     <h2 data-reveal data-reveal-delay="1">
       Entre antes que<br>a <em>vantagem feche</em>
     </h2>
     <p data-reveal data-reveal-delay="2">
-      A janela de quem aprende a operar IA como sistema ainda está aberta — mas está fechando. Quem entrar cedo recebe o playbook completo com desconto de early access.
+      A janela de quem aprende a operar IA como sistema ainda está aberta — mas está fechando. Compre hoje e receba tudo agora.
     </p>
     <div class="cta-actions" data-reveal data-reveal-delay="3">
-      <div class="form-inline">
-        <input type="email" placeholder="seu@email.com" aria-label="Seu e-mail">
-        <button type="button" onclick="handleWaitlist(this)">Entrar na waitlist</button>
+      <div class="price-card">
+        <span class="price-badge">Early Access</span>
+        <div class="price-value">R$ 47 <span>/ acesso vitalício</span></div>
+        <ul class="price-includes">
+          <li>Playbook completo — Jules, MCP, Antigravity</li>
+          <li>Todos os módulos futuros incluídos</li>
+          <li>Stack real documentado com evidência</li>
+          <li>Acesso imediato após pagamento</li>
+        </ul>
+        <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener noreferrer" class="btn-cta-large">
+          Comprar agora — R$ 47
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
-    <p class="cta-note" data-reveal data-reveal-delay="4">Sem spam. Você recebe apenas quando o produto estiver pronto.</p>
+    <p class="cta-note" data-reveal data-reveal-delay="4">Pagamento via Cakto — Pix, cartão ou boleto. Entrega imediata.</p>
   </div>
 </section>
 
@@ -860,24 +905,21 @@ footer{
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <p>© 2026 Modo Operador. Sistema em construção.</p>
+      <p>© 2026 Modo Operador.</p>
       <nav class="footer-links" aria-label="Links do rodapé">
         <a href="https://github.com/nsfwbunny/modo-operador" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        <a href="https://github.com/nsfwbunny/modo-operador/blob/main/docs/roadmap.md" target="_blank" rel="noopener noreferrer">Roadmap</a>
-        <a href="https://github.com/nsfwbunny/modo-operador/blob/main/docs/vision.md" target="_blank" rel="noopener noreferrer">Visão</a>
+        <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener noreferrer">Comprar ↗</a>
       </nav>
     </div>
   </div>
 </footer>
 
 <script>
-// NAV scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-// Scroll reveal
 const revealEls = document.querySelectorAll('[data-reveal]');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -889,144 +931,78 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 revealEls.forEach(el => observer.observe(el));
 
-// Waitlist
-function handleWaitlist(btn) {
-  const input = btn.previousElementSibling;
-  const email = input.value.trim();
-  if (!email || !email.includes('@')) {
-    input.style.color = '#ff6b6b';
-    input.placeholder = 'Email inválido';
-    setTimeout(() => { input.style.color = ''; input.placeholder = 'seu@email.com'; }, 2000);
-    return;
-  }
-  btn.textContent = '✓ Na lista!';
-  btn.style.background = '#a8d44a';
-  input.value = '';
-  input.placeholder = 'Você está na lista.';
-  setTimeout(() => {
-    btn.textContent = 'Entrar na waitlist';
-    btn.style.background = '';
-    input.placeholder = 'seu@email.com';
-  }, 4000);
-}
-
-// THREE.JS — campo de partículas 3D
 (function() {
   const canvas = document.getElementById('bg-canvas');
   if (!THREE || !canvas) return;
-
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0x000000, 0);
-
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.z = 30;
-
-  // Grid de pontos flutuantes
   const count = 1800;
   const positions = new Float32Array(count * 3);
   const sizes = new Float32Array(count);
   for (let i = 0; i < count; i++) {
-    positions[i * 3]     = (Math.random() - 0.5) * 120;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 120;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 60;
-    sizes[i] = Math.random() * 1.5 + 0.3;
+    positions[i*3]   = (Math.random()-0.5)*120;
+    positions[i*3+1] = (Math.random()-0.5)*120;
+    positions[i*3+2] = (Math.random()-0.5)*60;
+    sizes[i] = Math.random()*1.5+0.3;
   }
-
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-  const mat = new THREE.PointsMaterial({
-    color: 0xc8f066,
-    size: 0.12,
-    transparent: true,
-    opacity: 0.35,
-    sizeAttenuation: true,
-  });
-
+  const mat = new THREE.PointsMaterial({ color: 0xc8f066, size: 0.12, transparent: true, opacity: 0.35, sizeAttenuation: true });
   const points = new THREE.Points(geo, mat);
   scene.add(points);
-
-  // Anel 3D central — geometria toroidal
   const torusGeo = new THREE.TorusGeometry(8, 0.06, 8, 120);
-  const torusMat = new THREE.MeshBasicMaterial({
-    color: 0xc8f066,
-    transparent: true,
-    opacity: 0.08,
-    wireframe: false,
-  });
+  const torusMat = new THREE.MeshBasicMaterial({ color: 0xc8f066, transparent: true, opacity: 0.08 });
   const torus = new THREE.Mesh(torusGeo, torusMat);
   torus.rotation.x = Math.PI / 3;
   scene.add(torus);
-
-  // Segundo anel menor
   const torus2 = new THREE.Mesh(
     new THREE.TorusGeometry(5, 0.04, 8, 80),
     new THREE.MeshBasicMaterial({ color: 0xc8f066, transparent: true, opacity: 0.05 })
   );
-  torus2.rotation.x = Math.PI / 5;
-  torus2.rotation.y = Math.PI / 4;
+  torus2.rotation.x = Math.PI/5; torus2.rotation.y = Math.PI/4;
   scene.add(torus2);
-
-  // Icosaedro wireframe flutuante
-  const icoGeo = new THREE.IcosahedronGeometry(3.5, 1);
-  const icoMat = new THREE.MeshBasicMaterial({
-    color: 0xc8f066,
-    transparent: true,
-    opacity: 0.04,
-    wireframe: true,
-  });
-  const ico = new THREE.Mesh(icoGeo, icoMat);
+  const ico = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(3.5, 1),
+    new THREE.MeshBasicMaterial({ color: 0xc8f066, transparent: true, opacity: 0.04, wireframe: true })
+  );
   ico.position.set(18, 6, -10);
   scene.add(ico);
-
-  // Mouse parallax
   let mouse = { x: 0, y: 0 };
   document.addEventListener('mousemove', e => {
-    mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouse.y = (e.clientY / window.innerHeight - 0.5) * 2;
+    mouse.x = (e.clientX/window.innerWidth-0.5)*2;
+    mouse.y = (e.clientY/window.innerHeight-0.5)*2;
   }, { passive: true });
-
   let t = 0;
   function animate() {
     requestAnimationFrame(animate);
     t += 0.004;
-
-    points.rotation.y = t * 0.05 + mouse.x * 0.03;
-    points.rotation.x = mouse.y * 0.02;
-
-    torus.rotation.z = t * 0.15;
-    torus.rotation.y = t * 0.05;
-
-    torus2.rotation.z = -t * 0.12;
-    torus2.rotation.x = t * 0.08;
-
-    ico.rotation.y = t * 0.3;
-    ico.rotation.x = t * 0.2;
-    ico.position.y = 6 + Math.sin(t * 0.7) * 1.5;
-
-    camera.position.x += (mouse.x * 3 - camera.position.x) * 0.02;
-    camera.position.y += (-mouse.y * 2 - camera.position.y) * 0.02;
+    points.rotation.y = t*0.05+mouse.x*0.03;
+    points.rotation.x = mouse.y*0.02;
+    torus.rotation.z = t*0.15; torus.rotation.y = t*0.05;
+    torus2.rotation.z = -t*0.12; torus2.rotation.x = t*0.08;
+    ico.rotation.y = t*0.3; ico.rotation.x = t*0.2;
+    ico.position.y = 6+Math.sin(t*0.7)*1.5;
+    camera.position.x += (mouse.x*3-camera.position.x)*0.02;
+    camera.position.y += (-mouse.y*2-camera.position.y)*0.02;
     camera.lookAt(scene.position);
-
     renderer.render(scene, camera);
   }
   animate();
-
   window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   }, { passive: true });
-
-  // Reduz opacidade quando não é hero
   window.addEventListener('scroll', () => {
-    const p = Math.min(window.scrollY / window.innerHeight, 1);
-    mat.opacity = 0.35 * (1 - p * 0.6);
-    torusMat.opacity = 0.08 * (1 - p * 0.8);
+    const p = Math.min(window.scrollY/window.innerHeight, 1);
+    mat.opacity = 0.35*(1-p*0.6);
+    torusMat.opacity = 0.08*(1-p*0.8);
   }, { passive: true });
 })();
 </script>
