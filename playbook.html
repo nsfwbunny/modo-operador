@@ -1,11 +1,436 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=https://pay.cakto.com.br/pfuibmt_999515">
-<title>Modo Operador — Acesso</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Operador de IA — Playbook Completo</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..600&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="dark"]{
+--bg:#0a0a08;--surface:#111110;--surface2:#161614;--border:#232320;
+--text:#e8e6e0;--muted:#888780;--faint:#484640;
+--accent:#c8f066;--accent2:#a8d050;
+--font-display:'Instrument Serif',Georgia,serif;
+--font-body:'Inter','Helvetica Neue',sans-serif;
+--r:0.5rem;--space-4:1rem;--space-6:1.5rem;--space-8:2rem;--space-12:3rem;--space-16:4rem;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:1rem;line-height:1.7;min-height:100dvh}
+img,svg{display:block;max-width:100%}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:color-mix(in oklch,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.75rem var(--space-6);display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-display);font-size:1.1rem;color:var(--accent);letter-spacing:-.01em}
+.nav-badge{font-size:.7rem;background:var(--accent);color:#0a0a08;padding:.2em .6em;border-radius:999px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+
+/* LAYOUT */
+.wrap{max-width:760px;margin-inline:auto;padding-inline:var(--space-6)}
+
+/* HERO */
+.hero{padding:var(--space-16) var(--space-6) var(--space-12);text-align:center;border-bottom:1px solid var(--border)}
+.hero-eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:var(--space-4);opacity:.9}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;margin-bottom:var(--space-4);color:#fff}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:52ch;margin-inline:auto;margin-bottom:var(--space-8)}
+.hero-stack{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:var(--space-8)}
+.pill{font-size:.7rem;padding:.3em .8em;border-radius:999px;border:1px solid var(--border);color:var(--muted);letter-spacing:.04em;font-weight:500}
+.pill.active{border-color:var(--accent);color:var(--accent);background:color-mix(in oklch,var(--accent) 8%,transparent)}
+.proof-bar{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.5rem 1rem;font-size:.8rem;color:var(--muted)}
+.proof-bar span{color:var(--accent)}
+
+/* TOC */
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:var(--space-6);margin:var(--space-8) 0}
+.toc h2{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:var(--space-4)}
+.toc ol{list-style:none;counter-reset:toc}
+.toc li{counter-increment:toc;padding:.4rem 0;border-bottom:1px solid var(--border)}
+.toc li:last-child{border-bottom:none}
+.toc a{color:var(--text);text-decoration:none;display:flex;align-items:baseline;gap:.5rem;font-size:.95rem}
+.toc a:hover{color:var(--accent)}
+.toc a::before{content:"0" counter(toc);font-size:.7rem;color:var(--faint);font-variant-numeric:tabular-nums;min-width:2ch}
+
+/* CHAPTER */
+.chapter{padding:var(--space-12) 0;border-bottom:1px solid var(--border)}
+.chapter-header{margin-bottom:var(--space-8)}
+.chapter-num{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);opacity:.8;margin-bottom:.5rem}
+.chapter h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;color:#fff}
+.chapter-quote{border-left:2px solid var(--accent);padding-left:var(--space-4);margin:var(--space-6) 0;color:var(--muted);font-style:italic;font-size:.95rem}
+
+/* CONTENT */
+.chapter h3{font-size:1.05rem;font-weight:600;color:#fff;margin:var(--space-8) 0 var(--space-4);letter-spacing:-.01em}
+.chapter p{margin-bottom:var(--space-4);color:var(--text);max-width:70ch}
+.chapter ul,.chapter ol{padding-left:var(--space-6);margin-bottom:var(--space-4)}
+.chapter li{margin-bottom:.4rem;color:var(--text)}
+.chapter strong{color:#fff;font-weight:600}
+.chapter em{color:var(--accent);font-style:normal}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;margin:var(--space-6) 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:var(--surface2);color:var(--muted);font-weight:500;text-align:left;padding:.6rem var(--space-4);border-bottom:1px solid var(--border);font-size:.75rem;letter-spacing:.04em;text-transform:uppercase}
+td{padding:.6rem var(--space-4);border-bottom:1px solid var(--border);color:var(--text)}
+tr:last-child td{border-bottom:none}
+
+/* CODE */
+pre{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:var(--space-4) var(--space-6);overflow-x:auto;margin:var(--space-4) 0}
+code{font-family:'SF Mono','Fira Code',monospace;font-size:.82rem;color:#a8d050;line-height:1.6}
+p code{background:var(--surface2);padding:.1em .4em;border-radius:.2rem;font-size:.82em;color:var(--accent)}
+
+/* CALLOUT */
+.callout{background:color-mix(in oklch,var(--accent) 6%,var(--surface));border:1px solid color-mix(in oklch,var(--accent) 25%,transparent);border-radius:var(--r);padding:var(--space-4) var(--space-6);margin:var(--space-6) 0;font-size:.92rem}
+.callout strong{color:var(--accent)}
+
+/* FLOW DIAGRAM */
+.flow{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin:var(--space-6) 0}
+.flow-node{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:.5rem 1rem;font-size:.82rem;color:var(--text);white-space:nowrap}
+.flow-node.accent{border-color:var(--accent);color:var(--accent)}
+.flow-arrow{color:var(--faint);font-size:.9rem}
+
+/* FOOTER */
+footer{padding:var(--space-12) var(--space-6);text-align:center;border-top:1px solid var(--border)}
+footer p{font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none}
+
+@media(max-width:600px){
+.hero{padding:var(--space-12) var(--space-4) var(--space-8)}
+.wrap{padding-inline:var(--space-4)}
+.chapter{padding:var(--space-8) 0}
+}
+</style>
 </head>
 <body>
-<script>window.location.replace('https://pay.cakto.com.br/pfuibmt_999515');</script>
+
+<nav>
+  <span class="nav-logo">Modo *Operador*</span>
+  <span class="nav-badge">Acesso Exclusivo</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Playbook Completo — 7 Capítulos</div>
+  <h1>O <em>Operador</em><br>de IA</h1>
+  <p class="hero-sub">Do prompt ao dinheiro — o guia prático de quem usa Jules, MCP e agentes open source para automatizar, criar e vender em 2026.</p>
+  <div class="hero-stack">
+    <span class="pill active">Jules</span>
+    <span class="pill active">MCP</span>
+    <span class="pill active">Antigravity</span>
+    <span class="pill active">GitHub</span>
+    <span class="pill">Benni Control Plane</span>
+    <span class="pill">Perplexity</span>
+  </div>
+  <div class="proof-bar">
+    <span>✓</span> Construído com o mesmo stack que ensina
+  </div>
+</section>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Índice</h2>
+  <ol>
+    <li><a href="#cap1">O novo jogo da IA aplicada</a></li>
+    <li><a href="#cap2">De prompt para sistema</a></li>
+    <li><a href="#cap3">Agentes como unidade de trabalho</a></li>
+    <li><a href="#cap4">Jules no fluxo de build e ship</a></li>
+    <li><a href="#cap5">MCP como camada de contexto</a></li>
+    <li><a href="#cap6">Automações úteis e ativos digitais</a></li>
+    <li><a href="#cap7">Portfólio, distribuição e receita</a></li>
+  </ol>
+</nav>
+
+<!-- CAPÍTULO 1 -->
+<section class="chapter" id="cap1">
+  <div class="chapter-header">
+    <div class="chapter-num">Capítulo 01</div>
+    <h2>O novo jogo<br>da IA aplicada</h2>
+  </div>
+  <blockquote class="chapter-quote">Este capítulo foi escrito com base no uso real do stack Jules + MCP + Antigravity entre 2025 e 2026. Nada aqui é teoria.</blockquote>
+
+  <h3>O jogo mudou. A maioria ainda não percebeu.</h3>
+  <p>Em 2024, o ciclo padrão de quem usava IA era:</p>
+  <div class="flow">
+    <span class="flow-node">prompt</span><span class="flow-arrow">→</span>
+    <span class="flow-node">resposta</span><span class="flow-arrow">→</span>
+    <span class="flow-node">copiar</span><span class="flow-arrow">→</span>
+    <span class="flow-node">colar</span><span class="flow-arrow">→</span>
+    <span class="flow-node">repetir</span>
+  </div>
+  <p>Em 2026, o ciclo mudou radicalmente:</p>
+  <div class="flow">
+    <span class="flow-node accent">intenção</span><span class="flow-arrow">→</span>
+    <span class="flow-node accent">agente</span><span class="flow-arrow">→</span>
+    <span class="flow-node accent">sistema</span><span class="flow-arrow">→</span>
+    <span class="flow-node accent">entrega</span>
+  </div>
+  <p>A diferença não é de velocidade. É de arquitetura. No ciclo novo, você define o que quer. O agente executa. O sistema entrega. Você revisa e escala.</p>
+
+  <h3>O que é um operador de IA</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Usuário</th><th>Operador</th></tr></thead>
+      <tbody>
+        <tr><td>Abre o ChatGPT, digita pergunta</td><td>Define tarefa, agente abre PR no GitHub</td></tr>
+        <tr><td>Copia a resposta manualmente</td><td>Sistema entrega artefato pronto</td></tr>
+        <tr><td>Repete o processo todo dia</td><td>Automação roda sem ele</td></tr>
+        <tr><td>Produtividade limitada pelo tempo</td><td>Capacidade desacoplada do tempo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Por que a janela de vantagem é real</h3>
+  <p>A maioria das pessoas ainda está no ciclo de 2024. Os cursos ensinam prompt. Os ebooks explicam ChatGPT. Ninguém está ensinando o que acontece quando você conecta Jules ao seu repositório, MCP ao seu ambiente e Antigravity orquestrando tudo.</p>
+  <p>Essa janela fecha. Quem aprender a operar agora tem <strong>vantagem de execução</strong> (builds mais rápidos), <strong>vantagem de distribuição</strong> (sistemas que criam e publicam conteúdo) e <strong>vantagem de receita</strong> (ativos que geram valor sem depender de presença).</p>
+
+  <h3>Como este playbook foi construído</h3>
+  <div class="callout">
+    <strong>Prova verificável:</strong> Jules escreveu código e abriu PRs. MCP conectou GitHub, Perplexity e Benni Control Plane em fluxo único. Antigravity orquestrou as sessões locais. Cada decisão está no Decision Ledger auditável. O método foi usado para construir o método.
+  </div>
+</section>
+
+<!-- CAPÍTULO 2 -->
+<section class="chapter" id="cap2">
+  <div class="chapter-header">
+    <div class="chapter-num">Capítulo 02</div>
+    <h2>De prompt<br>para sistema</h2>
+  </div>
+  <blockquote class="chapter-quote">A transição mais importante que um operador de IA faz não é de ferramenta. É de mentalidade.</blockquote>
+
+  <h3>O problema com pensar em prompts</h3>
+  <p>Quando você pensa em termos de prompts, você está pensando em <strong>perguntas</strong>. Quando você pensa em termos de sistemas, você está pensando em <strong>fluxos</strong>.</p>
+  <p><em>"Quero que toda vez que aconteça A, o agente execute B e entregue C."</em></p>
+  <p>O resultado é uma máquina. Você configura uma vez, o sistema roda.</p>
+
+  <h3>Os três elementos de um sistema de IA</h3>
+  <p><strong>1. Contexto</strong> — O que o agente sabe antes de começar: objetivo, restrições, estado atual, recursos disponíveis. Sem contexto rico, o agente age no escuro.</p>
+  <p><strong>2. Instrução</strong> — Não é um prompt genérico. É uma spec.</p>
+  <pre><code>❌ Prompt:    "Crie uma landing page"
+✅ Spec:      "Crie assets/landing/index.html com hero dark,
+              Three.js para fundo 3D, copy focado em waitlist,
+              fonte Instrument Serif + Inter, sem dependências
+              externas além de CDN. Commit no branch main com
+              mensagem feat: landing page."</code></pre>
+  <p><strong>3. Loop de revisão</strong> — O agente entrega. Você revisa. Você aprova ou refina. Isso não é micromanagement — é calibração.</p>
+
+  <h3>Como migrar um fluxo manual para sistema</h3>
+  <div class="flow">
+    <span class="flow-node">identifica tarefa</span><span class="flow-arrow">→</span>
+    <span class="flow-node">documenta processo</span><span class="flow-arrow">→</span>
+    <span class="flow-node">monta spec</span><span class="flow-arrow">→</span>
+    <span class="flow-node">executa + revisa</span><span class="flow-arrow">→</span>
+    <span class="flow-node accent">automatiza</span>
+  </div>
+
+  <h3>O erro mais comum na transição</h3>
+  <p>Tentar automatizar tudo de uma vez. A transição certa é incremental: uma tarefa, uma spec bem feita, um padrão validado. Só depois automatiza. Volume sem padrão gera lixo em escala.</p>
+</section>
+
+<!-- CAPÍTULO 3 -->
+<section class="chapter" id="cap3">
+  <div class="chapter-header">
+    <div class="chapter-num">Capítulo 03</div>
+    <h2>Agentes como<br>unidade de trabalho</h2>
+  </div>
+  <blockquote class="chapter-quote">Um agente não é um chatbot mais esperto. É uma unidade autônoma de execução com acesso a ferramentas, contexto e capacidade de agir no mundo.</blockquote>
+
+  <h3>O que é um agente de verdade</h3>
+  <div class="callout">
+    <strong>Definição operacional:</strong> Um modelo de linguagem com acesso a ferramentas que pode executar sequências de ações para atingir um objetivo, tomando decisões intermediárias sem intervenção humana a cada passo.
+  </div>
+
+  <h3>Os três tipos de agente que você vai usar</h3>
+  <p><strong>Tipo 1 — Jules (coding):</strong> lê código, escreve código, testa, cria branches, abre PRs. Use para build, refactor, documentação técnica.</p>
+  <p><strong>Tipo 2 — MCP + Antigravity (orquestração):</strong> conecta ferramentas e gerencia fluxos multi-passo. Use para integração entre sistemas.</p>
+  <p><strong>Tipo 3 — Perplexity MCP (pesquisa):</strong> busca, filtra e sintetiza informação em tempo real. Use para validação de mercado, monitoramento, dados atuais.</p>
+
+  <h3>A anatomia de uma boa spec para agente</h3>
+  <pre><code>## Contexto
+[O que o agente precisa saber sobre o projeto/estado atual]
+
+## Tarefa
+[O que deve ser feito, em linguagem precisa]
+
+## Critérios de aceite
+[Como saber que está correto]
+
+## Restrições
+[O que NÃO fazer]
+
+## Output esperado
+[Formato, localização, nome de arquivo, mensagem de commit]</code></pre>
+
+  <h3>Quando não usar agente</h3>
+  <ul>
+    <li>A tarefa leva menos de 2 minutos para você fazer manualmente</li>
+    <li>O critério de aceite é subjetivo demais para descrever em texto</li>
+    <li>A tarefa requer julgamento estratégico que só você tem</li>
+    <li>O custo de erro é alto sem loop de revisão estabelecido</li>
+  </ul>
+</section>
+
+<!-- CAPÍTULO 4 -->
+<section class="chapter" id="cap4">
+  <div class="chapter-header">
+    <div class="chapter-num">Capítulo 04</div>
+    <h2>Jules no fluxo<br>de build e ship</h2>
+  </div>
+  <blockquote class="chapter-quote">Jules é o agente de coding do Google Labs. Ele lê seu repositório, escreve código com contexto real do projeto e abre PRs. Você revisa e faz merge. Sem terminal, sem IDE aberta.</blockquote>
+
+  <h3>O fluxo completo do Jules</h3>
+  <div class="flow">
+    <span class="flow-node">você descreve</span><span class="flow-arrow">→</span>
+    <span class="flow-node">Jules analisa repo</span><span class="flow-arrow">→</span>
+    <span class="flow-node">escreve código</span><span class="flow-arrow">→</span>
+    <span class="flow-node">cria branch + PR</span><span class="flow-arrow">→</span>
+    <span class="flow-node accent">você faz merge</span>
+  </div>
+
+  <h3>Padrões de uso no dia a dia</h3>
+  <pre><code>// Feature nova
+Contexto: [projeto + estado atual]
+Tarefa: implementa [feature] em [arquivo]
+Critério: [como testar]
+Estilo: [linguagem, framework, convenções]
+
+// Documentação
+Lê [arquivo]. Escreve docs em [destino]:
+o que faz, como usar, exemplos reais.
+Formato: Markdown. Sem jargão.
+
+// Refactor
+O arquivo [X] tem o problema [Y].
+Refatora para [Z] sem quebrar [existente].
+Os testes existentes devem continuar passando.</code></pre>
+
+  <h3>Jules + MCP — a combinação real</h3>
+  <ol>
+    <li>Perplexity MCP pesquisa tendências de mercado</li>
+    <li>Benni Control Plane salva como snapshot</li>
+    <li>Jules lê o snapshot e escreve o capítulo</li>
+    <li>GitHub MCP cria a issue e acompanha o PR</li>
+    <li>Você revisa e faz merge</li>
+  </ol>
+
+  <h3>Limitações reais do Jules</h3>
+  <ul>
+    <li><strong>Contexto grande:</strong> especifique os arquivos relevantes explicitamente</li>
+    <li><strong>Lógica de negócio:</strong> coloque as regras na spec — Jules não adivinha</li>
+    <li><strong>Testes:</strong> Jules nem sempre roda o CI antes de commitar — verifique</li>
+    <li><strong>Dependências:</strong> especifique o que pode e o que não pode usar</li>
+  </ul>
+</section>
+
+<!-- CAPÍTULO 5 -->
+<section class="chapter" id="cap5">
+  <div class="chapter-header">
+    <div class="chapter-num">Capítulo 05</div>
+    <h2>MCP como camada<br>de contexto</h2>
+  </div>
+  <blockquote class="chapter-quote">Model Context Protocol não é uma ferramenta. É um protocolo — a camada que permite que qualquer modelo de IA se conecte a qualquer sistema externo de forma padronizada.</blockquote>
+
+  <h3>A arquitetura em uma linha</h3>
+  <pre><code>Modelo de IA  ←→  Cliente MCP  ←→  Servidor MCP  ←→  Sistema externo
+(raciocina)      (protocolo)       (traduz)           (GitHub, DB, API)</code></pre>
+
+  <h3>Servidores MCP que este playbook usa</h3>
+  <p><strong>GitHub MCP:</strong> ler/escrever arquivos, criar issues/PRs/branches, listar commits, fazer merge — tudo sem abrir o browser.</p>
+  <p><strong>Benni Control Plane MCP:</strong> memória do sistema. <code>project_list</code>, <code>decision_add</code>, <code>project_save_snapshot</code>, <code>artifact_create</code>. Cada sessão começa lendo o estado anterior.</p>
+  <p><strong>Perplexity MCP:</strong> pesquisa em tempo real integrada ao fluxo. Dados atuais sem alucinação.</p>
+
+  <h3>Segurança e boas práticas</h3>
+  <ul>
+    <li>Nunca commite API keys — use variáveis de ambiente</li>
+    <li>Escopos mínimos — só as permissões que o servidor precisa</li>
+    <li>Audit trail — use o Decision Ledger do Benni Control Plane</li>
+    <li>Timeout explícito em todo servidor MCP</li>
+    <li>Nunca passe input do usuário direto para sistema externo sem validação</li>
+  </ul>
+</section>
+
+<!-- CAPÍTULO 6 -->
+<section class="chapter" id="cap6">
+  <div class="chapter-header">
+    <div class="chapter-num">Capítulo 06</div>
+    <h2>Automações úteis<br>e ativos digitais</h2>
+  </div>
+  <blockquote class="chapter-quote">Automatização sem resultado real é hobby. O objetivo é construir ativos — sistemas que geram valor enquanto você não está trabalhando neles.</blockquote>
+
+  <h3>A diferença entre automação e ativo</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Automação</th><th>Ativo digital</th></tr></thead>
+      <tbody>
+        <tr><td>Gera eficiência</td><td>Gera valor</td></tr>
+        <tr><td>Você ainda precisa iniciar</td><td>Roda sozinho</td></tr>
+        <tr><td>Economiza tempo</td><td>Economiza e cria</td></tr>
+        <tr><td>Substitui tarefa manual</td><td>Substitui presença</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Os quatro tipos de ativo digital com IA</h3>
+  <p><strong>Tipo 1 — Produto de informação:</strong> playbook, curso, ebook, template. Jules escreve com base na sua experiência. Você revisa e publica.</p>
+  <p><strong>Tipo 2 — Conteúdo de distribuição:</strong> posts, threads, newsletters. Um capítulo do playbook vira thread, newsletter e roteiro de vídeo em minutos.</p>
+  <p><strong>Tipo 3 — Ferramenta ou micro-SaaS:</strong> software pequeno para nicho específico. Jules escreve o backend e frontend. Você define o produto.</p>
+  <p><strong>Tipo 4 — Sistema de distribuição:</strong> pipeline automático que publica conteúdo, responde mensagens, qualifica leads — sem você presente.</p>
+
+  <h3>O princípio do Ativo Mínimo Viável (AMV)</h3>
+  <div class="callout">
+    <strong>Regra:</strong> Uma automação que funciona. Um produto que pode ser vendido. Um fluxo que pode ser mostrado. Este playbook seguiu esse princípio: repositório público primeiro → landing → capítulos → oferta.
+  </div>
+</section>
+
+<!-- CAPÍTULO 7 -->
+<section class="chapter" id="cap7">
+  <div class="chapter-header">
+    <div class="chapter-num">Capítulo 07</div>
+    <h2>Portfólio, distribuição<br>e receita</h2>
+  </div>
+  <blockquote class="chapter-quote">Construir é 30% do trabalho. Distribuir é 70%. O portfólio é a prova que abre a distribuição.</blockquote>
+
+  <h3>Por que portfólio público importa em 2026</h3>
+  <p>Todo mundo diz que usa IA. O que diferencia quem está de fato operando: <strong>repositórios públicos com histórico de commits real</strong>. O commit não mente. A data não mente. O diff não mente.</p>
+
+  <h3>Como construir portfólio técnico sem saber programar</h3>
+  <ol>
+    <li>Repositórios públicos com projetos reais — mesmo que o código tenha sido escrito por Jules</li>
+    <li>Decision Ledger documentando escolhas de arquitetura</li>
+    <li>Issues e PRs com discussão real de problema → solução</li>
+    <li>README honesto que descreve o que é e o que não é</li>
+    <li>Commits semânticos com mensagens que contam a história</li>
+  </ol>
+
+  <h3>A estratégia de distribuição em três camadas</h3>
+  <p><strong>Camada 1 — Prova:</strong> tudo que você constrói tem um repositório público. É prova de execução, material de conteúdo e credencial técnica.</p>
+  <p><strong>Camada 2 — Conteúdo:</strong> Twitter/X (threads táticos) → Instagram (carrosséis visuais) → Newsletter (versão longa) → YouTube/Shorts (demo ao vivo).</p>
+  <p><strong>Camada 3 — Oferta:</strong></p>
+  <div class="flow">
+    <span class="flow-node">conteúdo gratuito</span><span class="flow-arrow">→</span>
+    <span class="flow-node">waitlist</span><span class="flow-arrow">→</span>
+    <span class="flow-node">early access</span><span class="flow-arrow">→</span>
+    <span class="flow-node">produto</span><span class="flow-arrow">→</span>
+    <span class="flow-node accent">comunidade</span>
+  </div>
+
+  <h3>Como precificar produto de IA operacional</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Nível</th><th>Produto</th><th>Preço BR</th><th>Internacional</th></tr></thead>
+      <tbody>
+        <tr><td>Entry</td><td>Intro, ebook curto</td><td>R$47–97</td><td>$15–30</td></tr>
+        <tr><td>Playbook</td><td>Completo + ferramentas</td><td>R$197–397</td><td>$60–120</td></tr>
+        <tr><td>Comunidade</td><td>Produto + acesso ao autor</td><td>R$497–997/mês</td><td>$150–300/mês</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <p>O Operador de IA — Acesso Exclusivo · <a href="https://github.com/nsfwbunny/modo-operador" target="_blank" rel="noopener">github.com/nsfwbunny/modo-operador</a></p>
+</footer>
+
 </body>
 </html>
