@@ -8,10 +8,12 @@
 |---|---|
 | Repositório | ✅ Existe |
 | Documentação base | ✅ Existe |
-| Landing page | 🔄 Em construção |
-| Playbook | 🔄 Skeleton criado |
+| Landing page | Em construcao |
+| Playbook | Skeleton criado |
 | Cases de prova | 🔄 Scaffold criado |
 | Oferta final | ⏳ Pendente |
+
+_Ultima atualizacao por Jules via scaffold task._
 
 ## Estrutura
 

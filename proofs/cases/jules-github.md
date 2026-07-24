@@ -7,16 +7,16 @@ Build via Jules sem código manual
 PENDENTE
 
 ## Sistema construído
-PENDENTE
+Jules conectado ao repositorio modo-operador via branch feat/jules-scaffold-task
 
 ## Stack usada
 Jules + GitHub
 
 ## Evidência necessária
-PR real publicado e mergeado
+PR aberto e mergeado com resultado verificavel
 
 ## Status
-PENDENTE
+EM ANDAMENTO
 
 ## Próxima ação
-Abrir task no Jules apontando para modo-operador e documentar o resultado aqui.
+Documentar o PR gerado nesta task como evidencia do case
