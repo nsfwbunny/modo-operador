@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modo Operador — Cap. 01 Gratuito</title>
+<meta name="description" content="Leia o primeiro capítulo do Modo Operador gratuitamente. O guia prático de quem usa Jules, MCP e agentes para gerar receita em 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+:root,[data-theme="light"]{
+--bg:#f5f4f0;--surface:#fff;--surface2:#f9f8f6;--border:rgba(0,0,0,.08);
+--text:#1a1916;--muted:#6b6a67;--faint:#a8a7a4;
+--accent:#c8f066;--accent-dark:#8fb83a;--accent-bg:rgba(200,240,102,.1);
+--code-bg:#f0ede8;
+--font-display:'DM Serif Display',Georgia,serif;
+--font-body:'DM Sans','Helvetica Neue',sans-serif;
+--font-mono:'DM Mono','Fira Code',monospace;
+--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+}
+[data-theme="dark"]{
+--bg:#0a0a09;--surface:#161614;--surface2:#1c1c1a;--border:rgba(255,255,255,.07);
+--text:#d8d7d3;--muted:#7a7976;--faint:#454542;
+--accent:#c8f066;--accent-dark:#a5cc4a;--accent-bg:rgba(200,240,102,.08);
+--code-bg:#1a1a18;
+--shadow:0 1px 3px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.3);
+}
+body{font-family:var(--font-body);font-size:clamp(1rem,.95rem + .25vw,1.125rem);color:var(--text);background:var(--bg);line-height:1.7;}
+
+.topbar{
+position:sticky;top:0;z-index:100;
+display:flex;align-items:center;justify-content:space-between;
+padding:.75rem clamp(1rem,4vw,2.5rem);
+background:var(--bg);border-bottom:1px solid var(--border);
+backdrop-filter:blur(12px);
+}
+.topbar-logo{font-family:var(--font-display);font-size:1.05rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.topbar-logo svg{color:var(--accent);}
+.topbar-right{display:flex;align-items:center;gap:.75rem;}
+.pill-free{display:inline-flex;align-items:center;gap:.35rem;padding:.22rem .75rem;border-radius:999px;font-size:.75rem;font-weight:500;border:1px solid var(--border);color:var(--muted);background:var(--surface2);}
+.btn-buy{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1.1rem;border-radius:7px;background:var(--accent);color:#1a1916;font-size:.83rem;font-weight:700;text-decoration:none;transition:all .18s ease;white-space:nowrap;}
+.btn-buy:hover{filter:brightness(1.05);transform:translateY(-1px);}
+.theme-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:.3rem .55rem;cursor:pointer;color:var(--muted);font-size:.83rem;transition:all .18s ease;}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+.progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:transparent;}
+.progress-fill{height:100%;background:var(--accent);width:0%;transition:width .1s linear;}
+
+.wrap{max-width:680px;margin:0 auto;padding:3.5rem clamp(1.25rem,4vw,2.5rem) 6rem;}
+
+.chapter-eyebrow{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);letter-spacing:.06em;margin-bottom:.75rem;}
+.chapter-title{font-family:var(--font-display);font-size:clamp(2rem,1.5rem + 2.5vw,3.5rem);line-height:1.08;color:var(--text);margin-bottom:1.25rem;}
+.chapter-intro{font-size:clamp(1rem,0.95rem + .25vw,1.15rem);color:var(--muted);line-height:1.7;border-left:3px solid var(--accent);padding-left:1.25rem;margin-bottom:2.5rem;}
+
+h2{font-family:var(--font-display);font-size:clamp(1.35rem,1.1rem + .9vw,2rem);color:var(--text);margin:2.75rem 0 .9rem;line-height:1.2;}
+p{margin-bottom:1.1rem;color:var(--text);}
+strong{font-weight:600;}
+
+.table-wrap{overflow-x:auto;margin:1.5rem 0;border-radius:8px;border:1px solid var(--border);}
+table{border-collapse:collapse;width:100%;font-size:.9rem;}
+th{text-align:left;padding:.6rem 1rem;font-weight:600;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--surface2);border-bottom:1px solid var(--border);}
+td{padding:.6rem 1rem;border-bottom:1px solid var(--border);color:var(--text);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--surface2);}
+
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:1.5rem 0;}
+.fn{display:flex;flex-direction:column;align-items:center;padding:.9rem 1.25rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);min-width:100px;transition:all .25s ease;}
+.fn:hover{border-color:var(--accent);transform:translateY(-2px);}
+.fn-label{font-family:var(--font-mono);font-size:.68rem;color:var(--faint);margin-bottom:.25rem;}
+.fn-main{font-size:.88rem;font-weight:600;color:var(--text);}
+.fa{padding:0 .4rem;color:var(--faint);font-size:1.1rem;align-self:center;}
+
+blockquote{margin:2rem 0;padding:1.25rem 1.5rem;border-left:3px solid var(--accent);background:var(--accent-bg);border-radius:0 8px 8px 0;}
+blockquote p{margin:0;font-style:italic;}
+
+.callout{display:flex;gap:1rem;align-items:flex-start;padding:1.1rem 1.4rem;border-radius:8px;border:1px solid rgba(200,240,102,.25);background:var(--accent-bg);margin:2rem 0;}
+.callout-icon{font-size:1.1rem;flex-shrink:0;margin-top:.1rem;}
+.callout p{margin:0;font-size:.92rem;}
+
+.proof-card{padding:1.4rem 1.5rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);margin:1.5rem 0;}
+.proof-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;}
+.proof-label{font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+.proof-live{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .65rem;border-radius:999px;font-size:.72rem;font-weight:500;border:1px solid rgba(200,240,102,.35);color:var(--accent);background:var(--accent-bg);}
+.proof-live span{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+.proof-body{font-family:var(--font-mono);font-size:.82rem;color:var(--text);line-height:1.7;}
+
+/* GATE — o paywall visual */
+.gate{
+position:relative;
+margin-top:3rem;
+}
+.gate-blur{
+filter:blur(4px);
+pointer-events:none;
+user-select:none;
+opacity:.6;
+max-height:180px;
+overflow:hidden;
+}
+.gate-overlay{
+position:absolute;inset:0;
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center;
+padding:2rem;
+background:linear-gradient(to bottom, transparent 0%, var(--bg) 40%);
+}
+.gate-overlay h3{font-family:var(--font-display);font-size:clamp(1.3rem,1rem + 1.2vw,1.8rem);color:var(--text);margin-bottom:.6rem;}
+.gate-overlay p{color:var(--muted);font-size:.93rem;margin-bottom:1.5rem;max-width:40ch;}
+.gate-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;border-radius:8px;background:var(--accent);color:#1a1916;font-weight:700;font-size:1rem;text-decoration:none;transition:all .18s ease;}
+.gate-btn:hover{filter:brightness(1.05);transform:translateY(-2px);}
+.gate-price{font-size:.78rem;color:var(--faint);margin-top:.75rem;font-family:var(--font-mono);}
+
+.footnote{font-size:.75rem;color:var(--faint);font-family:var(--font-mono);margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+
+<header class="topbar">
+  <a href="/modo-operador/" class="topbar-logo">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="currentColor"/></svg>
+    Modo Operador
+  </a>
+  <div class="topbar-right">
+    <span class="pill-free">🔓 Cap. 01 — Gratuito</span>
+    <button class="theme-btn" id="tb" aria-label="Tema">☀</button>
+    <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener" class="btn-buy">Acesso completo →</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="chapter-eyebrow">Capítulo 01 — Preview Gratuito</p>
+  <h1 class="chapter-title">O novo jogo<br>da IA aplicada</h1>
+  <p class="chapter-intro">Este capítulo foi escrito com base no uso real do stack Jules + MCP + Antigravity entre 2025 e 2026. Nada aqui é teoria.</p>
+
+  <h2>O jogo mudou. A maioria ainda não percebeu.</h2>
+  <p>Em 2024, o ciclo padrão de quem usava IA era simples e manual:</p>
+  <div class="flow">
+    <div class="fn"><span class="fn-label">você</span><span class="fn-main">Prompt</span></div>
+    <span class="fa">→</span>
+    <div class="fn"><span class="fn-label">IA</span><span class="fn-main">Resposta</span></div>
+    <span class="fa">→</span>
+    <div class="fn"><span class="fn-label">você</span><span class="fn-main">Copia</span></div>
+    <span class="fa">→</span>
+    <div class="fn"><span class="fn-label">ciclo</span><span class="fn-main">Repete</span></div>
+  </div>
+  <p>Funcionava. Mas você ainda era o operador manual. A IA era uma ferramenta de pesquisa glorificada — útil, mas dependente de você para cada passo.</p>
+  <p>Em 2026, o ciclo mudou radicalmente. A diferença não é de velocidade. É de <strong>arquitetura</strong>.</p>
+  <div class="flow">
+    <div class="fn"><span class="fn-label">entrada</span><span class="fn-main">Intenção</span></div>
+    <span class="fa">→</span>
+    <div class="fn"><span class="fn-label">executor</span><span class="fn-main">Agente</span></div>
+    <span class="fa">→</span>
+    <div class="fn"><span class="fn-label">infra</span><span class="fn-main">Sistema</span></div>
+    <span class="fa">→</span>
+    <div class="fn" style="border-color:var(--accent);"><span class="fn-label">saída</span><span class="fn-main">Resultado</span></div>
+  </div>
+
+  <h2>O que é um operador de IA</h2>
+  <p>Um <strong>usuário de IA</strong> usa ferramentas. Pede respostas. Copia e cola. Um <strong>operador de IA</strong> constrói sistemas. Define intenção, monta fluxo, deixa agente executar.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Usuário</th><th>Operador</th></tr></thead>
+      <tbody>
+        <tr><td>Abre o ChatGPT, digita pergunta</td><td>Define tarefa, agente abre PR no GitHub</td></tr>
+        <tr><td>Copia a resposta manualmente</td><td>Sistema entrega artefato pronto</td></tr>
+        <tr><td>Repete o processo todo dia</td><td>Automação roda sem ele</td></tr>
+        <tr><td>Produtividade limitada pelo tempo</td><td>Capacidade desacoplada do tempo</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O operador não trabalha mais — ele <strong>arquiteta trabalho</strong>.</p>
+
+  <h2>Por que a janela de vantagem é real</h2>
+  <p>A vantagem de quem aprende a operar IA agora é real por uma razão simples: <strong>a curva de adoção ainda está no início</strong>. A maioria das pessoas ainda está no ciclo de 2024. Os cursos ensinam prompt. Os ebooks explicam ChatGPT.</p>
+  <div class="callout">
+    <span class="callout-icon">⚡</span>
+    <p>Ninguém está ensinando o que acontece quando você conecta Jules ao seu repositório, MCP ao seu ambiente e Antigravity orquestrando tudo. Essa janela fecha.</p>
+  </div>
+
+  <h2>Como este playbook foi construído</h2>
+  <div class="proof-card">
+    <div class="proof-header">
+      <span class="proof-label">Prova de execução</span>
+      <span class="proof-live"><span></span>commits públicos</span>
+    </div>
+    <div class="proof-body">
+      ✦ Jules → escreveu código, abriu PRs, fez commits no repositório<br>
+      ✦ MCP → conectou GitHub + Perplexity + Benni Control Plane<br>
+      ✦ Antigravity → orquestrou as sessões locais<br>
+      ✦ Benni Control Plane → rastreou cada decisão no Decision Ledger
+    </div>
+  </div>
+  <blockquote><p>O método foi usado para construir o método. Essa é a evidência mais forte que existe.</p></blockquote>
+
+  <!-- GATE -->
+  <div class="gate">
+    <div class="gate-blur">
+      <h2>De prompt para sistema</h2>
+      <p>A transição mais importante que um criador ou developer pode fazer em 2026 não é técnica. É mental. Um prompt resolve um problema uma vez. Um sistema resolve a classe inteira do problema — indefinidamente, sem você presente...</p>
+    </div>
+    <div class="gate-overlay">
+      <h3>Continue lendo</h3>
+      <p>Os capítulos 02–07 cobrem agentes, Jules, MCP, automações e receita — com exemplos reais e código copiable.</p>
+      <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener" class="gate-btn">Acesso completo →</a>
+      <p class="gate-price">R$47 · acesso imediato · atualização contínua</p>
+    </div>
+  </div>
+
+  <p class="footnote">Modo Operador © 2026 · <a href="https://github.com/nsfwbunny/modo-operador" target="_blank" rel="noopener" style="color:var(--faint);">github.com/nsfwbunny/modo-operador</a></p>
+</div>
+
+<script>
+const h=document.documentElement,b=document.getElementById('tb');
+let t='dark';h.setAttribute('data-theme',t);b.textContent='☀';
+b.addEventListener('click',()=>{t=t==='dark'?'light':'dark';h.setAttribute('data-theme',t);b.textContent=t==='dark'?'☀':'☾';});
+window.addEventListener('scroll',()=>{const s=document.documentElement;document.getElementById('pf').style.width=Math.min(s.scrollTop/(s.scrollHeight-s.clientHeight)*100,100)+'%';},{passive:true});
+</script>
+</body>
+</html>
