@@ -4,57 +4,69 @@
 
 **O sistema para usar IA como camada de execução.**
 
-*Agentes. Jules. MCP. Automações. Ativos digitais. Tudo funcionando junto.*
+*Não é curso. Não é teoria. É o sistema documentado.*
 
-![Status](https://img.shields.io/badge/status-em%20constru%C3%A7%C3%A3o-yellow)
-![License](https://img.shields.io/badge/license-MIT-blue)
+[![Status](https://img.shields.io/badge/status-em%20constru%C3%A7%C3%A3o-yellow)]()
+[![Stack](https://img.shields.io/badge/stack-Jules%20%7C%20MCP%20%7C%20Antigravity-blue)]()
+[![Proof](https://img.shields.io/badge/proof-engenharia%20real-brightgreen)]()
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)]()
 
 </div>
 
 ---
 
-## O problema
+## O problema real
 
-Ferramentas de IA avançaram radicalmente em 12 meses.
+As ferramentas de IA avançaram radicalmente em 12 meses.\
+O que a maioria está ensinando não acompanhou.
 
-A maioria dos cursos e ebooks ainda ensina o ciclo de 2024:
-
-```
-prompt → resposta → copiar
-```
-
-Ninguém está ensinando o ciclo de 2026:
-
-```
-intenção → agente → sistema → entrega
+```text
+Ciclo de 2024:  prompt → resposta → copiar
+Ciclo de 2026:  intenção → agente → sistema → entrega
 ```
 
-Quem aprender a **operar IA como sistema** — não como ferramenta — terá vantagem real de execução. Essa vantagem se traduz em: build mais rápido, distribuição mais eficiente, receita com menos trabalho manual.
+Quem só usa prompt como ferramenta está competindo com todo mundo.\
+Quem opera IA como sistema está jogando em outra liga.
+
+> **Vantagem real de execução:** build mais rápido, distribuição mais eficiente, receita com menos trabalho manual.
 
 ---
 
 ## O que é o Modo Operador
 
-Não é curso. Não é teoria.
+Um **playbook de operação** construído por quem usa Jules, MCP e Antigravity no dia a dia para criar ativos digitais, automações e produtos reais.
 
-É o **sistema documentado** — construído por quem usa Jules, MCP e Antigravity no dia a dia para criar ativos digitais, automações e produtos reais.
+Não tem lição gravada. Não tem slide. Tem sistema documentado.
 
-**O que você aprende:**
+**Resultado que o leitor sai com:**
 
-- Sair do ciclo prompt → resposta
-- Montar o primeiro fluxo com agente real
-- Criar um ativo digital com stack de IA
-- Entender Jules, MCP e automações sem precisar saber programar profissionalmente
+- Sai do ciclo prompt → resposta — para sempre
+- Monta o primeiro fluxo com agente real rodando
+- Cria um ativo digital com stack de IA do zero
+- Opera Jules, MCP e automações sem precisar ser dev profissional
 
 ---
 
-## Princípios
+## A stack que este playbook documenta
 
-> Este repositório documenta o que já existe. Nada é afirmado antes de ser provado.
+| Ferramenta | Papel no sistema |
+|------------|------------------|
+| **Jules** | Agente assíncrono — gera PRs, testa, entrega código revisado |
+| **Antigravity** | Runtime local — webhooks, agentes, browser, scheduler, audit |
+| **MCP** | Protocolo nativo de conexão de ferramentas |
+| **MONOMO** | Workspace de agentes — orquestração cloud + local |
+| **Gemini / Perplexity** | Raciocínio, pesquisa e citações em tempo real |
+
+---
+
+## Princípios (não negociáveis)
+
+> Este repositório documenta o que já existe.\
+> Nada é afirmado antes de ser executado e provado.
 
 - A landing só afirma o que já existe
 - O playbook só descreve o que foi executado de verdade
-- Cases sem evidência real ficam como `PENDENTE`
+- Cases sem evidência real ficam marcados como `PENDENTE`
 - A oferta só abre depois da prova estar pública
 
 ---
@@ -63,12 +75,27 @@ Não é curso. Não é teoria.
 
 | Componente | Status |
 |---|:---:|
-| Repositório | ✅ Existe |
-| Documentação base | ✅ Existe |
-| Playbook | 🔄 Skeleton criado |
-| Cases de prova | 🔄 Scaffold criado |
+| Repositório + documentação base | ✅ Completo |
+| Playbook — skeleton dos capítulos | ✅ Criado |
+| Cases de prova — scaffold | ✅ Criado |
+| [Antigravity](https://github.com/nsfwbunny/antigravity) — proof público v5 | ✅ 38 testes passando |
+| [MONOMO](https://github.com/nsfwbunny/monomo) — agent workspace | 🔄 Em build |
 | Landing page | 🔄 Em construção |
-| Oferta final | ⏳ Pendente — abre após prova pública |
+| Oferta final | ⏳ Abre após prova pública |
+
+---
+
+## Proofs — engenharia como evidência
+
+Este repositório é ele mesmo uma prova do método.
+
+O **[Antigravity](https://github.com/nsfwbunny/antigravity)** é o primeiro proof público:
+- Sistema de operação local-first com FastAPI, SQLite e Ollama
+- Webhooks com HMAC, approval gate, audit trail imutável
+- 38 testes passando, 5 fases de build documentadas
+- Construído com Jules, operado com MCP, integrado com MONOMO
+
+> *Proof é código rodando. Não é slide.*
 
 ---
 
@@ -77,53 +104,34 @@ Não é curso. Não é teoria.
 ```text
 modo-operador/
 ├── docs/           # Visão, roadmap, outline do playbook
-├── playbook/       # Capítulos do produto — sistema documentado
-├── proofs/         # Cases e evidências reais de execução
-├── prompts/        # Prompts prontos para Jules e Antigravity
+├── playbook/       # Capítulos do método — sistema documentado
+├── proofs/         # Cases e evidências reais — sem prova, não entra
+├── prompts/        # Prompts operacionais prontos para Jules e MCP
 └── assets/
     └── landing/    # Landing page HTML
 ```
-
-### O que cada pasta é
-
-| Pasta | Conteúdo |
-|-------|----------|
-| `docs/` | visão do produto, roadmap, outline do playbook |
-| `playbook/` | o método documentado capítulo a capítulo |
-| `proofs/` | evidências reais — sem prova, não entra |
-| `prompts/` | prompts operacionais prontos para uso com Jules e MCP |
-| `assets/landing/` | código da landing page |
-
----
-
-## Proofs — Engineering as evidence
-
-Este repositório é ele mesmo uma prova do método.
-
-O [`benni-operator-gateway`](https://github.com/nsfwbunny/benni-operator-gateway) é o primeiro **proof público** de como o Modo Operador funciona na prática: gateway local-first, policy-gated, CI-enforced — construido com Jules, operado com MCP, documentado com rastreabilidade completa.
-
-> *Proof é código rodando, não slide.*
 
 ---
 
 ## Roadmap
 
-Ver [`docs/roadmap.md`](./docs/roadmap.md) para o estado detalhado.
-
-**Próximos marcos:**
-
 - [ ] Playbook completo — todos os capítulos escritos e revisados
-- [ ] Cases de prova publicados com evidência real
+- [ ] Cases de prova publicados com evidência real e links
 - [ ] Landing page no ar com waitlist
 - [ ] Oferta aberta
 
+Ver [`docs/roadmap.md`](./docs/roadmap.md) para detalhes.
+
 ---
 
-## Contribuindo
+## Ecossistema
 
-Este é um repositório de produto. Contribuições externas não estão abertas por enquanto.
-
-Se você chegou aqui via landing page ou indicação: o produto ainda está sendo construído. Entre na waitlist quando estiver disponível.
+| Repositório | Papel |
+|------------|-------|
+| [modo-operador](https://github.com/nsfwbunny/modo-operador) | Este repo — o playbook e o método |
+| [antigravity](https://github.com/nsfwbunny/antigravity) | Runtime local do operador — proof v5 |
+| [monomo](https://github.com/nsfwbunny/monomo) | Agent workspace premium — em build |
+| [benni-master-os-skills](https://github.com/nsfwbunny/benni-master-os-skills) | Skills operacionais para YouTube e conteúdo |
 
 ---
 
