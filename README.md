@@ -2,100 +2,111 @@
 
 # Modo Operador
 
-**O sistema para usar IA como camada de execução.**
+**O sistema para usar IA como camada de execução — documentado por quem opera assim.**
 
-*Não é curso. Não é teoria. É o sistema documentado.*
+*Este repositório é o acervo público. O produto completo está em [modooperadorplaybook.netlify.app](https://modooperadorplaybook.netlify.app).*
 
-[![Status](https://img.shields.io/badge/status-em%20constru%C3%A7%C3%A3o-yellow)]()
-[![Stack](https://img.shields.io/badge/stack-Jules%20%7C%20MCP%20%7C%20Antigravity-blue)]()
-[![Proof](https://img.shields.io/badge/proof-engenharia%20real-brightgreen)]()
-[![License](https://img.shields.io/badge/license-MIT-lightgrey)]()
+[![Stack](https://img.shields.io/badge/stack-Jules%20%7C%20MCP%20%7C%20Antigravity-8052ff?style=flat-square)]()
+[![Antigravity](https://img.shields.io/badge/proof-Antigravity%20v5%20%E2%80%94%2038%20testes-15846e?style=flat-square)](https://github.com/nsfwbunny/antigravity)
+[![Produto](https://img.shields.io/badge/produto-R%2497%20no%20Cakto-ffb829?style=flat-square)](https://modooperadorplaybook.netlify.app)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)]()
 
 </div>
 
 ---
 
-## O problema real
+## O problema que este método resolve
 
-As ferramentas de IA avançaram radicalmente em 12 meses.\
-O que a maioria está ensinando não acompanhou.
+A maioria das pessoas usa IA assim:
 
-```text
-Ciclo de 2024:  prompt → resposta → copiar
-Ciclo de 2026:  intenção → agente → sistema → entrega
+```
+prompt → resposta → copiar → colar → repetir
 ```
 
-Quem só usa prompt como ferramenta está competindo com todo mundo.\
-Quem opera IA como sistema está jogando em outra liga.
+Isso é uma ferramenta de consulta. Funciona para tarefas isoladas. Não escala. O gargalo é você.
 
-> **Vantagem real de execução:** build mais rápido, distribuição mais eficiente, receita com menos trabalho manual.
+O operador usa assim:
 
----
+```
+intenção → spec → agente executa → sistema entrega → você revisa
+```
 
-## O que é o Modo Operador
+A diferença não é de velocidade. É de arquitetura. **Você sai do loop sem o sistema parar.**
 
-Um **playbook de operação** construído por quem usa Jules, MCP e Antigravity no dia a dia para criar ativos digitais, automações e produtos reais.
-
-Não tem lição gravada. Não tem slide. Tem sistema documentado.
-
-**Resultado que o leitor sai com:**
-
-- Sai do ciclo prompt → resposta — para sempre
-- Monta o primeiro fluxo com agente real rodando
-- Cria um ativo digital com stack de IA do zero
-- Opera Jules, MCP e automações sem precisar ser dev profissional
+> **O teste real:** se você fechar o laptop agora, o que continua acontecendo?
 
 ---
 
-## A stack que este playbook documenta
+## O que está neste acervo (gratuito)
 
-| Ferramenta | Papel no sistema |
-|------------|------------------|
-| **Jules** | Agente assíncrono — gera PRs, testa, entrega código revisado |
-| **Antigravity** | Runtime local — webhooks, agentes, browser, scheduler, audit |
-| **MCP** | Protocolo nativo de conexão de ferramentas |
-| **MONOMO** | Workspace de agentes — orquestração cloud + local |
-| **Gemini / Perplexity** | Raciocínio, pesquisa e citações em tempo real |
-
----
-
-## Princípios (não negociáveis)
-
-> Este repositório documenta o que já existe.\
-> Nada é afirmado antes de ser executado e provado.
-
-- A landing só afirma o que já existe
-- O playbook só descreve o que foi executado de verdade
-- Cases sem evidência real ficam marcados como `PENDENTE`
-- A oferta só abre depois da prova estar pública
+| Arquivo | O que entrega |
+|---|---|
+| [`STACK.md`](./STACK.md) | Documentação técnica completa da stack com exemplos copiáveis |
+| [`prompts/`](./prompts/) | Prompts operacionais reais usados no build deste produto |
+| [`docs/DECISION-LEDGER-public.md`](./docs/DECISION-LEDGER-public.md) | Decisões rastreáveis do build — com contexto e evidência |
+| [`proofs/`](./proofs/) | Evidências reais de execução — sem prova, não entra |
+| [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Estrutura completa dos 7 capítulos do playbook |
 
 ---
 
-## Estado atual
+## A stack do operador
 
-| Componente | Status |
-|---|:---:|
-| Repositório + documentação base | ✅ Completo |
-| Playbook — skeleton dos capítulos | ✅ Criado |
-| Cases de prova — scaffold | ✅ Criado |
-| [Antigravity](https://github.com/nsfwbunny/antigravity) — proof público v5 | ✅ 38 testes passando |
-| [MONOMO](https://github.com/nsfwbunny/monomo) — agent workspace | 🔄 Em build |
-| Landing page | 🔄 Em construção |
-| Oferta final | ⏳ Abre após prova pública |
+Este repositório foi construído usando exatamente o stack que documenta.
+
+```text
+Jules (Google Labs)
+  └── agente assíncrono de coding
+  └── cria branch → escreve código → abre PR
+  └── usado para: scaffold do repo, geração de prompts, estrutura de docs
+
+MCP — Model Context Protocol
+  └── conecta Claude Desktop ao GitHub, filesystem e SQLite
+  └── usado para: commits, leitura de arquivos, queries de estado
+
+Antigravity
+  └── runtime local de automações e workflows
+  └── usado para: pipeline de conteúdo, processamento de docs, webhooks
+  └── proof público: github.com/nsfwbunny/antigravity — 38 testes passando
+
+Benni Control Plane
+  └── sistema de orquestração com Decision Ledger e snapshots
+  └── usado para: rastreamento de decisões, estado de projeto, CI/CD
+```
+
+→ Documentação técnica completa em [`STACK.md`](./STACK.md)
 
 ---
 
-## Proofs — engenharia como evidência
+## Prova de execução
 
-Este repositório é ele mesmo uma prova do método.
+Nada aqui é afirmado antes de ser executado.
 
-O **[Antigravity](https://github.com/nsfwbunny/antigravity)** é o primeiro proof público:
-- Sistema de operação local-first com FastAPI, SQLite e Ollama
+**[Antigravity](https://github.com/nsfwbunny/antigravity)** — o primeiro proof público:
+- Runtime local com FastAPI, SQLite e Ollama
 - Webhooks com HMAC, approval gate, audit trail imutável
 - 38 testes passando, 5 fases de build documentadas
-- Construído com Jules, operado com MCP, integrado com MONOMO
+- Construído com Jules, operado com MCP
 
-> *Proof é código rodando. Não é slide.*
+**Este repositório** — o segundo proof:
+- Commits datados com decisões rastreáveis no [Decision Ledger público](./docs/DECISION-LEDGER-public.md)
+- PRs criados por agente (Jules) com descrição de raciocínio
+- Landing, playbook e bônus — tudo versionado e auditável
+
+> *Proof é código rodando e commits datados. Não é slide.*
+
+---
+
+## O que está no produto (não está aqui)
+
+O acervo público entrega método e evidência. O produto entrega execução:
+
+- **7 capítulos** — do prompt isolado ao sistema autônomo, com specs copiáveis e exemplos de código real
+- **Prompt Library** — 12 specs completas testadas em projeto real (Jules, Cursor, Claude Code)
+- **MCP Starter Kit** — servidor MCP funcional em TypeScript, 5 tools pré-configuradas, roda com `npm install && npm run build`
+- **Workflow Pack Antigravity** — 3 workflows exportáveis em JSON (Content Pipeline, Code Review Assistant, Document Processor)
+- **Operador's Daily Stack** — checklist operacional em `.md` + `.json` para Notion/Obsidian
+
+**→ [modooperadorplaybook.netlify.app](https://modooperadorplaybook.netlify.app) — R$97, entrega imediata via Cakto**
 
 ---
 
@@ -103,40 +114,41 @@ O **[Antigravity](https://github.com/nsfwbunny/antigravity)** é o primeiro proo
 
 ```text
 modo-operador/
-├── docs/           # Visão, roadmap, outline do playbook
-├── playbook/       # Capítulos do método — sistema documentado
-├── proofs/         # Cases e evidências reais — sem prova, não entra
-├── prompts/        # Prompts operacionais prontos para Jules e MCP
-└── assets/
-    └── landing/    # Landing page HTML
+├── README.md               ← você está aqui
+├── STACK.md                ← documentação técnica da stack
+├── docs/
+│   ├── DECISION-LEDGER-public.md   ← decisões rastreáveis do build
+│   ├── playbook-outline.md          ← estrutura dos 7 capítulos
+│   ├── proof-plan.md                ← plano de evidências
+│   ├── roadmap.md                   ← estado e próximos passos
+│   └── vision.md                    ← visão e princípios
+├── prompts/
+│   ├── README.md                    ← índice dos prompts com quando usar
+│   ├── jules-task-active.md         ← spec completa para Jules
+│   ├── jules-scaffold.md            ← scaffold de projeto novo
+│   └── antigravity-playbook-fill.md ← automação de preenchimento
+├── proofs/                 ← evidências reais de execução
+└── assets/                 ← landing page e recursos visuais
 ```
-
----
-
-## Roadmap
-
-- [ ] Playbook completo — todos os capítulos escritos e revisados
-- [ ] Cases de prova publicados com evidência real e links
-- [ ] Landing page no ar com waitlist
-- [ ] Oferta aberta
-
-Ver [`docs/roadmap.md`](./docs/roadmap.md) para detalhes.
 
 ---
 
 ## Ecossistema
 
-| Repositório | Papel |
-|------------|-------|
-| [modo-operador](https://github.com/nsfwbunny/modo-operador) | Este repo — o playbook e o método |
-| [antigravity](https://github.com/nsfwbunny/antigravity) | Runtime local do operador — proof v5 |
-| [monomo](https://github.com/nsfwbunny/monomo) | Agent workspace premium — em build |
-| [benni-master-os-skills](https://github.com/nsfwbunny/benni-master-os-skills) | Skills operacionais para YouTube e conteúdo |
+| Repositório | Papel | Status |
+|---|---|---|
+| [modo-operador](https://github.com/nsfwbunny/modo-operador) | Este repo — acervo público do método | ✅ Ativo |
+| [antigravity](https://github.com/nsfwbunny/antigravity) | Runtime local — proof v5, 38 testes | ✅ Público |
+| [monomo](https://github.com/nsfwbunny/monomo) | Agent workspace premium | 🔄 Em build |
+| [benni-master-os-skills](https://github.com/nsfwbunny/benni-master-os-skills) | Skills operacionais | 🔒 Privado |
 
 ---
 
 <div align="center">
 
-**Operar é diferente de usar.**
+**Operar é diferente de usar.**\
+A diferença está na arquitetura — não na ferramenta.
+
+[→ Produto completo](https://modooperadorplaybook.netlify.app)
 
 </div>
