@@ -1,134 +1,151 @@
 <div align="center">
 
-# Modo Operador
+<br/>
 
-**O sistema para usar IA como camada de execução — documentado por quem opera assim.**
+```
+ ███╗   ███╗ ██████╗ ██████╗  ██████╗      ██████╗ ██████╗ ███████╗██████╗  █████╗ ██████╗  ██████╗ ██████╗
+ ████╗ ████║██╔═══██╗██╔══██╗██╔═══██╗    ██╔═══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔═══██╗██╔══██╗
+ ██╔████╔██║██║   ██║██║  ██║██║   ██║    ██║   ██║██████╔╝█████╗  ██████╔╝███████║██║  ██║██║   ██║██████╔╝
+ ██║╚██╔╝██║██║   ██║██║  ██║██║   ██║    ██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗██╔══██║██║  ██║██║   ██║██╔══██╗
+ ██║ ╚═╝ ██║╚██████╔╝██████╔╝╚██████╔╝    ╚██████╔╝██║     ███████╗██║  ██║██║  ██║██████╔╝╚██████╔╝██║  ██║
+ ╚═╝     ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝      ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+```
 
-*Este repositório é o acervo público do método.*
+### IA como camada de execução — não como ferramenta de consulta.
 
-[![Stack](https://img.shields.io/badge/stack-Jules%20%7C%20MCP%20%7C%20Antigravity-8052ff?style=flat-square)]()
-[![Antigravity](https://img.shields.io/badge/proof-Antigravity%20v5%20%E2%80%94%2038%20testes-15846e?style=flat-square)](https://github.com/nsfwbunny/antigravity)
-[![Produto](https://img.shields.io/badge/produto-R%2497%20via%20Cakto-ffb829?style=flat-square)](https://nsfwbunny.github.io/modo-operador)
-[![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)]()
+<br/>
+
+[![Stack](https://img.shields.io/badge/stack-Jules_%7C_MCP_%7C_Antigravity-8052ff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6bTAgMTBMNCAxMmw4IDQgOC00eiIvPjwvc3ZnPg==)](./STACK.md)
+[![Proof](https://img.shields.io/badge/proof-Antigravity_v5_%7C_38_testes-15846e?style=for-the-badge)](https://github.com/nsfwbunny/antigravity)
+[![Produto](https://img.shields.io/badge/produto-R$97_no_Cakto-ffb829?style=for-the-badge)](https://nsfwbunny.github.io/modo-operador)
+[![Status](https://img.shields.io/badge/status-ativo-4ade80?style=for-the-badge)]()
+
+<br/>
+
+> **Se você fechar o laptop agora — o que continua acontecendo?**
+
+<br/>
 
 </div>
 
 ---
 
-## O problema que este método resolve
+## O problema
 
-A maioria das pessoas usa IA assim:
+A maioria das pessoas usa IA como uma busca glorificada:
 
 ```
-prompt → resposta → copiar → colar → repetir
+[você] → prompt → resposta → copiar → colar → repetir → [você de novo]
 ```
 
-Isso é uma ferramenta de consulta. Funciona para tarefas isoladas. Não escala. O gargalo é você.
+O gargalo é você. Sempre você. O sistema não age sem você.
 
 O operador usa assim:
 
 ```
-intenção → spec → agente executa → sistema entrega → você revisa
+[você] → intenção → spec → agente executa → sistema entrega → [você revisa]
+         └─────────────────────────────────────────────────┘
+                     isso acontece sem você presente
 ```
 
-A diferença não é de velocidade. É de arquitetura. **Você sai do loop sem o sistema parar.**
-
-> **O teste real:** se você fechar o laptop agora, o que continua acontecendo?
+A diferença não é de velocidade. É de **arquitetura**.
 
 ---
 
-## O que está neste acervo (gratuito)
+## Este repositório
 
-| Arquivo | O que entrega |
-|---|---|
-| [`STACK.md`](./STACK.md) | Documentação técnica completa da stack com exemplos copiáveis |
-| [`prompts/`](./prompts/) | Prompts operacionais reais usados no build deste produto |
-| [`docs/DECISION-LEDGER-public.md`](./docs/DECISION-LEDGER-public.md) | Decisões rastreáveis do build — com contexto e evidência |
-| [`proofs/`](./proofs/) | Evidências reais de execução — sem prova, não entra |
-| [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Estrutura completa dos 7 capítulos do playbook |
+Acervo público do método. Código, decisões e evidências de um sistema real em produção.
+
+| | Arquivo | O que você encontra |
+|---|---|---|
+| 📐 | [`STACK.md`](./STACK.md) | Stack técnica completa com exemplos reais e copiáveis |
+| 🧠 | [`prompts/`](./prompts/) | Specs operacionais usadas no build deste produto |
+| 📋 | [`docs/DECISION-LEDGER-public.md`](./docs/DECISION-LEDGER-public.md) | Cada decisão do build — com contexto, evidência e data |
+| 🔬 | [`proofs/`](./proofs/) | Evidências verificáveis — sem prova, não entra |
+| 🗺️ | [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Os 7 capítulos do playbook — estrutura completa |
 
 ---
 
-## A stack do operador
+## A stack
 
-Este repositório foi construído usando exatamente o stack que documenta.
+Este repositório foi construído usando exatamente o que documenta.
 
-```text
-Jules (Google Labs)
-  └── agente assíncrono de coding
-  └── cria branch → escreve código → abre PR
-  └── usado para: scaffold do repo, geração de prompts, estrutura de docs
-
-MCP — Model Context Protocol
-  └── conecta Claude Desktop ao GitHub, filesystem e SQLite
-  └── usado para: commits, leitura de arquivos, queries de estado
-
-Antigravity
-  └── runtime local de automações e workflows
-  └── usado para: pipeline de conteúdo, processamento de docs, webhooks
-  └── proof público: github.com/nsfwbunny/antigravity — 38 testes passando
-
-Benni Control Plane
-  └── sistema de orquestração com Decision Ledger e snapshots
-  └── usado para: rastreamento de decisões, estado de projeto, CI/CD
+```
+┌─────────────────────────────────────────────────────────────┐
+│  JULES (Google Labs)                                        │
+│  └─ agente assíncrono de coding                            │
+│  └─ cria branch → escreve código → abre PR                 │
+│  └─ você escreve a spec. Jules executa.                    │
+├─────────────────────────────────────────────────────────────┤
+│  MCP — Model Context Protocol                              │
+│  └─ Claude Desktop conectado ao GitHub, filesystem, SQLite │
+│  └─ agente com acesso real ao ambiente — não só ao chat    │
+├─────────────────────────────────────────────────────────────┤
+│  ANTIGRAVITY                                               │
+│  └─ runtime local de automações e workflows                │
+│  └─ FastAPI + SQLite + Ollama — sem custo de API           │
+│  └─ proof: github.com/nsfwbunny/antigravity (38 testes)   │
+├─────────────────────────────────────────────────────────────┤
+│  BENNI CONTROL PLANE                                       │
+│  └─ orquestrador com Decision Ledger e snapshots           │
+│  └─ rastreia decisões, estado e CI/CD                      │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-→ Documentação técnica completa em [`STACK.md`](./STACK.md)
+→ Documentação técnica completa: [`STACK.md`](./STACK.md)
 
 ---
 
-## Prova de execução
-
-Nada aqui é afirmado antes de ser executado.
-
-**[Antigravity](https://github.com/nsfwbunny/antigravity)** — o primeiro proof público:
-- Runtime local com FastAPI, SQLite e Ollama
-- Webhooks com HMAC, approval gate, audit trail imutável
-- 38 testes passando, 5 fases de build documentadas
-- Construído com Jules, operado com MCP
-
-**Este repositório** — o segundo proof:
-- Commits datados com decisões rastreáveis no [Decision Ledger público](./docs/DECISION-LEDGER-public.md)
-- PRs criados por agente (Jules) com descrição de raciocínio
-- Landing, playbook e bônus — tudo versionado e auditável
+## Prova
 
 > *Proof é código rodando e commits datados. Não é slide.*
 
----
+**[Antigravity](https://github.com/nsfwbunny/antigravity)** — proof público v5
+- FastAPI + SQLite + Ollama rodando local
+- Webhooks com HMAC, approval gate, audit trail imutável
+- 38 testes passando, 5 fases de build documentadas
+- Construído com Jules via spec, operado com MCP
 
-## O que está no produto (não está aqui)
-
-O acervo público entrega método e evidência. O produto entrega execução:
-
-- **7 capítulos** — do prompt isolado ao sistema autônomo, com specs copiáveis e exemplos de código real
-- **Prompt Library** — 12 specs completas testadas em projeto real (Jules, Cursor, Claude Code)
-- **MCP Starter Kit** — servidor MCP funcional em TypeScript, 5 tools pré-configuradas, roda com `npm install && npm run build`
-- **Workflow Pack Antigravity** — 3 workflows exportáveis em JSON (Content Pipeline, Code Review Assistant, Document Processor)
-- **Operador's Daily Stack** — checklist operacional em `.md` + `.json` para Notion/Obsidian
-
-**→ [nsfwbunny.github.io/modo-operador](https://nsfwbunny.github.io/modo-operador) — landing de compra**
+**Este repositório** — proof público v2
+- Commits datados, decisões no [Decision Ledger](./docs/DECISION-LEDGER-public.md)
+- PRs abertos por Jules — histórico público e auditável
+- Landing page, playbook e bônus — tudo versionado
 
 ---
 
-## Estrutura do repositório
+## O produto (não está aqui)
 
-```text
+Este acervo entrega **método e evidência**. O produto entrega **execução**:
+
+```
+7 capítulos         — do prompt isolado ao sistema autônomo
+Prompt Library      — 12 specs testadas (Jules, Cursor, Claude Code)
+MCP Starter Kit     — servidor TypeScript funcional, 5 tools, roda com npm install
+Workflow Pack       — 3 workflows JSON para Antigravity (pronto para importar)
+Daily Stack         — checklist operacional .md + .json para Notion/Obsidian
+```
+
+**→ [nsfwbunny.github.io/modo-operador](https://nsfwbunny.github.io/modo-operador)**
+
+---
+
+## Estrutura
+
+```
 modo-operador/
-├── README.md               ← você está aqui
-├── STACK.md                ← documentação técnica da stack
+├── README.md                           ← você está aqui
+├── STACK.md                            ← stack técnica completa
 ├── docs/
-│   ├── DECISION-LEDGER-public.md   ← decisões rastreáveis do build
-│   ├── playbook-outline.md          ← estrutura dos 7 capítulos
-│   ├── proof-plan.md                ← plano de evidências
-│   ├── roadmap.md                   ← estado e próximos passos
-│   └── vision.md                    ← visão e princípios
+│   ├── DECISION-LEDGER-public.md       ← decisões rastreáveis
+│   ├── playbook-outline.md             ← 7 capítulos detalhados
+│   ├── roadmap.md                      ← estado atual e próximos passos
+│   └── vision.md                       ← princípios do método
 ├── prompts/
-│   ├── README.md                    ← índice dos prompts com quando usar
-│   ├── jules-task-active.md         ← spec completa para Jules
-│   ├── jules-scaffold.md            ← scaffold de projeto novo
-│   └── antigravity-playbook-fill.md ← automação de preenchimento
-├── proofs/                 ← evidências reais de execução
-└── assets/                 ← recursos visuais
+│   ├── README.md                       ← índice + quando usar cada spec
+│   ├── jules-task-active.md            ← spec para Jules (feature ativa)
+│   ├── jules-scaffold.md               ← scaffold de projeto novo
+│   └── antigravity-playbook-fill.md    ← automação de preenchimento
+└── proofs/                             ← evidências de execução real
 ```
 
 ---
@@ -137,18 +154,25 @@ modo-operador/
 
 | Repositório | Papel | Status |
 |---|---|---|
-| [modo-operador](https://github.com/nsfwbunny/modo-operador) | Este repo — acervo público do método | ✅ Ativo |
-| [antigravity](https://github.com/nsfwbunny/antigravity) | Runtime local — proof v5, 38 testes | ✅ Público |
-| [monomo](https://github.com/nsfwbunny/monomo) | Agent workspace premium | 🔄 Em build |
-| [benni-master-os-skills](https://github.com/nsfwbunny/benni-master-os-skills) | Skills operacionais | 🔒 Privado |
+| [`modo-operador`](https://github.com/nsfwbunny/modo-operador) | Acervo público do método | `✅ ativo` |
+| [`antigravity`](https://github.com/nsfwbunny/antigravity) | Runtime local — 38 testes, 5 fases | `✅ público` |
+| [`monomo`](https://github.com/nsfwbunny/monomo) | Agent workspace premium | `🔄 build` |
+| [`benni-master-os-skills`](https://github.com/nsfwbunny/benni-master-os-skills) | Skills operacionais | `🔒 privado` |
 
 ---
 
 <div align="center">
 
-**Operar é diferente de usar.**\
-A diferença está na arquitetura — não na ferramenta.
+<br/>
 
-[→ Ver landing e adquirir](https://nsfwbunny.github.io/modo-operador)
+**Operar IA é diferente de usar IA.**
+
+*A diferença está na arquitetura — não na ferramenta.*
+
+<br/>
+
+[`→ Ver o produto`](https://nsfwbunny.github.io/modo-operador)
+
+<br/>
 
 </div>
