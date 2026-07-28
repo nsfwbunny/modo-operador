@@ -1,5 +1,20 @@
 # Vision — Modo Operador
 
+## Objetivo estratégico
+
+> **Estar entre os top devs de IA do Brasil até dezembro de 2026.**
+
+Métrica de referência: reconhecimento público verificável.
+
+- Repositórios com tração real (stars, forks, citações)
+- Produto vendendo com prova de receita
+- Presença técnica citável em comunidades, GitHub e redes
+- Stack diferencial público: Jules + MCP + Antigravity + Benni Control Plane
+
+Nada disso é afirmado. Tudo é construído em público, commit por commit.
+
+---
+
 ## Problema
 
 Ferramentas de IA evoluíram radicalmente em 12 meses.
