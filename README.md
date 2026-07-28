@@ -4,11 +4,11 @@
 
 **O sistema para usar IA como camada de execução — documentado por quem opera assim.**
 
-*Este repositório é o acervo público. O produto completo está em [modooperadorplaybook.netlify.app](https://modooperadorplaybook.netlify.app).*
+*Este repositório é o acervo público do método.*
 
 [![Stack](https://img.shields.io/badge/stack-Jules%20%7C%20MCP%20%7C%20Antigravity-8052ff?style=flat-square)]()
 [![Antigravity](https://img.shields.io/badge/proof-Antigravity%20v5%20%E2%80%94%2038%20testes-15846e?style=flat-square)](https://github.com/nsfwbunny/antigravity)
-[![Produto](https://img.shields.io/badge/produto-R%2497%20no%20Cakto-ffb829?style=flat-square)](https://modooperadorplaybook.netlify.app)
+[![Produto](https://img.shields.io/badge/produto-R%2497%20via%20Cakto-ffb829?style=flat-square)](https://nsfwbunny.github.io/modo-operador)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)]()
 
 </div>
@@ -106,7 +106,7 @@ O acervo público entrega método e evidência. O produto entrega execução:
 - **Workflow Pack Antigravity** — 3 workflows exportáveis em JSON (Content Pipeline, Code Review Assistant, Document Processor)
 - **Operador's Daily Stack** — checklist operacional em `.md` + `.json` para Notion/Obsidian
 
-**→ [modooperadorplaybook.netlify.app](https://modooperadorplaybook.netlify.app) — R$97, entrega imediata via Cakto**
+**→ [nsfwbunny.github.io/modo-operador](https://nsfwbunny.github.io/modo-operador) — landing de compra**
 
 ---
 
@@ -128,7 +128,7 @@ modo-operador/
 │   ├── jules-scaffold.md            ← scaffold de projeto novo
 │   └── antigravity-playbook-fill.md ← automação de preenchimento
 ├── proofs/                 ← evidências reais de execução
-└── assets/                 ← landing page e recursos visuais
+└── assets/                 ← recursos visuais
 ```
 
 ---
@@ -149,6 +149,6 @@ modo-operador/
 **Operar é diferente de usar.**\
 A diferença está na arquitetura — não na ferramenta.
 
-[→ Produto completo](https://modooperadorplaybook.netlify.app)
+[→ Ver landing e adquirir](https://nsfwbunny.github.io/modo-operador)
 
 </div>
