@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modo Operador — IA como sistema de execução</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #09090b;
+  --bg-elevated: #0c0c0f;
+  --surface: rgba(18, 18, 22, 0.6);
+  --surface-hover: rgba(24, 24, 28, 0.8);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --text: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --accent: #a78bfa;
+  --accent-deep: #7c3aed;
+  --accent-2: #67e8f9;
+  --accent-3: #f0abfc;
+  --success: #4ade80;
+  --glow: rgba(167, 139, 250, 0.15);
+  --glow-strong: rgba(167, 139, 250, 0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  letter-spacing: -0.011em;
+}
+
+/* Noise texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== SCROLL PROGRESS ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--accent-2));
+  z-index: 200;
+  box-shadow: 0 0 10px var(--glow-strong);
+  transition: width 0.1s ease-out;
+}
+
+/* ===== CURSOR GLOW ===== */
+.cursor-glow {
+  position: fixed;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.08), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s;
+  mix-blend-mode: screen;
+}
+
+/* ===== CODE RAIN CANVAS ===== */
+#codeRain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ===== BACKGROUND ===== */
+.bg-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.18), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(103, 232, 249, 0.07), transparent),
+    radial-gradient(ellipse 60% 40% at 20% 100%, rgba(240, 171, 252, 0.06), transparent);
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+  will-change: transform;
+}
+
+/* ===== WAVE SVG ===== */
+.wave-container {
+  position: absolute;
+  left: 0; right: 0;
+  height: 200px;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.wave-container.top { top: -1px; }
+.wave-container.bottom { bottom: -1px; transform: rotate(180deg); }
+
+.wave-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wave-path {
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+  opacity: 0.6;
+}
+
+.wave-path-1 { stroke: var(--accent); stroke-dasharray: 4 6; animation: waveDash 20s linear infinite; }
+.wave-path-2 { stroke: var(--accent-2); stroke-dasharray: 6 8; animation: waveDash 25s linear infinite reverse; }
+.wave-path-3 { stroke: var(--accent-3); stroke-dasharray: 3 5; animation: waveDash 30s linear infinite; }
+
+@keyframes waveDash {
+  to { stroke-dashoffset: -1000; }
+}
+
+/* Frequency bars */
+.frequency-bars {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  height: 40px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.frequency-bar {
+  width: 2px;
+  background: linear-gradient(to top, var(--accent), var(--accent-2));
+  border-radius: 2px;
+  animation: frequencyPulse 1.2s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes frequencyPulse {
+  0%, 100% { height: 4px; opacity: 0.3; }
+  50% { height: 30px; opacity: 0.8; }
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 14px 32px;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(9, 9, 11, 0.7);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+nav.scrolled {
+  background: rgba(9, 9, 11, 0.85);
+  border-bottom-color: var(--border-hover);
+}
+
+nav .nav-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+  position: relative;
+  box-shadow: 0 0 20px var(--glow);
+  animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 20px var(--glow); }
+  50% { box-shadow: 0 0 30px var(--glow-strong); }
+}
+
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 3px;
+  background: var(--bg);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+  letter-spacing: -0.01em;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--text);
+  color: var(--bg);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: #e4e4e7;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn-ghost:hover {
+  background: var(--surface);
+  border-color: var(--text-secondary);
+  box-shadow: none;
+}
+
+.btn-large {
+  padding: 14px 28px;
+  font-size: 15px;
+}
+
+.btn-arrow::after {
+  content: '→';
+  transition: transform 0.2s;
+}
+
+.btn-arrow:hover::after {
+  transform: translateX(3px);
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 140px 32px 100px;
+  position: relative;
+  perspective: 1500px;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.hero-content {
+  max-width: 880px;
+  animation: heroIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--success);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.2); }
+}
+
+.hero h1 {
+  font-size: clamp(44px, 7vw, 84px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+
+.hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 8s ease infinite;
+  font-style: italic;
+  font-weight: 500;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 44px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.hero-subtitle strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Floating 3D cards */
+.floating-cards {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  perspective: 1500px;
+  overflow: hidden;
+}
+
+.float-card {
+  position: absolute;
+  width: 140px;
+  height: 90px;
+  background: linear-gradient(135deg, rgba(30, 30, 35, 0.8), rgba(20, 20, 25, 0.6));
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transform-style: preserve-3d;
+  animation: floatCard 16s ease-in-out infinite;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.float-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
+}
+
+.float-card:nth-child(1) { top: 18%; left: 6%; animation-delay: 0s; }
+.float-card:nth-child(2) { top: 62%; left: 4%; animation-delay: -4s; }
+.float-card:nth-child(3) { top: 22%; right: 6%; animation-delay: -8s; }
+.float-card:nth-child(4) { top: 68%; right: 4%; animation-delay: -12s; }
+
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  25% {
+    transform: translateY(-25px) rotateX(12deg) rotateY(15deg) rotateZ(3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg);
+  }
+  75% {
+    transform: translateY(-20px) rotateX(6deg) rotateY(8deg) rotateZ(1deg);
+  }
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 120px 32px;
+  position: relative;
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: -3px; left: 50%;
+  transform: translateX(-50%);
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 72px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.section-title .accent {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.section-subtitle {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* ===== COMPARISON ===== */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.compare-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.compare-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(167, 139, 250, 0.1), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.compare-card:hover::before,
+.compare-card.selected::before { opacity: 1; }
+
+.compare-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.compare-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 30px 60px rgba(167, 139, 250, 0.2);
+  transform: translateY(-4px);
+}
+
+.compare-card.old { opacity: 0.6; }
+.compare-card.old.selected { opacity: 1; }
+
+.compare-card.new {
+  border-color: rgba(167, 139, 250, 0.2);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.06), rgba(103, 232, 249, 0.03));
+}
+
+.compare-card.new::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+}
+
+.compare-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 28px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.compare-card.new .compare-title { color: var(--accent); }
+
+.compare-steps { display: flex; flex-direction: column; gap: 12px; }
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+
+.compare-card.new .step {
+  border-color: rgba(167, 139, 250, 0.15);
+  background: rgba(167, 139, 250, 0.04);
+}
+
+.step-num {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-secondary);
+}
+
+.compare-card.new .step-num {
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+  color: white;
+  box-shadow: 0 4px 12px var(--glow);
+}
+
+.step-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.step-arrow {
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  padding: 4px 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.compare-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ===== CHAPTERS ===== */
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.chapter-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.chapter-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s;
+}
+
+.chapter-card:hover::before { transform: scaleX(1); }
+
+.chapter-card:hover {
+  transform: translateY(-4px) rotateX(2deg);
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.chapter-card.selected {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(103, 232, 249, 0.04));
+  box-shadow: 0 0 0 1px var(--accent), 0 20px 40px rgba(167, 139, 250, 0.2);
+}
+
+.chapter-card.selected::before {
+  transform: scaleX(1);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+}
+
+.chapter-num {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chapter-num::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.chapter-title {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.chapter-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.chapter-card.selected .chapter-desc {
+  color: var(--text);
+}
+
+/* Ripple */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.4), transparent 70%);
+  transform: scale(0);
+  animation: rippleEffect 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ===== TEMPLATES ===== */
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.template-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  position: relative;
+  cursor: pointer;
+}
+
+.template-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.template-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 20px 40px rgba(167, 139, 250, 0.2);
+}
+
+.template-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.template-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(103, 232, 249, 0.1));
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.template-card.selected .template-icon {
+  transform: rotate(-8deg) scale(1.05);
+  box-shadow: 0 0 20px var(--glow-strong);
+}
+
+.template-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+.template-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.template-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+
+.template-tag::before {
+  content: '✓';
+  font-size: 10px;
+}
+
+/* ===== BONUS ===== */
+.bonus-notice {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(103, 232, 249, 0.04));
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+}
+
+.bonus-notice strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.bonus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.bonus-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.bonus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.bonus-card:hover::before,
+.bonus-card.selected::before { opacity: 1; }
+
+.bonus-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.bonus-card.selected {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(103, 232, 249, 0.04));
+  box-shadow: 0 0 0 1px var(--accent), 0 20px 40px rgba(167, 139, 250, 0.2);
+}
+
+.bonus-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.bonus-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.bonus-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.bonus-cta {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bonus-cta::after {
+  content: '→';
+  transition: transform 0.2s;
+}
+
+.bonus-card:hover .bonus-cta::after,
+.bonus-card.selected .bonus-cta::after {
+  transform: translateX(3px);
+}
+
+/* ===== STACK ===== */
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.stack-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.stack-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.stack-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 20px 40px rgba(167, 139, 250, 0.2);
+}
+
+.stack-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(103, 232, 249, 0.08));
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  margin-bottom: 18px;
+  transition: transform 0.3s;
+}
+
+.stack-card.selected .stack-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.stack-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.stack-name {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.stack-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* ===== PROOF ===== */
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.proof-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s;
+  cursor: pointer;
+  position: relative;
+}
+
+.proof-card:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+}
+
+.proof-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 20px 40px rgba(167, 139, 250, 0.15);
+}
+
+.proof-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--success);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.proof-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--success);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.proof-status.pending { color: var(--accent-2); }
+.proof-status.pending::before { background: var(--accent-2); box-shadow: 0 0 6px var(--accent-2); }
+
+.proof-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.proof-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.proof-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  transition: gap 0.2s;
+}
+
+.proof-link:hover { gap: 10px; }
+
+/* ===== PRINCIPLES ===== */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.principle-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s;
+  cursor: pointer;
+  position: relative;
+}
+
+.principle-card:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+}
+
+.principle-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 20px 40px rgba(167, 139, 250, 0.15);
+}
+
+.principle-num {
+  font-size: 32px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.02em;
+}
+
+.principle-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.principle-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* ===== CTA FINAL ===== */
+.cta-section {
+  padding: 140px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-box {
+  max-width: 720px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(103, 232, 249, 0.04));
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 20px;
+  padding: 64px 48px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+}
+
+.cta-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.cta-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  margin: 32px 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.price-label {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.price-amount {
+  font-size: 56px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.price-period {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.features-list {
+  list-style: none;
+  text-align: left;
+  max-width: 440px;
+  margin: 32px auto;
+}
+
+.features-list li {
+  padding: 10px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+
+.features-list li::before {
+  content: '✓';
+  width: 20px; height: 20px;
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: white;
+}
+
+.cta-footer {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  letter-spacing: -0.01em;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 48px 32px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--text-tertiary);
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+
+/* ===== REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  nav { padding: 12px 20px; }
+  .nav-links a:not(.btn) { display: none; }
+  .comparison { grid-template-columns: 1fr; }
+  .float-card { display: none; }
+  section { padding: 80px 20px; }
+  .cta-box { padding: 40px 24px; }
+  .price-amount { font-size: 44px; }
+  .hero { padding: 120px 20px 80px; }
+  .cursor-glow { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Cursor Glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Code Rain Canvas -->
+<canvas id="codeRain"></canvas>
+
+<!-- Background -->
+<div class="bg-gradient"></div>
+<div class="bg-grid" id="bgGrid"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark"></div>
+      Modo Operador
+    </a>
+    <div class="nav-links">
+      <a href="#capitulos">Capítulos</a>
+      <a href="#bonus">Bônus</a>
+      <a href="#stack">Stack</a>
+      <a href="https://pay.cakto.com.br/pfuibmt_999515" class="btn">Comprar agora</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="floating-cards">
+    <div class="float-card">⚡</div>
+    <div class="float-card">🤖</div>
+    <div class="float-card">🎯</div>
+    <div class="float-card">🚀</div>
+  </div>
+  <div class="hero-content" id="heroContent">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      IA como sistema de execução
+    </div>
+    <h1>Operar IA é <span class="gradient">diferente</span> de usar IA</h1>
+    <p class="hero-subtitle">
+      O ciclo de 2024 era: <strong>prompt → resposta → copiar</strong>.<br>
+      O ciclo de 2026 é: <strong>intenção → agente → sistema → entrega</strong>.<br>
+      Playbook completo + arsenal de bônus documentado por quem já opera assim.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://pay.cakto.com.br/pfuibmt_999515" class="btn btn-large btn-arrow">Quero o Modo Operador</a>
+      <a href="#capitulos" class="btn btn-large btn-ghost">Ver conteúdo</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COMPARISON -->
+<section>
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">O problema</div>
+      <h2 class="section-title">As ferramentas avançaram.<br><span class="accent">Os cursos ficaram para trás.</span></h2>
+    </div>
+    <div class="comparison">
+      <div class="compare-card old reveal-left" data-selectable>
+        <div class="compare-title">Ciclo 2024 — ainda ensinado por 99% dos cursos</div>
+        <div class="compare-steps">
+          <div class="step"><div class="step-num">01</div><div class="step-text">Prompt</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">02</div><div class="step-text">Resposta</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">03</div><div class="step-text">Copiar manualmente</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">04</div><div class="step-text">Repetir indefinidamente</div></div>
+        </div>
+        <div class="compare-footer">Você ainda é o operador manual. A IA é só uma ferramenta de pesquisa glorificada. Se você fechar o laptop, tudo para.</div>
+      </div>
+      <div class="compare-card new reveal-right" data-selectable>
+        <div class="compare-title">Ciclo 2026 — o que o Modo Operador documenta</div>
+        <div class="compare-steps">
+          <div class="step"><div class="step-num">01</div><div class="step-text">Intenção</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">02</div><div class="step-text">Agente executa</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">03</div><div class="step-text">Sistema entrega</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">04</div><div class="step-text">Você revisa e escala</div></div>
+        </div>
+        <div class="compare-footer">Você passa a ser o arquiteto. Jules, MCP e automações são a camada de execução. O sistema age no seu lugar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CHAPTERS -->
+<section id="capitulos">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">O que você recebe</div>
+      <h2 class="section-title">7 capítulos + <span class="accent">3 templates copiáveis.</span></h2>
+      <p class="section-subtitle">Cada capítulo documenta apenas o que foi executado de verdade — com código, specs e decisões reais. Nada teórico. Os templates são copiáveis e validados em uso real.</p>
+    </div>
+    <div class="chapters-grid">
+      <div class="chapter-card reveal" data-selectable>
+        <div class="chapter-num">CAPÍTULO 01</div>
+        <div class="chapter-title">O novo jogo da IA aplicada</div>
+        <div class="chapter-desc">Diferença entre usuário e operador. Ciclo 2024 vs ciclo 2026. A janela de vantagem que ainda está aberta.</div>
+      </div>
+      <div class="chapter-card reveal" data-selectable>
+        <div class="chapter-num">CAPÍTULO 02</div>
+        <div class="chapter-title">De prompt para sistema</div>
+        <div class="chapter-desc">O que é uma spec. Os 4 componentes obrigatórios. Como escrever instrução suficiente para agente executar sem pedir esclarecimento.</div>
+      </div>
+      <div class="chapter-card reveal" data-selectable>
+        <div class="chapter-num">CAPÍTULO 03</div>
+        <div class="chapter-title">Agentes como unidade de trabalho</div>
+        <div class="chapter-desc">Anatomia de um agente. 3 tipos: reativo, com estado, orquestrador. Limitações reais e como contorná-las.</div>
+      </div>
+      <div class="chapter-card reveal" data-selectable>
+        <div class="chapter-num">CAPÍTULO 04</div>
+        <div class="chapter-title">Jules no fluxo de build e ship</div>
+        <div class="chapter-desc">Como Jules funciona na prática. Onde performa e onde falha. Padrão de spec com código real que funciona.</div>
+      </div>
+      <div class="chapter-card reveal" data-selectable>
+        <div class="chapter-num">CAPÍTULO 05</div>
+        <div class="chapter-title">MCP como camada de contexto</div>
+        <div class="chapter-desc">Arquitetura Host/Client/Server. Servidores úteis para começar. Segurança operacional com acesso a ferramentas externas.</div>
+      </div>
+      <div class="chapter-card reveal" data-selectable>
+        <div class="chapter-num">CAPÍTULO 06</div>
+        <div class="chapter-title">Antigravity e automações locais</div>
+        <div class="chapter-desc">Canvas local vs cloud. 5 casos de uso reais. AMV — Automação Mínima Viável. Ollama como backend sem custo de API.</div>
+      </div>
+      <div class="chapter-card reveal" data-selectable>
+        <div class="chapter-num">CAPÍTULO 07</div>
+        <div class="chapter-title">Portfólio, distribuição e receita</div>
+        <div class="chapter-desc">Portfólio verificável vs lista de projetos. 4 tipos de ativo digital. Canais de distribuição com maior retorno por esforço. Lógica de precificação para produto técnico.</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px;">
+      <div class="templates-grid">
+        <div class="template-card reveal" data-selectable>
+          <div class="template-header">
+            <div class="template-icon">📋</div>
+            <div>
+              <div class="template-label">TEMPLATE 01</div>
+              <div class="template-title">Spec de Agente</div>
+            </div>
+          </div>
+          <div class="template-desc">Objetivo, contexto, comportamento esperado, constraints e critério de done. Base para Jules, Cursor, qualquer agente.</div>
+          <div class="template-tag">Copiável</div>
+        </div>
+        <div class="template-card reveal" data-selectable>
+          <div class="template-header">
+            <div class="template-icon">✅</div>
+            <div>
+              <div class="template-label">TEMPLATE 02</div>
+              <div class="template-title">Checklist de Ship</div>
+            </div>
+          </div>
+          <div class="template-desc">Go/No-go antes de publicar qualquer coisa: código, produto, conteúdo ou automação. Cobre funcionamento, segurança e distribuição.</div>
+          <div class="template-tag">Validado</div>
+        </div>
+        <div class="template-card reveal" data-selectable>
+          <div class="template-header">
+            <div class="template-icon">💰</div>
+            <div>
+              <div class="template-label">TEMPLATE 03</div>
+              <div class="template-title">Skeleton de Oferta Low-ticket</div>
+            </div>
+          </div>
+          <div class="template-desc">Estrutura para produto entre R$67–R$197. Problema, público, entrega, prova, preço e o que não está incluído.</div>
+          <div class="template-tag">Pronto para usar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BONUS -->
+<section id="bonus">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Bônus inclusos</div>
+      <h2 class="section-title">O arsenal <span class="accent">do operador.</span></h2>
+      <p class="section-subtitle">4 bônus que eliminam o gap entre "ler" e "executar". Você não constrói do zero — importa, configura e roda. Tudo dentro do playbook, acessível imediatamente.</p>
+    </div>
+
+    <div class="bonus-notice reveal">
+      <strong>Incluso no acesso vitalício</strong> — sem custo extra
+    </div>
+
+    <div class="bonus-grid">
+      <div class="bonus-card reveal" data-selectable>
+        <div class="bonus-label">Bônus 01</div>
+        <div class="bonus-title">Prompt Library</div>
+        <div class="bonus-desc">12 specs prontas para copiar e colar: feature, refatoração, testes, bugfix, migração, documentação, review, API, componente UI, script, query e deploy. Cada uma com variações para Jules, Cursor e Claude Code.</div>
+        <div class="bonus-cta">Copia, preenche os [colchetes], cola no agente</div>
+      </div>
+      <div class="bonus-card reveal" data-selectable>
+        <div class="bonus-label">Bônus 02</div>
+        <div class="bonus-title">MCP Server Starter</div>
+        <div class="bonus-desc">Servidor MCP funcional em TypeScript com 5 tools pré-configuradas: filesystem, sqlite, fetch, exec e notify. Inclui config pronta para Claude Desktop e README de instalação. Roda com <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent);">npm install && npm run build</code>.</div>
+        <div class="bonus-cta">Código real, pronto para estender</div>
+      </div>
+      <div class="bonus-card reveal" data-selectable>
+        <div class="bonus-label">Bônus 03</div>
+        <div class="bonus-title">Workflow Pack Antigravity</div>
+        <div class="bonus-desc">3 workflows exportáveis em JSON: Content Pipeline (geração diária), Code Review Assistant (análise automática de PRs) e Document Processor (OCR + extração estruturada com LLM local). Importa no Antigravity, configura env vars, executa.</div>
+        <div class="bonus-cta">Importa e roda — sem escrever nó por nó</div>
+      </div>
+      <div class="bonus-card reveal" data-selectable>
+        <div class="bonus-label">Bônus 04</div>
+        <div class="bonus-title">Operador's Daily Stack</div>
+        <div class="bonus-desc">Checklist operacional específico para trabalho com agentes: pre-flight (6 checks), spec review (7 perguntas), output validation (13 critérios), security sweep (5 itens) e weekly retro (3 perguntas). Em formato .md + .json para Notion/Obsidian.</div>
+        <div class="bonus-cta">Copia para Notion/Obsidian e usa hoje</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">A stack</div>
+      <h2 class="section-title">Ferramentas reais usadas <span class="accent">para construir este repositório</span></h2>
+      <p class="section-subtitle">Nada teórico. O histórico de commits prova que o mesmo stack que o playbook documenta foi usado para criar o próprio produto.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card reveal" data-selectable>
+        <div class="stack-icon">🧠</div>
+        <div class="stack-tag">Google Labs</div>
+        <div class="stack-name">Jules</div>
+        <div class="stack-desc">Agente de coding autônomo. Cria branches, escreve código, abre PRs — tudo com linguagem natural. Sem precisar tocar no terminal.</div>
+      </div>
+      <div class="stack-card reveal" data-selectable>
+        <div class="stack-icon">🔌</div>
+        <div class="stack-tag">Protocol</div>
+        <div class="stack-name">MCP</div>
+        <div class="stack-desc">Model Context Protocol. Conecta qualquer ferramenta à IA: GitHub, databases, APIs — como uma camada de sistema operacional para agentes.</div>
+      </div>
+      <div class="stack-card reveal" data-selectable>
+        <div class="stack-icon">🛸</div>
+        <div class="stack-tag">Local-first</div>
+        <div class="stack-name">Antigravity</div>
+        <div class="stack-desc">Canvas local de automações e workflows. Orquestra agentes sem depender de cloud. Suporte a Ollama como backend sem custo de API.</div>
+      </div>
+      <div class="stack-card reveal" data-selectable>
+        <div class="stack-icon">🎛️</div>
+        <div class="stack-tag">Infra privada</div>
+        <div class="stack-name">Benni Control Plane + GitHub Actions</div>
+        <div class="stack-desc">Sistema de controle que orquestra tudo: Decision Ledger de decisões rastreáveis, snapshots de projeto, CI/CD automatizado. Este repositório foi construído usando esse stack.</div>
+      </div>
+      <div class="stack-card reveal" data-selectable>
+        <div class="stack-icon">🔍</div>
+        <div class="stack-tag">Perplexity AI</div>
+        <div class="stack-name">Pesquisa autônoma</div>
+        <div class="stack-desc">Buscas em tempo real integradas ao fluxo de trabalho via MCP. O agente pesquisa, filtra e age — sem você pedir.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROOF -->
+<section>
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Prova pública</div>
+      <h2 class="section-title">A landing só afirma <span class="accent">o que já existe</span></h2>
+      <p class="section-subtitle">Nada é afirmado antes de ser provado. Este repositório é ele mesmo uma evidência do método funcionando.</p>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-card reveal" data-selectable>
+        <div class="proof-status">Ativo</div>
+        <div class="proof-title">Playbook completo publicado</div>
+        <div class="proof-desc">7 capítulos + 4 bônus + 3 templates. Conteúdo real e técnico: agentes, specs, Jules, MCP, Antigravity, distribuição e receita. Acessível imediatamente após pagamento.</div>
+      </div>
+      <div class="proof-card reveal" data-selectable>
+        <div class="proof-status">Ativo</div>
+        <div class="proof-title">Repositório público no ar</div>
+        <div class="proof-desc">Estrutura completa: playbook, proofs, prompts, bônus e esta landing — tudo versionado e auditável.</div>
+        <a href="https://github.com/nsfwbunny/modo-operador" class="proof-link" target="_blank">github.com/nsfwbunny/modo-operador ↗</a>
+      </div>
+      <div class="proof-card reveal" data-selectable>
+        <div class="proof-status">Ativo</div>
+        <div class="proof-title">Benni Control Plane — infra real em produção</div>
+        <div class="proof-desc">Sistema de orquestração privado com Decision Ledger, snapshots e MCP ativo. Usado para construir este repositório.</div>
+      </div>
+      <div class="proof-card reveal" data-selectable>
+        <div class="proof-status">Ativo</div>
+        <div class="proof-title">Jules operando no repositório</div>
+        <div class="proof-desc">PRs criados por agente, commits com rastreabilidade completa. Histórico público no GitHub.</div>
+        <a href="https://github.com/nsfwbunny/modo-operador/commits/main" class="proof-link" target="_blank">Ver histórico de commits ↗</a>
+      </div>
+      <div class="proof-card reveal" data-selectable>
+        <div class="proof-status">Ativo</div>
+        <div class="proof-title">Produto ativo no Cakto</div>
+        <div class="proof-desc">Compra real, entrega imediata. Link de pagamento verificável.</div>
+        <a href="https://pay.cakto.com.br/pfuibmt_999515" class="proof-link" target="_blank">pay.cakto.com.br ↗</a>
+      </div>
+      <div class="proof-card reveal" data-selectable>
+        <div class="proof-status pending">Em andamento</div>
+        <div class="proof-title">Cases com evidência de receita</div>
+        <div class="proof-desc">Números reais, telas reais. Nada entra aqui sem screenshot ou log verificável.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PRINCIPLES -->
+<section>
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Princípios</div>
+      <h2 class="section-title">Como este produto <span class="accent">é construído</span></h2>
+    </div>
+    <div class="principles-grid">
+      <div class="principle-card reveal" data-selectable>
+        <div class="principle-num">01</div>
+        <div class="principle-title">Zero afirmação sem prova</div>
+        <div class="principle-desc">Nenhum case entra no playbook sem evidência verificável. Se não existe screenshot ou log, não existe claim.</div>
+      </div>
+      <div class="principle-card reveal" data-selectable>
+        <div class="principle-num">02</div>
+        <div class="principle-title">Acesso imediato, atualização contínua</div>
+        <div class="principle-desc">Você compra hoje e recebe tudo que existe. Cada novo módulo entregue entra automaticamente sem custo adicional.</div>
+      </div>
+      <div class="principle-card reveal" data-selectable>
+        <div class="principle-num">03</div>
+        <div class="principle-title">Repositório como artefato</div>
+        <div class="principle-desc">Este repo é a prova do método. Cada commit é rastreável, cada decisão está no Decision Ledger.</div>
+      </div>
+      <div class="principle-card reveal" data-selectable>
+        <div class="principle-num">04</div>
+        <div class="principle-title">Privado protege. Público prova.</div>
+        <div class="principle-desc">Infraestrutura e agentes ficam privados. O produto e o método ficam públicos — qualquer um pode auditar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="wave-container top">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path class="wave-path wave-path-1" d="M0,100 Q150,50 300,100 T600,100 T900,100 T1200,100" />
+      <path class="wave-path wave-path-2" d="M0,120 Q150,70 300,120 T600,120 T900,120 T1200,120" />
+      <path class="wave-path wave-path-3" d="M0,80 Q150,130 300,80 T600,80 T900,80 T1200,80" />
+    </svg>
+  </div>
+  <div class="frequency-bars" id="ctaFrequency">
+    <!-- Generated by JS -->
+  </div>
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2 class="cta-title">Entre antes que a vantagem feche</h2>
+      <p class="cta-subtitle">A janela de quem aprende a operar IA como sistema ainda está aberta — mas está fechando. Compre hoje e receba tudo agora.</p>
+      <div class="price">
+        <span class="price-label">Early Access</span>
+        <span class="price-amount">R$ 97</span>
+        <span class="price-period">/ acesso vitalício</span>
+      </div>
+      <ul class="features-list">
+        <li>7 capítulos técnicos — Jules, MCP, Antigravity</li>
+        <li>3 templates copiáveis validados em uso real</li>
+        <li>4 bônus práticos — Prompt Library, MCP Starter, Workflows, Daily Stack</li>
+        <li>Todos os módulos futuros incluídos</li>
+        <li>Stack real documentado com evidência</li>
+        <li>Acesso imediato após pagamento</li>
+      </ul>
+      <a href="https://pay.cakto.com.br/pfuibmt_999515" class="btn btn-large btn-arrow">Comprar agora — R$ 97</a>
+      <p class="cta-footer">Pagamento via Cakto — Pix, cartão ou boleto. Entrega imediata.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 Modo Operador.
+  </div>
+</footer>
+
+<script>
+// ===== SCROLL PROGRESS =====
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  scrollProgress.style.width = scrolled + '%';
+});
+
+// ===== CURSOR GLOW =====
+const cursorGlow = document.getElementById('cursorGlow');
+let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animateGlow() {
+  glowX += (mouseX - glowX) * 0.1;
+  glowY += (mouseY - glowY) * 0.1;
+  cursorGlow.style.left = glowX + 'px';
+  cursorGlow.style.top = glowY + 'px';
+  requestAnimationFrame(animateGlow);
+}
+animateGlow();
+
+// ===== CODE RAIN CANVAS =====
+const canvas = document.getElementById('codeRain');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const codeChars = ['const', 'let', '=>', '{}', '</>', '//', 'fn', 'async', 'await', '0', '1', 'true', 'null', 'return', 'if', 'else', 'for', 'import', 'export', 'class', 'func', 'def', 'pub', 'mod', 'use', 'impl', 'trait', 'struct', 'enum', 'match', 'loop', 'while', 'try', 'catch', 'throw', 'new', 'this', 'self', 'super', 'type', 'interface', 'extends', 'implements'];
+const colors = ['#a78bfa', '#67e8f9', '#f0abfc', '#7c3aed'];
+const fontSize = 14;
+const columns = Math.floor(canvas.width / (fontSize * 3));
+const drops = new Array(columns).fill(0).map(() => Math.random() * -100);
+const speeds = new Array(columns).fill(0).map(() => 0.3 + Math.random() * 0.7);
+const charIndices = new Array(columns).fill(0).map(() => Math.floor(Math.random() * codeChars.length));
+
+function drawCodeRain() {
+  ctx.fillStyle = 'rgba(9, 9, 11, 0.08)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
+  
+  for (let i = 0; i < drops.length; i++) {
+    const char = codeChars[charIndices[i]];
+    const x = i * fontSize * 3;
+    const y = drops[i] * fontSize;
+    
+    const color = colors[i % colors.length];
+    ctx.fillStyle = color;
+    ctx.globalAlpha = 0.3 + Math.random() * 0.3;
+    ctx.fillText(char, x, y);
+    
+    // Glow effect on leading char
+    if (Math.random() > 0.95) {
+      ctx.fillStyle = color;
+      ctx.globalAlpha = 0.8;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = color;
+      ctx.fillText(char, x, y);
+      ctx.shadowBlur = 0;
+    }
+    
+    drops[i] += speeds[i];
+    
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
+      drops[i] = 0;
+      charIndices[i] = Math.floor(Math.random() * codeChars.length);
+    }
+  }
+  ctx.globalAlpha = 1;
+  
+  requestAnimationFrame(drawCodeRain);
+}
+drawCodeRain();
+
+// ===== NAV SCROLL =====
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ===== PARALLAX ON SCROLL =====
+const bgGrid = document.getElementById('bgGrid');
+const heroContent = document.getElementById('heroContent');
+const hero = document.getElementById('hero');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  
+  // Grid parallax
+  bgGrid.style.transform = `translateY(${scrollY * 0.3}px)`;
+  
+  // Hero content zoom out + fade
+  if (scrollY < window.innerHeight) {
+    const progress = scrollY / window.innerHeight;
+    heroContent.style.transform = `translateY(${scrollY * 0.3}px) scale(${1 - progress * 0.1})`;
+    heroContent.style.opacity = 1 - progress * 0.8;
+  }
+});
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const delay = Array.from(entry.target.parentElement.children).indexOf(entry.target) * 80;
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+// ===== 3D TILT + GLOW SPOT =====
+document.querySelectorAll('[data-selectable]').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -3;
+    const rotateY = ((x - centerX) / centerX) * 3;
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    card.style.setProperty('--mx', (x / rect.width * 100) + '%');
+    card.style.setProperty('--my', (y / rect.height * 100) + '%');
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    if (!card.classList.contains('selected')) {
+      card.style.transform = '';
+    }
+  });
+  
+  // Click to select + ripple
+  card.addEventListener('click', (e) => {
+    // Ripple effect
+    const rect = card.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    card.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+    
+    // Toggle selection
+    card.classList.toggle('selected');
+  });
+});
+
+// ===== FREQUENCY BARS (CTA) =====
+const ctaFrequency = document.getElementById('ctaFrequency');
+for (let i = 0; i < 40; i++) {
+  const bar = document.createElement('div');
+  bar.className = 'frequency-bar';
+  bar.style.animationDelay = (i * 0.05) + 's';
+  bar.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+  ctaFrequency.appendChild(bar);
+}
+
+// ===== PARALLAX FLOATING CARDS =====
+const floatCards = document.querySelectorAll('.float-card');
+hero.addEventListener('mousemove', (e) => {
+  const rect = hero.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width - 0.5;
+  const y = (e.clientY - rect.top) / rect.height - 0.5;
+  floatCards.forEach((card, i) => {
+    const depth = (i + 1) * 12;
+    card.style.marginLeft = `${x * depth}px`;
+    card.style.marginTop = `${y * depth}px`;
+  });
+});
+</script>
+
+</body>
+</html>
