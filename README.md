@@ -17,7 +17,7 @@
 
 [![Stack](https://img.shields.io/badge/stack-MCP_%7C_Antigravity_%7C_Control_Plane-8052ff?style=for-the-badge)](./STACK.md)
 [![Proof](https://img.shields.io/badge/proof-Antigravity_v5_%7C_38_testes-15846e?style=for-the-badge)](https://github.com/nsfwbunny/antigravity)
-[![Produto](https://img.shields.io/badge/produto-R$97_%E2%86%92_Acessar-ffb829?style=for-the-badge)](https://pay.cakto.com.br/pfuibmt_999515)
+[![Produto](https://img.shields.io/badge/produto-R$97_%E2%86%92_Acessar-ffb829?style=for-the-badge)](https://nsfwbunny.github.io/modo-operador/)
 [![Status](https://img.shields.io/badge/status-ativo-4ade80?style=for-the-badge)]()
 
 <br/>
@@ -61,7 +61,7 @@ Acervo público do método. Decisões e evidências de um sistema real em produ�
 | 📐 | [`STACK.md`](./STACK.md) | Stack técnica completa com exemplos reais |
 | 📋 | [`docs/DECISION-LEDGER-public.md`](./docs/DECISION-LEDGER-public.md) | Cada decisão do build — com contexto, evidência e data |
 | 🔬 | [`proofs/`](./proofs/) | Evidências verificáveis — sem prova, não entra |
-| 🗺️ | [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Estrutura dos 7 capítulos + 4 bônus |
+| 🗺️ | [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Estrutura dos 7 capítulos + bônus |
 
 ---
 
@@ -110,7 +110,7 @@ Workflow Pack       — 3 workflows JSON prontos para importar
 Daily Stack         — checklist operacional para Notion/Obsidian
 ```
 
-**→ Acesso via [pay.cakto.com.br/pfuibmt_999515](https://pay.cakto.com.br/pfuibmt_999515)**
+**→ Saiba mais e acesse: [modooperador — landing page](https://nsfwbunny.github.io/modo-operador/)**
 
 ---
 

@@ -138,8 +138,8 @@ section{position:relative;z-index:10;}
 .stack-card p{font-size:12px;color:var(--text-secondary);}
 
 .bonuses{padding:80px 0;border-top:1px solid var(--border);}
-.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px;}
-@media(max-width:640px){.bonus-grid{grid-template-columns:1fr;}}
+.bonus-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:48px;}
+@media(max-width:760px){.bonus-grid{grid-template-columns:1fr;}}
 .bonus-card{background:rgba(74,222,128,0.03);border:1px solid rgba(74,222,128,0.15);border-radius:14px;padding:28px;position:relative;overflow:hidden;transition:all 0.2s;}
 .bonus-card:hover{border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.06);}
 .bonus-card::before{content:'BÔNUS';position:absolute;top:16px;right:16px;font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--success);background:rgba(74,222,128,0.1);padding:3px 8px;border-radius:4px;}
@@ -249,7 +249,7 @@ footer p{font-size:13px;color:var(--text-tertiary);}
     <p class="proof-text"><strong>Early Access aberto</strong> · acesso em segundos após a compra</p>
   </div>
   <div class="proof-banner reveal">
-    <div class="proof-banner-label">❆ Produto construído com a própria stack que ensina</div>
+    <div class="proof-banner-label">✦ Produto construído com a própria stack que ensina</div>
     <p>Este playbook foi scaffoldado com MCP, versionado no <a href="https://github.com/nsfwbunny/modo-operador" target="_blank" rel="noopener noreferrer">GitHub público</a>, com decision ledger imutável e cada commit auditável — não é ficção de como operar, é o registro real de como foi feito.</p>
   </div>
 </section>
@@ -442,12 +442,6 @@ footer p{font-size:13px;color:var(--text-tertiary);}
     <h2 class="section-title">Você não compra só o playbook.<br>Você leva o kit operacional.</h2>
     <div class="bonus-grid">
       <div class="bonus-card">
-        <div class="bonus-icon">🧠</div>
-        <h3>Benni Master OS — Versão Compacta</h3>
-        <p>O arquivo de instruções que transforma qualquer IA em orquestrador com memória, scope isolation e session protocol. Plug-and-play no Claude, Perplexity e Cursor.</p>
-        <div class="bonus-value">Valor: <span>R$97</span> — incluso</div>
-      </div>
-      <div class="bonus-card">
         <div class="bonus-icon">🔌</div>
         <h3>MCP Starter Kit — Repositório Completo</h3>
         <p>Código-base TypeScript com endpoints documentados, exemplos de tools reais e estrutura pronta para o seu primeiro servidor MCP. Você só adapta para o seu caso.</p>
@@ -521,7 +515,6 @@ footer p{font-size:13px;color:var(--text-tertiary);}
       <ul class="price-includes">
         <li>7 capítulos completos com exemplos reais executados</li>
         <li>Acesso ao repositório público com commits auditáveis</li>
-        <li>Benni Master OS versão compacta (bônus)</li>
         <li>MCP Starter Kit — repositório TypeScript completo (bônus)</li>
         <li>Dashboard de saúde de projetos em HTML (bônus)</li>
         <li>Spec Templates operacionais usados no build real (bônus)</li>
