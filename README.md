@@ -15,7 +15,7 @@
 
 <br/>
 
-[![Stack](https://img.shields.io/badge/stack-MCP_%7C_Antigravity_%7C_Control_Plane-8052ff?style=for-the-badge)](./STACK.md)
+[![Stack](https://img.shields.io/badge/stack-MCP_%7C_Antigravity_%7C_Decision_Ledger-8052ff?style=for-the-badge)](./STACK.md)
 [![Proof](https://img.shields.io/badge/proof-Antigravity_v5_%7C_38_testes-15846e?style=for-the-badge)](https://github.com/nsfwbunny/antigravity)
 [![Produto](https://img.shields.io/badge/produto-R$97_%E2%86%92_Acessar-ffb829?style=for-the-badge)](https://nsfwbunny.github.io/modo-operador/)
 [![Status](https://img.shields.io/badge/status-ativo-4ade80?style=for-the-badge)]()
@@ -76,8 +76,8 @@ Acervo público do método. Decisões e evidências de um sistema real em produ�
 │  └─ runtime local — FastAPI + SQLite + Ollama              │
 │  └─ proof: github.com/nsfwbunny/antigravity (38 testes)   │
 ├─────────────────────────────────────────────────────────────┤
-│  BENNI CONTROL PLANE                                       │
-│  └─ Decision Ledger + snapshots de projeto                 │
+│  DECISION LEDGER                                           │
+│  └─ rastreamento de decisões e continuidade entre sessões  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
