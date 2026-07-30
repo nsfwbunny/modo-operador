@@ -103,14 +103,28 @@ Acervo público do método. Decisões e evidências de um sistema real em produ�
 ## O produto
 
 ```
-7 capítulos         — do prompt isolado ao sistema autônomo
-Prompt Library      — 12 specs testadas
-MCP Starter Kit     — servidor TypeScript funcional, roda com npm install
-Workflow Pack       — 3 workflows JSON prontos para importar
-Daily Stack         — checklist operacional para Notion/Obsidian
+7 capítulos    — do prompt isolado ao sistema autônomo
+               01 O novo jogo da IA aplicada
+               02 De prompt para sistema
+               03 Agentes como unidade de trabalho
+               04 Modelos locais e open source
+               05 MCP como camada de contexto universal
+               06 Antigravity — IDE de agentes Google
+               07 Sistemas que escalam sem você
+
+4 bônus        — arsenal do operador
+               Prompt Library: 3 specs completas testadas em projeto real
+               Prompt de pesquisa autônoma
+               Prompt de refatoração guiada
+               Checklist de ship de sistema
+
+3 templates    — copie, adapte, use
+               Spec de Agente
+               Configuração de Servidor MCP
+               Checklist de Ship de Sistema
 ```
 
-**→ Saiba mais e acesse: [modooperador — landing page](https://nsfwbunny.github.io/modo-operador/)**
+**→ Acesse o playbook completo: [modooperador.github.io](https://nsfwbunny.github.io/modo-operador/)**
 
 ---
 
