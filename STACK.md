@@ -13,77 +13,22 @@
 │              (você define o que precisa ser feito)       │
 └──────────────────────────────┬─────────────────────────┘
                                │  spec
-           ┌───────────────────┼───────────────────┐
-           ▼                   ▼                   ▼
-    ┌─────────────┐  ┌──────────────┐  ┌─────────────────┐
-    │    Jules    │  │     MCP      │  │   Antigravity   │
-    │  (coding)  │  │  (contexto)  │  │  (automações)   │
-    └──────┬──────┘  └──────┬───────┘  └──────┬──────────┘
-           │                │                  │
-           └────────────────┼──────────────────┘
-                            │  output
-           ┌────────────────▼──────────────────┐
+                 ┌─────────────┴─────────────┐
+                 ▼                           ▼
+        ┌──────────────┐         ┌─────────────────┐
+        │     MCP      │         │   Antigravity   │
+        │  (contexto)  │         │  (automações)   │
+        └──────┬───────┘         └──────┬──────────┘
+               │                        │
+               └───────────┬────────────┘
+                           │  output
+           ┌───────────────▼───────────────────┐
            │       BENNI CONTROL PLANE          │
            │   Decision Ledger + Snapshots      │
            └────────────────────────────────────┘
 ```
 
-**Princípio de arquitetura:** cada camada tem uma responsabilidade única. Jules escreve código. MCP conecta ferramentas. Antigravity orquestra workflows. O Control Plane rastreia decisões. Você define a intenção e revisa o output.
-
----
-
-## Jules — Agente de Coding Assíncrono
-
-**O que faz:** recebe uma spec em linguagem natural, lê o repositório inteiro, cria uma branch, implementa a solução e abre um PR com descrição do raciocínio.
-
-**Onde vive:** [labs.google.com/jules](https://labs.google.com/jules)
-
-**Fluxo operacional:**
-
-```text
-1. Você cria issue ou task descrevendo o que precisa
-2. Atribui ao Jules via interface do Google Labs
-3. Jules clona o repo e lê o código existente
-4. Jules cria branch, implementa, abre PR
-5. Você revisa, solicita ajustes ou faz merge
-```
-
-**Onde Jules performa melhor:**
-- Features com escopo limitado e critério de done claro
-- Refatoração seguindo padrão estabelecido no repo
-- Testes unitários para funções já escritas
-- Correção de bugs com reprodução clara na spec
-
-**Onde Jules falha (e como contornar):**
-
-| Falha | Contorno |
-|---|---|
-| Ambiguidade de arquitetura | Documente o padrão correto no README ou em comentários |
-| Tasks com múltiplos domínios | Separe em tasks distintas — uma por domínio |
-| Contexto de produto ausente | Cole o contexto diretamente na spec |
-| Scope creep | Adicione seção "O que NÃO fazer" com paths exatos |
-
-**Template de spec que funciona:**
-
-```markdown
-## Objetivo
-[O que precisa existir ao final — resultado, não processo]
-
-## Contexto
-[Stack, padrões existentes, decisões de arquitetura relevantes]
-
-## Comportamento esperado
-[Casos de uso reais, estados de loading/erro/sucesso]
-
-## Constraints técnicas
-[Bibliotecas permitidas/proibidas, versões, padrões a seguir]
-
-## Critério de done
-[Como validar sem testar tudo manualmente]
-
-## O que NÃO fazer
-[Arquivos fora do escopo, refatorações não solicitadas]
-```
+**Princípio de arquitetura:** cada camada tem uma responsabilidade única. MCP conecta ferramentas e dá contexto real ao agente. Antigravity orquestra workflows. O Control Plane rastreia decisões. Você define a intenção e revisa o output.
 
 ---
 
@@ -229,17 +174,17 @@ Isso elimina a necessidade de rediscutir decisões já tomadas e cria um rastro 
 Não use todas as ferramentas ao mesmo tempo desde o início. A ordem de adoção que funciona:
 
 ```text
-Semana 1: Jules para uma task bem definida
-  → aprende a escrever spec que funciona
-
-Semana 2: MCP com github + filesystem no Claude Desktop
+Semana 1: MCP com github + filesystem no Claude Desktop
   → aprende a dar acesso controlado ao agente
 
-Semana 3: Antigravity para uma automação que você já faz manualmente
+Semana 2: Antigravity para uma automação que você já faz manualmente
   → aprende a converter processo manual em workflow
 
-Semana 4: Control Plane para rastrear decisões do projeto ativo
+Semana 3: Control Plane para rastrear decisões do projeto ativo
   → aprende a criar continuidade entre sessões
+
+Semana 4: integrar as três camadas num fluxo único
+  → sistema que roda sem você presente
 ```
 
 Cada ferramenta resolve um problema específico. A integração é consequência do uso, não pré-requisito.

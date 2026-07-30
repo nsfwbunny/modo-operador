@@ -15,7 +15,7 @@
 
 <br/>
 
-[![Stack](https://img.shields.io/badge/stack-Jules_%7C_MCP_%7C_Antigravity-8052ff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6bTAgMTBMNCAxMmw4IDQgOC00eiIvPjwvc3ZnPg==)](./STACK.md)
+[![Stack](https://img.shields.io/badge/stack-MCP_%7C_Antigravity_%7C_Control_Plane-8052ff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6bTAgMTBMNCAxMmw4IDQgOC00eiIvPjwvc3ZnPg==)](./STACK.md)
 [![Proof](https://img.shields.io/badge/proof-Antigravity_v5_%7C_38_testes-15846e?style=for-the-badge)](https://github.com/nsfwbunny/antigravity)
 [![Landing](https://img.shields.io/badge/landing-modooperadorplaybook.netlify.app-0ea5e9?style=for-the-badge)](https://modooperadorplaybook.netlify.app)
 [![Produto](https://img.shields.io/badge/produto-R$97_no_Cakto-ffb829?style=for-the-badge)](https://modooperadorplaybook.netlify.app)
@@ -73,11 +73,6 @@ Este repositório foi construído usando exatamente o que documenta.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  JULES (Google Labs)                                        │
-│  └─ agente assíncrono de coding                            │
-│  └─ cria branch → escreve código → abre PR                 │
-│  └─ você escreve a spec. Jules executa.                    │
-├─────────────────────────────────────────────────────────────┤
 │  MCP — Model Context Protocol                              │
 │  └─ Claude Desktop conectado ao GitHub, filesystem, SQLite │
 │  └─ agente com acesso real ao ambiente — não só ao chat    │
@@ -105,22 +100,20 @@ Este repositório foi construído usando exatamente o que documenta.
 - FastAPI + SQLite + Ollama rodando local
 - Webhooks com HMAC, approval gate, audit trail imutável
 - 38 testes passando, 5 fases de build documentadas
-- Construído com Jules via spec, operado com MCP
 
-**Este repositório** — proof público v2
+**Este repositório** — proof público
 - Commits datados, decisões no [Decision Ledger](./docs/DECISION-LEDGER-public.md)
-- PRs abertos por Jules — histórico público e auditável
 - Landing page, playbook e bônus — tudo versionado
 
 ---
 
 ## O produto
 
-Este acérvo entrega **método e evidência**. O produto entrega **execução**:
+Este acervo entrega **método e evidência**. O produto entrega **execução**:
 
 ```
 7 capítulos         — do prompt isolado ao sistema autônomo
-Prompt Library      — 12 specs testadas (Jules, Cursor, Claude Code)
+Prompt Library      — 12 specs testadas (Cursor, Claude Code, MCP)
 MCP Starter Kit     — servidor TypeScript funcional, 5 tools, roda com npm install
 Workflow Pack       — 3 workflows JSON para Antigravity (pronto para importar)
 Daily Stack         — checklist operacional .md + .json para Notion/Obsidian
@@ -136,13 +129,14 @@ Daily Stack         — checklist operacional .md + .json para Notion/Obsidian
 modo-operador/
 ├── README.md                           ← você está aqui
 ├── STACK.md                            ← stack técnica completa
+├── AGENTS.md                           ← como agentes construíram este repo
 ├── docs/
 │   ├── DECISION-LEDGER-public.md       ← decisões rastreáveis
 │   ├── playbook-outline.md             ← 7 capítulos + 4 bônus
 │   ├── roadmap.md                      ← estado atual e próximos passos
 │   └── vision.md                       ← princípios do método
 ├── prompts/
-│   ├── README.md                       ← índice + quando usar cada spec
+│   └── README.md                       ← índice + quando usar cada spec
 ├── proofs/                             ← evidências de execução real
 └── index.html                          ← playbook completo (netlify deploy)
 ```
