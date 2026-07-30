@@ -17,7 +17,7 @@
 
 [![Stack](https://img.shields.io/badge/stack-Jules_%7C_MCP_%7C_Antigravity-8052ff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6bTAgMTBMNCAxMmw4IDQgOC00eiIvPjwvc3ZnPg==)](./STACK.md)
 [![Proof](https://img.shields.io/badge/proof-Antigravity_v5_%7C_38_testes-15846e?style=for-the-badge)](https://github.com/nsfwbunny/antigravity)
-[![Produto](https://img.shields.io/badge/produto-R$97_no_Cakto-ffb829?style=for-the-badge)](https://nsfwbunny.github.io/modo-operador)
+[![Produto](https://img.shields.io/badge/produto-R$97_no_Cakto-ffb829?style=for-the-badge)](https://pay.cakto.com.br/pfuibmt_999515)
 [![Status](https://img.shields.io/badge/status-ativo-4ade80?style=for-the-badge)]()
 
 <br/>
@@ -125,7 +125,9 @@ Workflow Pack       — 3 workflows JSON para Antigravity (pronto para importar)
 Daily Stack         — checklist operacional .md + .json para Notion/Obsidian
 ```
 
-**→ [nsfwbunny.github.io/modo-operador](https://nsfwbunny.github.io/modo-operador)**
+**→ [modooperadorplaybook.netlify.app](https://modooperadorplaybook.netlify.app)**
+
+**→ [Adquirir por R$97](https://pay.cakto.com.br/pfuibmt_999515)**
 
 ---
 
@@ -171,7 +173,7 @@ modo-operador/
 
 <br/>
 
-[`→ Ver o produto`](https://nsfwbunny.github.io/modo-operador)
+[`→ Ver o playbook`](https://modooperadorplaybook.netlify.app) &nbsp;·&nbsp; [`→ Adquirir R$97`](https://pay.cakto.com.br/pfuibmt_999515)
 
 <br/>
 
