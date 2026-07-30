@@ -15,10 +15,9 @@
 
 <br/>
 
-[![Stack](https://img.shields.io/badge/stack-MCP_%7C_Antigravity_%7C_Control_Plane-8052ff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6bTAgMTBMNCAxMmw4IDQgOC00eiIvPjwvc3ZnPg==)](./STACK.md)
+[![Stack](https://img.shields.io/badge/stack-MCP_%7C_Antigravity_%7C_Control_Plane-8052ff?style=for-the-badge)](./STACK.md)
 [![Proof](https://img.shields.io/badge/proof-Antigravity_v5_%7C_38_testes-15846e?style=for-the-badge)](https://github.com/nsfwbunny/antigravity)
-[![Landing](https://img.shields.io/badge/landing-modooperadorplaybook.netlify.app-0ea5e9?style=for-the-badge)](https://modooperadorplaybook.netlify.app)
-[![Produto](https://img.shields.io/badge/produto-R$97_no_Cakto-ffb829?style=for-the-badge)](https://modooperadorplaybook.netlify.app)
+[![Produto](https://img.shields.io/badge/produto-R$97_%E2%86%92_Acessar-ffb829?style=for-the-badge)](https://pay.cakto.com.br/pfuibmt_999515)
 [![Status](https://img.shields.io/badge/status-ativo-4ade80?style=for-the-badge)]()
 
 <br/>
@@ -55,36 +54,30 @@ A diferença não é de velocidade. É de **arquitetura**.
 
 ## Este repositório
 
-Acervo público do método. Código, decisões e evidências de um sistema real em produção.
+Acervo público do método. Decisões e evidências de um sistema real em produção.
 
 | | Arquivo | O que você encontra |
 |---|---|---|
-| 📐 | [`STACK.md`](./STACK.md) | Stack técnica completa com exemplos reais e copiáveis |
-| 🧠 | [`prompts/`](./prompts/) | Specs operacionais usadas no build deste produto |
+| 📐 | [`STACK.md`](./STACK.md) | Stack técnica completa com exemplos reais |
 | 📋 | [`docs/DECISION-LEDGER-public.md`](./docs/DECISION-LEDGER-public.md) | Cada decisão do build — com contexto, evidência e data |
 | 🔬 | [`proofs/`](./proofs/) | Evidências verificáveis — sem prova, não entra |
-| 🗺️ | [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Os 7 capítulos + 4 bônus — estrutura completa |
+| 🗺️ | [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Estrutura dos 7 capítulos + 4 bônus |
 
 ---
 
 ## A stack
 
-Este repositório foi construído usando exatamente o que documenta.
-
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  MCP — Model Context Protocol                              │
 │  └─ Claude Desktop conectado ao GitHub, filesystem, SQLite │
-│  └─ agente com acesso real ao ambiente — não só ao chat    │
 ├─────────────────────────────────────────────────────────────┤
 │  ANTIGRAVITY                                               │
-│  └─ runtime local de automações e workflows                │
-│  └─ FastAPI + SQLite + Ollama — sem custo de API           │
+│  └─ runtime local — FastAPI + SQLite + Ollama              │
 │  └─ proof: github.com/nsfwbunny/antigravity (38 testes)   │
 ├─────────────────────────────────────────────────────────────┤
 │  BENNI CONTROL PLANE                                       │
-│  └─ orquestrador com Decision Ledger e snapshots           │
-│  └─ rastreia decisões, estado e CI/CD                      │
+│  └─ Decision Ledger + snapshots de projeto                 │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -101,45 +94,23 @@ Este repositório foi construído usando exatamente o que documenta.
 - Webhooks com HMAC, approval gate, audit trail imutável
 - 38 testes passando, 5 fases de build documentadas
 
-**Este repositório** — proof público
+**Este repositório**
 - Commits datados, decisões no [Decision Ledger](./docs/DECISION-LEDGER-public.md)
-- Landing page, playbook e bônus — tudo versionado
+- Estrutura, stack e decisões — tudo versionado e auditável
 
 ---
 
 ## O produto
 
-Este acervo entrega **método e evidência**. O produto entrega **execução**:
-
 ```
 7 capítulos         — do prompt isolado ao sistema autônomo
-Prompt Library      — 12 specs testadas (Cursor, Claude Code, MCP)
-MCP Starter Kit     — servidor TypeScript funcional, 5 tools, roda com npm install
-Workflow Pack       — 3 workflows JSON para Antigravity (pronto para importar)
-Daily Stack         — checklist operacional .md + .json para Notion/Obsidian
+Prompt Library      — 12 specs testadas
+MCP Starter Kit     — servidor TypeScript funcional, roda com npm install
+Workflow Pack       — 3 workflows JSON prontos para importar
+Daily Stack         — checklist operacional para Notion/Obsidian
 ```
 
-**→ [modooperadorplaybook.netlify.app](https://modooperadorplaybook.netlify.app)**
-
----
-
-## Estrutura
-
-```
-modo-operador/
-├── README.md                           ← você está aqui
-├── STACK.md                            ← stack técnica completa
-├── AGENTS.md                           ← como agentes construíram este repo
-├── docs/
-│   ├── DECISION-LEDGER-public.md       ← decisões rastreáveis
-│   ├── playbook-outline.md             ← 7 capítulos + 4 bônus
-│   ├── roadmap.md                      ← estado atual e próximos passos
-│   └── vision.md                       ← princípios do método
-├── prompts/
-│   └── README.md                       ← índice + quando usar cada spec
-├── proofs/                             ← evidências de execução real
-└── index.html                          ← playbook completo (netlify deploy)
-```
+**→ Acesso via [pay.cakto.com.br/pfuibmt_999515](https://pay.cakto.com.br/pfuibmt_999515)**
 
 ---
 
@@ -161,10 +132,6 @@ modo-operador/
 **Operar IA é diferente de usar IA.**
 
 *A diferença está na arquitetura — não na ferramenta.*
-
-<br/>
-
-[`→ Ver o playbook`](https://modooperadorplaybook.netlify.app)
 
 <br/>
 

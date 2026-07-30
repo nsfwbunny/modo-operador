@@ -1,7 +1,7 @@
 # Stack do Operador — Documentação Técnica
 
 > Este documento descreve a stack usada para construir e operar o Modo Operador.
-> Cada ferramenta tem uma função específica no sistema. Nenhuma é opcional na arquitetura atual.
+> Cada ferramenta tem uma função específica no sistema.
 
 ---
 
@@ -28,7 +28,7 @@
            └────────────────────────────────────┘
 ```
 
-**Princípio de arquitetura:** cada camada tem uma responsabilidade única. MCP conecta ferramentas e dá contexto real ao agente. Antigravity orquestra workflows. O Control Plane rastreia decisões. Você define a intenção e revisa o output.
+**Princípio:** cada camada tem uma responsabilidade única. MCP conecta ferramentas. Antigravity orquestra workflows. Control Plane rastreia decisões. Você define intenção e revisa output.
 
 ---
 
@@ -42,14 +42,12 @@
 
 ```text
 Host (Claude Desktop / Cursor)
-  └── MCP Client (camada de comunicação)
-        └── MCP Server (processo que expõe ferramentas)
+  └── MCP Client
+        └── MCP Server
               └── Ferramenta (GitHub, filesystem, SQLite, APIs)
 ```
 
-**Instalação no Claude Desktop:**
-
-Edite `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) ou `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+**Instalação no Claude Desktop** (`~/Library/Application Support/Claude/claude_desktop_config.json`):
 
 ```json
 {
@@ -57,139 +55,87 @@ Edite `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) ou
     "github": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_seu_token"
-      }
+      "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_seu_token" }
     },
     "filesystem": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/seu-usuario/projetos"]
-    },
-    "sqlite": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sqlite", "/Users/seu-usuario/data.db"]
     }
   }
 }
 ```
 
-Reinicie o Claude Desktop. Ícone de ferramentas na barra inferior confirma ativação.
+**Servidores úteis:**
 
-**Servidores úteis para começar:**
-
-| Servidor | O que expõe | Caso de uso imediato |
+| Servidor | O que expõe | Caso de uso |
 |---|---|---|
-| `@mcp/github` | Repos, issues, PRs, commits | Agente que lê e escreve no repositório |
-| `@mcp/filesystem` | Leitura e escrita de arquivos | Agente que processa documentos locais |
-| `@mcp/sqlite` | Queries SQL em banco local | Agente que consulta e atualiza dados |
-| `@mcp/fetch` | Requisições HTTP | Agente que consome APIs externas |
-| `@mcp/puppeteer` | Controle de browser | Agente que navega e extrai dados de sites |
+| `@mcp/github` | Repos, issues, PRs | Agente que lê e escreve no repo |
+| `@mcp/filesystem` | Leitura/escrita de arquivos | Agente que processa docs locais |
+| `@mcp/sqlite` | Queries SQL | Agente que consulta banco local |
+| `@mcp/fetch` | HTTP requests | Agente que consome APIs |
+| `@mcp/puppeteer` | Browser | Agente que navega e extrai dados |
 
-**Regras de segurança inegociáveis:**
-- Token com escopo mínimo — `read-only` para o repo específico, não para toda a conta
-- Ações destrutivas (delete, deploy) sempre com confirmação humana explícita na spec
-- Nunca cole tokens no chat — use apenas o arquivo de configuração
-- Revogue tokens de desenvolvimento após cada sessão
+**Segurança:**
+- Token com escopo mínimo — apenas o repo necessário
+- Ações destrutivas sempre com confirmação humana na spec
+- Nunca cole tokens no chat
 
 ---
 
 ## Antigravity — Runtime Local de Automações
 
-**O que faz:** canvas visual de automações onde você conecta nós — triggers, ações, condições, agentes LLM — sem depender de cloud. Seus dados ficam na sua máquina. Zero custo por execução.
+**O que faz:** canvas visual onde você conecta nós (triggers, ações, LLMs) sem depender de cloud. Dados ficam na sua máquina.
 
-**Repositório público do proof:** [github.com/nsfwbunny/antigravity](https://github.com/nsfwbunny/antigravity)
+**Proof público:** [github.com/nsfwbunny/antigravity](https://github.com/nsfwbunny/antigravity)
 
-**Casos de uso reais em produção:**
+**Casos de uso:**
 
 ```text
 Content Pipeline
-  trigger: schedule diário 08h
-  ação: busca artigos via fetch MCP
-  ação: filtra por relevância com LLM
-  output: resumo em arquivo local + notificação
+  trigger: schedule diário
+  ação: busca + filtra com LLM
+  output: arquivo local + notificação
 
-Code Review Assistant
-  trigger: webhook — PR aberto no GitHub
-  ação: lê diff via GitHub MCP
-  ação: gera review com LLM
-  output: comentário automático no PR
-
-Document Processor
-  trigger: arquivo novo em /entrada
-  ação: extrai dados estruturados com LLM
-  output: linha em CSV ou banco SQLite
+Code Review Automático
+  trigger: webhook PR aberto
+  ação: lê diff + gera review com LLM
+  output: comentário no PR
 ```
 
-**Ollama como backend local:**
+**Backend local com Ollama:**
 
 ```bash
-# Instalar Ollama
 curl -fsSL https://ollama.ai/install.sh | sh
-
-# Baixar modelo
 ollama pull llama3.1:8b
-
-# Testar
-curl http://localhost:11434/api/generate -d '{"model":"llama3.1:8b","prompt":"ok?"}'
 ```
 
-No nó LLM do Antigravity: `model: ollama/llama3.1:8b` + `base_url: http://localhost:11434`
-
-**AMV — Automação Mínima Viável:**
-
-Antes de construir o workflow perfeito, construa o mais simples que resolve o problema. Um AMV tem três critérios:
-1. Roda sem intervenção sua
-2. Falha de forma visível (você sabe quando quebrou)
-3. Output utilizável sem pós-processamento manual
+**AMV — Automação Mínima Viável:** roda sem intervenção, falha de forma visível, output utilizável direto.
 
 ---
 
-## Benni Control Plane — Orquestração e Rastreamento
+## Benni Control Plane — Orquestração
 
-**O que faz:** sistema de controle com Decision Ledger (decisões rastreáveis com contexto), snapshots de projeto e MCP ativo. Usado para rastrear o estado de cada projeto, registrar decisões tomadas e garantir continuidade entre sessões.
-
-**Conceito central — Decision Ledger:**
-
-Cada decisão relevante é registrada com:
-- O que foi decidido
-- Por quê (contexto e evidência)
-- Data e ID rastreável
-
-Isso elimina a necessidade de rediscutir decisões já tomadas e cria um rastro auditável do build.
-
-**Exemplo de entrada no ledger:**
+**O que faz:** Decision Ledger (decisões rastreáveis), snapshots de projeto, continuidade entre sessões.
 
 ```json
 {
-  "decision": "Entrega do produto via link privado pós-compra no Cakto — sem repo público, sem PDF externo.",
-  "context": "Cakto tem checkout nativo, área de membros e envio de email automático. Reduz stack a uma ferramenta.",
+  "decision": "Entrega via Cakto — checkout nativo, área de membros, email automático.",
+  "context": "Reduz stack a uma ferramenta. Zero infra adicional.",
   "created_at": "2026-07-24T09:55:34.270Z"
 }
 ```
 
 ---
 
-## Princípio de integração
-
-Não use todas as ferramentas ao mesmo tempo desde o início. A ordem de adoção que funciona:
+## Ordem de adoção
 
 ```text
-Semana 1: MCP com github + filesystem no Claude Desktop
-  → aprende a dar acesso controlado ao agente
-
-Semana 2: Antigravity para uma automação que você já faz manualmente
-  → aprende a converter processo manual em workflow
-
-Semana 3: Control Plane para rastrear decisões do projeto ativo
-  → aprende a criar continuidade entre sessões
-
-Semana 4: integrar as três camadas num fluxo único
-  → sistema que roda sem você presente
+Semana 1: MCP + Claude Desktop → acesso controlado ao agente
+Semana 2: Antigravity → converter processo manual em workflow
+Semana 3: Control Plane → continuidade entre sessões
+Semana 4: integrar as três camadas → sistema que roda sem você
 ```
-
-Cada ferramenta resolve um problema específico. A integração é consequência do uso, não pré-requisito.
 
 ---
 
-*Documentação técnica viva — atualizada conforme o stack evolui.*\
-*Produto completo com specs copiáveis e bônus em [modooperadorplaybook.netlify.app](https://modooperadorplaybook.netlify.app)*
+*Produto completo com specs e bônus via [pay.cakto.com.br/pfuibmt_999515](https://pay.cakto.com.br/pfuibmt_999515)*
