@@ -17,7 +17,8 @@
 
 [![Stack](https://img.shields.io/badge/stack-Jules_%7C_MCP_%7C_Antigravity-8052ff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6bTAgMTBMNCAxMmw4IDQgOC00eiIvPjwvc3ZnPg==)](./STACK.md)
 [![Proof](https://img.shields.io/badge/proof-Antigravity_v5_%7C_38_testes-15846e?style=for-the-badge)](https://github.com/nsfwbunny/antigravity)
-[![Produto](https://img.shields.io/badge/produto-R$97_no_Cakto-ffb829?style=for-the-badge)](https://pay.cakto.com.br/pfuibmt_999515)
+[![Landing](https://img.shields.io/badge/landing-modooperadorplaybook.netlify.app-0ea5e9?style=for-the-badge)](https://modooperadorplaybook.netlify.app)
+[![Produto](https://img.shields.io/badge/produto-R$97_no_Cakto-ffb829?style=for-the-badge)](https://modooperadorplaybook.netlify.app)
 [![Status](https://img.shields.io/badge/status-ativo-4ade80?style=for-the-badge)]()
 
 <br/>
@@ -62,7 +63,7 @@ Acervo público do método. Código, decisões e evidências de um sistema real 
 | 🧠 | [`prompts/`](./prompts/) | Specs operacionais usadas no build deste produto |
 | 📋 | [`docs/DECISION-LEDGER-public.md`](./docs/DECISION-LEDGER-public.md) | Cada decisão do build — com contexto, evidência e data |
 | 🔬 | [`proofs/`](./proofs/) | Evidências verificáveis — sem prova, não entra |
-| 🗺️ | [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Os 7 capítulos do playbook — estrutura completa |
+| 🗺️ | [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Os 7 capítulos + 4 bônus — estrutura completa |
 
 ---
 
@@ -113,9 +114,9 @@ Este repositório foi construído usando exatamente o que documenta.
 
 ---
 
-## O produto (não está aqui)
+## O produto
 
-Este acervo entrega **método e evidência**. O produto entrega **execução**:
+Este acérvo entrega **método e evidência**. O produto entrega **execução**:
 
 ```
 7 capítulos         — do prompt isolado ao sistema autônomo
@@ -127,8 +128,6 @@ Daily Stack         — checklist operacional .md + .json para Notion/Obsidian
 
 **→ [modooperadorplaybook.netlify.app](https://modooperadorplaybook.netlify.app)**
 
-**→ [Adquirir por R$97](https://pay.cakto.com.br/pfuibmt_999515)**
-
 ---
 
 ## Estrutura
@@ -139,15 +138,13 @@ modo-operador/
 ├── STACK.md                            ← stack técnica completa
 ├── docs/
 │   ├── DECISION-LEDGER-public.md       ← decisões rastreáveis
-│   ├── playbook-outline.md             ← 7 capítulos detalhados
+│   ├── playbook-outline.md             ← 7 capítulos + 4 bônus
 │   ├── roadmap.md                      ← estado atual e próximos passos
 │   └── vision.md                       ← princípios do método
 ├── prompts/
 │   ├── README.md                       ← índice + quando usar cada spec
-│   ├── jules-task-active.md            ← spec para Jules (feature ativa)
-│   ├── jules-scaffold.md               ← scaffold de projeto novo
-│   └── antigravity-playbook-fill.md    ← automação de preenchimento
-└── proofs/                             ← evidências de execução real
+├── proofs/                             ← evidências de execução real
+└── index.html                          ← playbook completo (netlify deploy)
 ```
 
 ---
@@ -173,7 +170,7 @@ modo-operador/
 
 <br/>
 
-[`→ Ver o playbook`](https://modooperadorplaybook.netlify.app) &nbsp;·&nbsp; [`→ Adquirir R$97`](https://pay.cakto.com.br/pfuibmt_999515)
+[`→ Ver o playbook`](https://modooperadorplaybook.netlify.app)
 
 <br/>
 

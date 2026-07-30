@@ -23,7 +23,7 @@
 ### Cap 2 — De prompt para sistema
 **O que você sai capaz de fazer:** Escrever uma spec operacional — não um prompt — que um agente consegue executar de forma autônoma e verificável.
 
-**Conteúdo:** Anatomia de uma spec vs. anatomia de um prompt. O que precisar estar na spec para o agente não precisar perguntar. Controle por evidência, não por microgestão.
+**Conteúdo:** Anatomia de uma spec vs. anatomia de um prompt. O que precisa estar na spec para o agente não precisar perguntar. Controle por evidência, não por microgestão.
 
 **Exemplo real:** Spec usada para Jules scaffoldar o repositório `modo-operador` — com resultado auditável em commits datados.
 
@@ -70,4 +70,24 @@
 
 **Conteúdo:** Repo público como prova de trabalho. Decision Ledger como narrativa de autoridade. Produto digital construído com a mesma stack que ensina. Distribuição por evidência, não por volume de conteúdo.
 
-**Exemplo real:** Este playbook — produto digital em HTML, distribuído via Cakto, com acervo público no GitHub, construído com Jules + MCP + Control Plane, gerando receita com R$97 Early Access.
+**Exemplo real:** Este playbook — produto digital em HTML, distribuído via Cakto por R$97, com acervo público no GitHub, construído com Jules + MCP + Control Plane.
+
+---
+
+## Bônus
+
+### Bônus 01 — Prompt Library
+12 specs completas testadas em projetos reais (Jules, Cursor, Claude Code).
+
+### Bônus 02 — MCP Server Starter
+Servidor TypeScript funcional com 5 tools. Roda com `npm install`.
+
+### Bônus 03 — Templates de Spec
+Templates reutilizáveis para Análise, Feature, Bug Fix e Refactor.
+
+### Bônus 04 — Arsenal do Operador
+Lista curada de ferramentas com descrição de quando usar cada uma.
+
+---
+
+**→ [Adquirir por R$97](https://pay.cakto.com.br/pfuibmt_999515)**
