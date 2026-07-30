@@ -40,18 +40,22 @@ body{
   letter-spacing:-0.011em;
 }
 body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.02;
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.025;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 .scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--accent-deep),var(--accent),var(--accent-2));z-index:200;box-shadow:0 0 10px var(--glow-strong);transition:width 0.1s ease-out;}
-.bg-gradient{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(124,58,237,0.18),transparent),radial-gradient(ellipse 60% 40% at 80% 50%,rgba(103,232,249,0.07),transparent),radial-gradient(ellipse 60% 40% at 20% 100%,rgba(240,171,252,0.06),transparent);}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 30%,transparent 80%);}
+
+/* CODE RAIN CANVAS — background vivo */
+#codeCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.07;}
+
+.bg-gradient{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(124,58,237,0.22),transparent),radial-gradient(ellipse 60% 40% at 80% 50%,rgba(103,232,249,0.08),transparent),radial-gradient(ellipse 60% 40% at 20% 100%,rgba(240,171,252,0.07),transparent);}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 30%,transparent 80%);}
 .container{max-width:860px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
 .container--wide{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 32px;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:rgba(9,9,11,0.75);border-bottom:1px solid var(--border);transition:all 0.3s ease;}
-nav.scrolled{background:rgba(9,9,11,0.9);border-bottom-color:var(--border-hover);}
+nav.scrolled{background:rgba(9,9,11,0.92);border-bottom-color:var(--border-hover);}
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-0.02em;color:var(--text);text-decoration:none;}
 .logo-mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--accent-deep),var(--accent));position:relative;box-shadow:0 0 20px var(--glow);animation:logoPulse 3s ease-in-out infinite;}
@@ -78,7 +82,7 @@ nav.scrolled{background:rgba(9,9,11,0.9);border-bottom-color:var(--border-hover)
 .cta-block{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:24px;}
 .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 36px;background:linear-gradient(135deg,var(--accent-deep),var(--accent));color:#fff;text-decoration:none;border-radius:10px;font-weight:700;font-size:1rem;letter-spacing:-0.01em;transition:all 0.25s;border:none;cursor:pointer;box-shadow:0 0 40px rgba(124,58,237,0.3);position:relative;overflow:hidden;}
 .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent);opacity:0;transition:opacity 0.2s;}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(124,58,237,0.45);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(124,58,237,0.5);}
 .btn-primary:hover::before{opacity:1;}
 .btn-primary svg{flex-shrink:0;}
 .cta-meta{font-size:13px;color:var(--text-tertiary);display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;}
@@ -86,6 +90,24 @@ nav.scrolled{background:rgba(9,9,11,0.9);border-bottom-color:var(--border-hover)
 .hero-social-proof{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:8px;padding:16px 24px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;max-width:520px;margin-left:auto;margin-right:auto;}
 .proof-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary);}
 .proof-num{font-size:18px;font-weight:800;color:var(--text);letter-spacing:-0.02em;}
+
+/* TERMINAL BLOCK — hero visual */
+.terminal{margin:48px auto 0;max-width:640px;background:rgba(12,12,15,0.85);border:1px solid var(--border-strong);border-radius:14px;overflow:hidden;box-shadow:0 0 60px rgba(124,58,237,0.12),0 24px 64px rgba(0,0,0,0.5);backdrop-filter:blur(12px);}
+.terminal-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(255,255,255,0.04);border-bottom:1px solid var(--border);}
+.t-dot{width:11px;height:11px;border-radius:50%;}
+.t-dot:nth-child(1){background:#ff5f57;}
+.t-dot:nth-child(2){background:#febc2e;}
+.t-dot:nth-child(3){background:#28c840;}
+.terminal-title{flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-tertiary);}
+.terminal-body{padding:20px 24px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;min-height:180px;}
+.t-line{display:flex;gap:10px;margin-bottom:2px;}
+.t-prompt{color:var(--accent);user-select:none;}
+.t-cmd{color:var(--text);}
+.t-out{color:var(--text-secondary);padding-left:20px;}
+.t-success{color:var(--success);}
+.t-accent{color:var(--accent-2);}
+.t-cursor{display:inline-block;width:8px;height:14px;background:var(--accent);animation:blink 1s step-end infinite;vertical-align:middle;margin-left:2px;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
 
 /* PROBLEM SECTION */
 .section{padding:80px 0;position:relative;}
@@ -140,7 +162,7 @@ nav.scrolled{background:rgba(9,9,11,0.9);border-bottom-color:var(--border-hover)
 
 /* PRICING */
 .pricing-box{background:rgba(255,255,255,0.025);border:1px solid rgba(167,139,250,0.3);border-radius:20px;padding:40px;text-align:center;position:relative;overflow:hidden;max-width:480px;margin:40px auto 0;}
-.pricing-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(124,58,237,0.12),transparent);pointer-events:none;}
+.pricing-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(124,58,237,0.15),transparent);pointer-events:none;}
 .pricing-badge{display:inline-block;background:linear-gradient(90deg,var(--accent-deep),var(--accent));color:#fff;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:20px;}
 .pricing-name{font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px;}
 .pricing-desc{font-size:14px;color:var(--text-secondary);margin-bottom:28px;line-height:1.6;}
@@ -191,6 +213,10 @@ footer a:hover{color:var(--text);}
 <body>
 
 <div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- CODE RAIN CANVAS -->
+<canvas id="codeCanvas"></canvas>
+
 <div class="bg-gradient"></div>
 <div class="bg-grid"></div>
 
@@ -282,6 +308,24 @@ footer a:hover{color:var(--text);}
         </div>
       </div>
     </div>
+
+    <!-- TERMINAL HERO -->
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+        <span class="terminal-title">modo-operador — bash</span>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd" id="termLine1"></span></div>
+        <div class="t-line" id="termOut1" style="display:none"><span class="t-out t-accent" id="termOut1txt"></span></div>
+        <div class="t-line" id="termLine2wrap" style="display:none"><span class="t-prompt">$</span><span class="t-cmd" id="termLine2"></span></div>
+        <div class="t-line" id="termOut2" style="display:none"><span class="t-out t-success" id="termOut2txt"></span></div>
+        <div class="t-line" id="termLine3wrap" style="display:none"><span class="t-prompt">$</span><span class="t-cmd" id="termLine3"></span></div>
+        <div class="t-line" id="termOut3" style="display:none"><span class="t-out" id="termOut3txt"></span></div>
+        <div class="t-line" id="termFinalWrap" style="display:none"><span class="t-prompt">$</span><span class="t-cursor" id="termFinalCursor"></span></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -464,7 +508,7 @@ footer a:hover{color:var(--text);}
         <div class="bonus-icon">🔄</div>
         <div>
           <h3>Bonus #3 — Template de Control Plane para Perplexity Spaces</h3>
-          <p>O template de instrução de Space que ativa o Benni Master OS — o sistema de contexto persistente que este playbook descreve em prática real.</p>
+          <p>O template de instrução de Space que ativa o sistema de contexto persistente — o método que este playbook descreve em prática real.</p>
           <span class="bonus-tag">Template · Plug-and-play</span>
         </div>
       </div>
@@ -635,7 +679,93 @@ footer a:hover{color:var(--text);}
 </footer>
 
 <script>
-// Scroll progress
+// ─── CODE RAIN BACKGROUND ───────────────────────────────────────────────────
+(function(){
+  const canvas = document.getElementById('codeCanvas');
+  const ctx = canvas.getContext('2d');
+  const SNIPPETS = [
+    'agent.run()','jules.commit()','mcp.call()','ctx.push()','deploy()',
+    'await task','git push','npm run','ollama pull','n8n exec',
+    'spec.md','PR #42','merge()','fork()','build ok',
+    'artifact.create()','decision.add()','snapshot()','loop()',
+    '{"role":"agent"}','project.list()','run.plan()','health: 98',
+    'jules → PR','mcp → tools','agente → exec','system → live',
+    'control_plane','benni_os','jarvas.loop','auto_deploy',
+  ];
+  let cols, drops, fontSize;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    fontSize = 13;
+    cols = Math.floor(canvas.width / (fontSize * 7));
+    drops = Array.from({length: cols}, () => Math.random() * -100);
+  }
+
+  function draw() {
+    ctx.fillStyle = 'rgba(9,9,11,0.18)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    drops.forEach((y, i) => {
+      const snippet = SNIPPETS[Math.floor(Math.random() * SNIPPETS.length)];
+      const alpha = 0.3 + Math.random() * 0.5;
+      // alternates between purple accent and cyan accent
+      ctx.fillStyle = i % 3 === 0
+        ? `rgba(167,139,250,${alpha})`
+        : i % 3 === 1
+          ? `rgba(103,232,249,${alpha * 0.7})`
+          : `rgba(250,250,250,${alpha * 0.25})`;
+      ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
+      ctx.fillText(snippet, i * fontSize * 7, y * fontSize);
+      drops[i] = (y * fontSize > canvas.height && Math.random() > 0.975) ? 0 : y + 0.4;
+    });
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  setInterval(draw, 50);
+})();
+
+// ─── TERMINAL TYPEWRITER ────────────────────────────────────────────────────
+(function(){
+  const lines = [
+    { el: 'termLine1',    text: 'jules task "build modo-operador landing"',   delay: 400 },
+    { el: 'termOut1',     text: '→ branch criado: feat/landing-v2',            outId: 'termOut1txt', delay: 900 },
+    { el: 'termLine2wrap',el2: 'termLine2', text: 'mcp call artifact.create --type=doc', delay: 1800 },
+    { el: 'termOut2',     text: '✓ artifact persisted · id: art_0042',         outId: 'termOut2txt', delay: 2400 },
+    { el: 'termLine3wrap',el2: 'termLine3', text: 'git push && deploy --prod', delay: 3200 },
+    { el: 'termOut3',     text: '⚡ deployed → nsfwbunny.github.io/modo-operador', outId: 'termOut3txt', delay: 3800 },
+    { el: 'termFinalWrap',                                                      delay: 4600 },
+  ];
+
+  function typeText(elId, text, cb) {
+    const el = document.getElementById(elId);
+    if (!el) return cb && cb();
+    let i = 0;
+    const iv = setInterval(() => {
+      el.textContent = text.slice(0, ++i);
+      if (i >= text.length) { clearInterval(iv); cb && cb(); }
+    }, 28);
+  }
+
+  function runStep(idx) {
+    if (idx >= lines.length) return;
+    const step = lines[idx];
+    setTimeout(() => {
+      const wrapper = document.getElementById(step.el);
+      if (wrapper) wrapper.style.display = 'flex';
+      const textTarget = step.el2 || (step.outId ? step.outId : null);
+      const text = step.text;
+      if (textTarget && text) {
+        typeText(textTarget, text, () => runStep(idx + 1));
+      } else {
+        runStep(idx + 1);
+      }
+    }, step.delay);
+  }
+  runStep(0);
+})();
+
+// ─── SCROLL PROGRESS ────────────────────────────────────────────────────────
 const sp = document.getElementById('scrollProgress');
 window.addEventListener('scroll', () => {
   const st = window.scrollY;
@@ -643,13 +773,13 @@ window.addEventListener('scroll', () => {
   sp.style.width = (st / dh * 100) + '%';
 }, {passive: true});
 
-// Nav scroll
+// ─── NAV SCROLL ─────────────────────────────────────────────────────────────
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 }, {passive: true});
 
-// FAQ
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
   const isOpen = item.classList.contains('open');
@@ -657,7 +787,7 @@ function toggleFaq(btn) {
   if (!isOpen) item.classList.add('open');
 }
 
-// Scroll reveal
+// ─── SCROLL REVEAL ───────────────────────────────────────────────────────────
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
