@@ -40,9 +40,9 @@ A diferença não é de velocidade. É de **arquitetura**.
 
 Um playbook de 7 capítulos construído com a mesma stack que ensina.
 
-Não é teoria. É o registro real de operação — commits datados, specs testadas, decision ledger imutável.
+Não é teoria. é o registro real de operação — commits datados, specs testadas, decision ledger imutável.
 
-**→ Acesse o produto: [modooperador.github.io](https://nsfwbunny.github.io/modo-operador)**
+**→ Acesse o produto: [modooperador.benni-os.net](https://modooperador.benni-os.net)**
 
 ---
 
@@ -122,3 +122,5 @@ Opera múltiplos canais, sistemas autônomos e produtos digitais — todos sobre
 
 *Modo Operador é o único produto público da marca Benni OS para o mercado BR.*  
 *Tudo o que está aqui — é real, rodando, e auditável.*
+
+**→ [modooperador.benni-os.net](https://modooperador.benni-os.net)**
