@@ -1,38 +1,22 @@
-<div align="center">
-
-<br/>
-
 ```
- ███╗   ███╗ ██████╗ ██████╗  ██████╗      ██████╗ ██████╗ ███████╗██████╗  █████╗ ██████╗  ██████╗ ██████╗
- ████╗ ████║██╔═══██╗██╔══██╗██╔═══██╗    ██╔═══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔═══██╗██╔══██╗
- ██╔████╔██║██║   ██║██║  ██║██║   ██║    ██║   ██║██████╔╝█████╗  ██████╔╝███████║██║  ██║██║   ██║██████╔╝
- ██║╚██╔╝██║██║   ██║██║  ██║██║   ██║    ██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗██╔══██║██║  ██║██║   ██║██╔══██╗
- ██║ ╚═╝ ██║╚██████╔╝██████╔╝╚██████╔╝    ╚██████╔╝██║     ███████╗██║  ██║██║  ██║██████╔╝╚██████╔╝██║  ██║
- ╚═╝     ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝      ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+ ██████╗ ███████╗███╗   ██╗███╗   ██╗██╗      ██████╗ ███████╗
+██╔══██╗██╔════╝████╗  ██║████╗  ██║██║     ██╔═══██╗██╔════╝
+██████╔╝█████╗  ██╔██╗ ██║██╔██╗ ██║██║     ██║   ██║███████╗
+██╔══██╗██╔══╝  ██║╚██╗██║██║╚██╗██║██║     ██║   ██║╚════██║
+██████╔╝███████╗██║ ╚████║██║ ╚████║██║     ╚██████╔╝███████║
+╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚══════╝
+                              OPERADOR
 ```
 
-### IA como camada de execução — não como ferramenta de consulta.
+### O único produto público da marca. Feito por quem opera — não por quem explica.
 
-<br/>
-
-[![Stack](https://img.shields.io/badge/stack-MCP_%7C_Antigravity_%7C_Decision_Ledger-8052ff?style=for-the-badge)](./STACK.md)
-[![Proof](https://img.shields.io/badge/proof-Antigravity_v5_%7C_38_testes-15846e?style=for-the-badge)](https://github.com/nsfwbunny/antigravity)
-[![Produto](https://img.shields.io/badge/produto-R$97_%E2%86%92_Acessar-ffb829?style=for-the-badge)](https://nsfwbunny.github.io/modo-operador/)
-[![Status](https://img.shields.io/badge/status-ativo-4ade80?style=for-the-badge)]()
-
-<br/>
-
-> **Se você fechar o laptop agora — o que continua acontecendo?**
-
-<br/>
-
-</div>
+> **Sistema Operacional Soberano de Agentes — construído por Benni Alencar, rodando em produção desde 2026.**
 
 ---
 
 ## O problema
 
-A maioria das pessoas usa IA como uma busca glorificada:
+A maioria usa IA como busca glorificada:
 
 ```
 [você] → prompt → resposta → copiar → colar → repetir → [você de novo]
@@ -40,7 +24,7 @@ A maioria das pessoas usa IA como uma busca glorificada:
 
 O gargalo é você. Sempre você. O sistema não age sem você.
 
-O operador usa assim:
+O Operador usa assim:
 
 ```
 [você] → intenção → spec → agente executa → sistema entrega → [você revisa]
@@ -52,101 +36,89 @@ A diferença não é de velocidade. É de **arquitetura**.
 
 ---
 
-## Este repositório
+## O que é o Modo Operador
 
-Acervo público do método. Decisões e evidências de um sistema real em produção.
+Um playbook de 7 capítulos construído com a mesma stack que ensina.
 
-| | Arquivo | O que você encontra |
+Não é teoria. É o registro real de operação — commits datados, specs testadas, decision ledger imutável.
+
+**→ Acesse o produto: [modooperador.github.io](https://nsfwbunny.github.io/modo-operador)**
+
+---
+
+## O ecossistema open source
+
+Este produto é sustentado por infraestrutura real — parte dela pública, parte licença Benni OS.
+
+### Arsenal público (MIT — use, estude, contribua)
+
+| Projeto | O que é | Status |
 |---|---|---|
-| 📐 | [`STACK.md`](./STACK.md) | Stack técnica completa com exemplos reais |
-| 📋 | [`docs/DECISION-LEDGER-public.md`](./docs/DECISION-LEDGER-public.md) | Cada decisão do build — com contexto, evidência e data |
-| 🔬 | [`proofs/`](./proofs/) | Evidências verificáveis — sem prova, não entra |
-| 🗺️ | [`docs/playbook-outline.md`](./docs/playbook-outline.md) | Estrutura dos 7 capítulos + bônus |
+| [**mcp-forge**](https://github.com/benni-os/mcp-forge) | Framework FastAPI-style para construir servidores MCP em Python | ✅ estável |
+| [**benni-nexus**](https://github.com/benni-os/benni-nexus) | LLM gateway inteligente — Ollama, Groq, OpenAI, Gemini em um endpoint | ✅ estável |
+| [**benni-operator-gateway**](https://github.com/benni-os/benni-operator-gateway) | Gateway MCP com Approval Gate, Decision Ledger e hot-reload | ✅ estável |
+
+Esses três repos são **prova pública de capacidade** — não entrega do sistema completo.
+
+### Stack proprietária (Licença Benni OS)
+
+| Projeto | O que é |
+|---|---|
+| **JARVAS-2** | Runtime autônomo de agentes — Wave 6 com billing nativo, rate limiting, UsageMeter |
+| **Benni Control Plane** | Full self-hosted stack — 5 serviços, nginx gateway, `api.benni-os.net` |
+| **antigravity** | IDE de agentes local — FastAPI + SQLite + Ollama, 38 testes, 5 fases documentadas |
+
+Esses são o que separa o operador intermediário do **Operador Soberano**.
 
 ---
 
-## A stack
+## Por que este produto existe
+
+Na Benni OS, tudo é versionado, auditável e com prova em código.
+
+O Modo Operador é o único ponto de contato público da marca com o mercado brasileiro.
+
+Não é um curso sobre IA. É o **mapa de operação** — como um sistema autônomo é arquitetado, construído e mantido em produção.
+
+A prova não é slide. É commit.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  MCP — Model Context Protocol                              │
-│  └─ Claude Desktop conectado ao GitHub, filesystem, SQLite │
-├─────────────────────────────────────────────────────────────┤
-│  ANTIGRAVITY                                               │
-│  └─ runtime local — FastAPI + SQLite + Ollama              │
-│  └─ proof: github.com/nsfwbunny/antigravity (38 testes)   │
-├─────────────────────────────────────────────────────────────┤
-│  DECISION LEDGER                                           │
-│  └─ rastreamento de decisões e continuidade entre sessões  │
-└─────────────────────────────────────────────────────────────┘
+git log --oneline --graph
+* Modo Operador — decisões, specs, commits
+* benni-operator-gateway — aprovação, gate, ledger
+* mcp-forge — ferramentas declarativas, sem boilerplate
+* benni-nexus — roteamento inteligente entre LLMs
 ```
 
-→ Documentação técnica completa: [`STACK.md`](./STACK.md)
-
 ---
 
-## Prova
-
-> *Proof é código rodando e commits datados. Não é slide.*
-
-**[Antigravity](https://github.com/nsfwbunny/antigravity)** — proof público v5
-- FastAPI + SQLite + Ollama rodando local
-- Webhooks com HMAC, approval gate, audit trail imutável
-- 38 testes passando, 5 fases de build documentadas
-
-**Este repositório**
-- Commits datados, decisões no [Decision Ledger](./docs/DECISION-LEDGER-public.md)
-- Estrutura, stack e decisões — tudo versionado e auditável
-
----
-
-## O produto
+## Estrutura do produto
 
 ```
-7 capítulos    — do prompt isolado ao sistema autônomo
-               01 O novo jogo da IA aplicada
-               02 De prompt para sistema
-               03 Agentes como unidade de trabalho
-               04 Modelos locais e open source
-               05 MCP como camada de contexto universal
-               06 Antigravity — IDE de agentes Google
-               07 Sistemas que escalam sem você
+7 capítulos — do prompt isolado ao sistema soberano
+  01  O novo jogo da IA aplicada
+  02  De prompt para sistema
+  03  Agentes como unidade de trabalho
+  04  MCP como camada de contexto universal
+  05  Runtime local e automações sem cloud
+  06  Memória de projeto e Decision Ledger
+  07  Sistemas que escalam sem você
 
-4 bônus        — arsenal do operador
-               Prompt Library: 3 specs completas testadas em projeto real
-               Prompt de pesquisa autônoma
-               Prompt de refatoração guiada
-               Checklist de ship de sistema
-
-3 templates    — copie, adapte, use
-               Spec de Agente
-               Configuração de Servidor MCP
-               Checklist de Ship de Sistema
+3 bônus — arsenal do operador
+  MCP Starter Kit completo (TypeScript)
+  Dashboard de saúde de projetos
+  Spec Templates operacionais testados em produção
 ```
 
-**→ Acesse o playbook completo: [modooperador.github.io](https://nsfwbunny.github.io/modo-operador/)**
+---
+
+## Sobre o operador
+
+**Benni Alencar** — criador de conteúdo, desenvolvedor de automações com IA, mantenedor do ecossistema [Benni OS](https://github.com/benni-os).
+
+Opera múltiplos canais, sistemas autônomos e produtos digitais — todos sobre a mesma stack que você encontra neste repo.
 
 ---
 
-## Ecossistema
-
-| Repositório | Papel | Status |
-|---|---|---|
-| [`modo-operador`](https://github.com/nsfwbunny/modo-operador) | Acervo público do método | `✅ ativo` |
-| [`antigravity`](https://github.com/nsfwbunny/antigravity) | Runtime local — 38 testes, 5 fases | `✅ público` |
-| [`monomo`](https://github.com/nsfwbunny/monomo) | Agent workspace premium | `🔄 build` |
-| [`benni-master-os-skills`](https://github.com/nsfwbunny/benni-master-os-skills) | Skills operacionais | `🔒 privado` |
-
----
-
-<div align="center">
-
-<br/>
-
-**Operar IA é diferente de usar IA.**
-
-*A diferença está na arquitetura — não na ferramenta.*
-
-<br/>
-
-</div>
+*Modo Operador é o único produto público da marca Benni OS para o mercado BR.*  
+*Tudo o que está aqui — é real, rodando, e auditável.*
