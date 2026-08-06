@@ -19,7 +19,7 @@
 ## Fase 4 — Offer
 - [x] Playbook completo — 7 capítulos + 4 bônus publicados
 - [x] Plataforma de venda configurada: **Cakto**
-- [x] Preço definido: **R$97**
+- [x] Preço definido: **R$147**
 - [x] Link de compra ativo: [pay.cakto.com.br/pfuibmt_999515](https://pay.cakto.com.br/pfuibmt_999515)
 - [ ] Landing page de vendas dedicada (CTA → Cakto)
 - [ ] Primeira venda

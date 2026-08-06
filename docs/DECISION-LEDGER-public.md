@@ -42,6 +42,11 @@ Cada entrada tem contexto, alternativa considerada e data.
 - **Decisão:** README + STACK.md + prompts/ + proofs/ + docs/ como acervo livre
 - **Motivo:** Acervo público entrega método e prova; produto entrega execução completa. Visitante aprende antes de comprar.
 
-### [2026-07-28] Versão 1.0.0 — projeto fechado para distribuição
-- **Decisão:** Produto, landing e checkout estão completos. Próxima fase: tráfego e conversão.
-- **Motivo:** Ship > perfeição. O que está no ar é suficiente para vender. Melhorias entram por demanda real.
+### [2026-08-06] Atualização de preço e checkout
+- **Decisão:** R$147 — Checkout Cakto oficial (`https://pay.cakto.com.br/pfuibmt_999515`)
+- **Alternativas:** R$97, R$197
+- **Motivo:** Ajuste de posicionamento de valor com inclusão de áudios MP3 nativos para todos os 7 capítulos.
+
+### [2026-08-06] Integração de Players de Áudio na Landing Page
+- **Decisão:** Embed nativo HTML5 com custom styling para `audio/cap01.mp3` a `audio/cap07.mp3`
+- **Motivo:** Permitir degustação/execução direta da narração de cada capítulo na landing page, aumentando engajamento e percepção de valor.

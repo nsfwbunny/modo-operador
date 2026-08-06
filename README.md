@@ -9,7 +9,7 @@
 <br/><br/>
 
 [![Site](https://img.shields.io/badge/modooperador.benni--os.net-00C853?style=for-the-badge&logo=internetexplorer&logoColor=white)](https://modooperador.benni-os.net)
-[![Produto BR](https://img.shields.io/badge/Produto_BR-R%2497-0066FF?style=for-the-badge&logo=pix&logoColor=white)](https://modooperador.benni-os.net)
+[![Produto BR](https://img.shields.io/badge/Produto_BR-R%24147-0066FF?style=for-the-badge&logo=pix&logoColor=white)](https://modooperador.benni-os.net)
 [![Stack](https://img.shields.io/badge/Stack-Benni_OS-0D0D0D?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/benni-os)
 [![Part of Benni OS](https://img.shields.io/badge/Part%20of-Benni%20OS-00C853?style=for-the-badge&logo=github&logoColor=white)](https://github.com/benni-os)
 
@@ -65,14 +65,14 @@ O Operador usa assim:
 ## 📦 Estrutura do Produto
 
 ```
-7 capítulos — do prompt isolado ao sistema soberano
-  01  O novo jogo da IA aplicada
-  02  De prompt para sistema
-  03  Agentes como unidade de trabalho
-  04  MCP como camada de contexto universal
-  05  Runtime local e automações sem cloud
-  06  Memória de projeto e Decision Ledger
-  07  Sistemas que escalam sem você
+7 capítulos (texto + áudio MP3 completo) — do prompt isolado ao sistema soberano
+  01  O novo jogo da IA aplicada (áudio cap01.mp3)
+  02  De prompt para sistema (áudio cap02.mp3)
+  03  Agentes como unidade de trabalho (áudio cap03.mp3)
+  04  MCP como camada de contexto universal (áudio cap04.mp3)
+  05  Runtime local e automações sem cloud (áudio cap05.mp3)
+  06  Memória de projeto e Decision Ledger (áudio cap06.mp3)
+  07  Sistemas que escalam sem você (áudio cap07.mp3)
 
 3 bônus — arsenal do operador
   MCP Starter Kit completo (TypeScript)
@@ -119,7 +119,7 @@ O Operador usa assim:
 | 🐍 **mcp-forge** | FastAPI-style Python MCP framework | 🟢 PyPI |
 | ⚡ **benni-nexus** | LLM gateway — route, balance, observe | 🟢 npm |
 | 🤖 **JARVAS-2** | Autonomous dispatch + Wave 6 billing | 🔥 Hot |
-| 🛍️ **Modo Operador** | Produto BR — R$97 — you are here | 🟢 Live |
+| 🛍️ **Modo Operador** | Produto BR — R$147 — you are here | 🟢 Live |
 
 <br/>
 
@@ -147,7 +147,7 @@ git log --oneline --graph
 
 **Modo Operador** — *O único produto público da marca [Benni OS](https://github.com/benni-os) para o mercado BR*
 
-`7_CAPÍTULOS` • `3_BÔNUS` • `STACK_REAL` • `PROVA_EM_CÓDIGO` • `R$97`
+`7_CAPÍTULOS` • `7_ÁUDIOS_MP3` • `3_BÔNUS` • `STACK_REAL` • `PROVA_EM_CÓDIGO` • `R$147`
 
 **→ [modooperador.benni-os.net](https://modooperador.benni-os.net)**
 

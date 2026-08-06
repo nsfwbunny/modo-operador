@@ -70,7 +70,7 @@
 
 **Conteúdo:** Repo público como prova de trabalho. Decision Ledger como narrativa de autoridade. Produto digital construído com a mesma stack que ensina. Distribuição por evidência, não por volume de conteúdo.
 
-**Exemplo real:** Este playbook — produto digital em HTML, distribuído via Cakto por R$97, com acervo público no GitHub, construído com Jules + MCP + Control Plane.
+**Exemplo real:** Este playbook — produto digital em HTML, distribuído via Cakto por R$147, com acervo público no GitHub, construído com Jules + MCP + Control Plane.
 
 ---
 
@@ -90,4 +90,4 @@ Lista curada de ferramentas com descrição de quando usar cada uma.
 
 ---
 
-**→ [Adquirir por R$97](https://pay.cakto.com.br/pfuibmt_999515)**
+**→ [Adquirir por R$147](https://pay.cakto.com.br/pfuibmt_999515)**

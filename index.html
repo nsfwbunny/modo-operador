@@ -123,6 +123,10 @@ section{position:relative;z-index:10;}
 .chapter-info h4{font-size:15px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;}
 .chapter-info p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px;}
 .chapter-outcome{font-size:12px;color:var(--accent);background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.15);border-radius:6px;padding:5px 10px;display:inline-block;}
+.chapter-audio-box{margin-top:14px;background:rgba(124,58,237,0.06);border:1px solid rgba(167,139,250,0.2);border-radius:10px;padding:12px 14px;}
+.chapter-audio-header{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px;}
+.chapter-audio-header svg{width:14px;height:14px;flex-shrink:0;}
+.chapter-audio-player{width:100%;height:36px;outline:none;border-radius:8px;filter:invert(0.92) hue-rotate(180deg);}
 .chapter-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;margin-top:2px;}
 .tag-core{background:rgba(167,139,250,0.12);color:var(--accent);border:1px solid rgba(167,139,250,0.2);}
 
@@ -213,7 +217,7 @@ footer p{font-size:13px;color:var(--text-tertiary);}
     </svg>
     Modo Operador
   </div>
-  <a href="#pricing" class="nav-cta">Quero acesso — R$97</a>
+  <a href="#pricing" class="nav-cta">Quero acesso — R$147</a>
 </nav>
 
 <!-- HERO -->
@@ -332,6 +336,16 @@ footer p{font-size:13px;color:var(--text-tertiary);}
           <h4>O novo jogo da IA aplicada</h4>
           <p>O ciclo manual vs. o ciclo do operador. Por que o gargalo é você, não o modelo. A diferença entre velocidade e arquitetura.</p>
           <span class="chapter-outcome">→ identificar se você usa IA ou opera IA — e o que mudar</span>
+          <div class="chapter-audio-box">
+            <div class="chapter-audio-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Ouvir Capítulo 01 (Áudio MP3)</span>
+            </div>
+            <audio controls preload="metadata" class="chapter-audio-player">
+              <source src="audio/cap01.mp3" type="audio/mpeg">
+              Seu navegador não suporta o elemento de áudio.
+            </audio>
+          </div>
         </div>
         <div class="chapter-tag tag-core">CORE</div>
       </div>
@@ -341,6 +355,16 @@ footer p{font-size:13px;color:var(--text-tertiary);}
           <h4>De prompt para sistema</h4>
           <p>Anatomia de uma spec vs. anatomia de um prompt. O que precisa estar na spec para o agente não precisar perguntar. Controle por evidência.</p>
           <span class="chapter-outcome">→ escrever specs operacionais que um agente executa de forma autônoma</span>
+          <div class="chapter-audio-box">
+            <div class="chapter-audio-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Ouvir Capítulo 02 (Áudio MP3)</span>
+            </div>
+            <audio controls preload="metadata" class="chapter-audio-player">
+              <source src="audio/cap02.mp3" type="audio/mpeg">
+              Seu navegador não suporta o elemento de áudio.
+            </audio>
+          </div>
         </div>
         <div class="chapter-tag tag-core">CORE</div>
       </div>
@@ -350,6 +374,16 @@ footer p{font-size:13px;color:var(--text-tertiary);}
           <h4>Agentes como unidade de trabalho</h4>
           <p>O que define um agente vs. um assistente. Como escolher a granularidade certa de tarefa. Loop de handoff entre agentes.</p>
           <span class="chapter-outcome">→ criar agente especializado para tarefa repetível sem você em cada passo</span>
+          <div class="chapter-audio-box">
+            <div class="chapter-audio-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Ouvir Capítulo 03 (Áudio MP3)</span>
+            </div>
+            <audio controls preload="metadata" class="chapter-audio-player">
+              <source src="audio/cap03.mp3" type="audio/mpeg">
+              Seu navegador não suporta o elemento de áudio.
+            </audio>
+          </div>
         </div>
         <div class="chapter-tag tag-core">CORE</div>
       </div>
@@ -359,6 +393,16 @@ footer p{font-size:13px;color:var(--text-tertiary);}
           <h4>MCP como camada de contexto</h4>
           <p>O que é MCP e por que é diferente de uma integração comum. Setup com mcp-forge. 5 tools que resolvem 80% dos casos reais.</p>
           <span class="chapter-outcome">→ conectar agente ao seu GitHub, filesystem e banco via MCP</span>
+          <div class="chapter-audio-box">
+            <div class="chapter-audio-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Ouvir Capítulo 04 (Áudio MP3)</span>
+            </div>
+            <audio controls preload="metadata" class="chapter-audio-player">
+              <source src="audio/cap04.mp3" type="audio/mpeg">
+              Seu navegador não suporta o elemento de áudio.
+            </audio>
+          </div>
         </div>
         <div class="chapter-tag tag-core">CORE</div>
       </div>
@@ -368,6 +412,16 @@ footer p{font-size:13px;color:var(--text-tertiary);}
           <h4>Runtime local e automações sem cloud</h4>
           <p>FastAPI + SQLite + Ollama como stack local. benni-nexus como LLM router. Webhooks com approval gate. Automação Mínima Viável.</p>
           <span class="chapter-outcome">→ construir workflow recorrente útil sem sua presença constante</span>
+          <div class="chapter-audio-box">
+            <div class="chapter-audio-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Ouvir Capítulo 05 (Áudio MP3)</span>
+            </div>
+            <audio controls preload="metadata" class="chapter-audio-player">
+              <source src="audio/cap05.mp3" type="audio/mpeg">
+              Seu navegador não suporta o elemento de áudio.
+            </audio>
+          </div>
         </div>
         <div class="chapter-tag tag-core">CORE</div>
       </div>
@@ -377,6 +431,16 @@ footer p{font-size:13px;color:var(--text-tertiary);}
           <h4>Memória de projeto e Decision Ledger</h4>
           <p>Como estruturar rastreamento de decisões, snapshots e continuidade entre sessões. O padrão que o operador usa — e como você constrói o seu.</p>
           <span class="chapter-outcome">→ operar projetos com memória, rastreabilidade e continuidade real</span>
+          <div class="chapter-audio-box">
+            <div class="chapter-audio-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Ouvir Capítulo 06 (Áudio MP3)</span>
+            </div>
+            <audio controls preload="metadata" class="chapter-audio-player">
+              <source src="audio/cap06.mp3" type="audio/mpeg">
+              Seu navegador não suporta o elemento de áudio.
+            </audio>
+          </div>
         </div>
         <div class="chapter-tag tag-core">CORE</div>
       </div>
@@ -386,6 +450,16 @@ footer p{font-size:13px;color:var(--text-tertiary);}
           <h4>Sistema soberano que escala sem você</h4>
           <p>Repo público como prova de trabalho. Decision Ledger como narrativa de autoridade. Produto digital construído com a mesma stack que ensina. O que continua acontecendo quando você fecha o laptop.</p>
           <span class="chapter-outcome">→ transformar seu sistema em ativo digital que gera receita sem você presente</span>
+          <div class="chapter-audio-box">
+            <div class="chapter-audio-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Ouvir Capítulo 07 (Áudio MP3)</span>
+            </div>
+            <audio controls preload="metadata" class="chapter-audio-player">
+              <source src="audio/cap07.mp3" type="audio/mpeg">
+              Seu navegador não suporta o elemento de áudio.
+            </audio>
+          </div>
         </div>
         <div class="chapter-tag tag-core">CORE</div>
       </div>
@@ -427,7 +501,7 @@ footer p{font-size:13px;color:var(--text-tertiary);}
     <div class="stats-bar">
       <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">capítulos com exemplos reais</div></div>
       <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">repos open source auditáveis agora</div></div>
-      <div class="stat-item"><div class="stat-num">R$97</div><div class="stat-label">acesso único vitalício</div></div>
+      <div class="stat-item"><div class="stat-num">R$147</div><div class="stat-label">acesso único vitalício</div></div>
     </div>
   </div>
 </section>
@@ -468,10 +542,11 @@ footer p{font-size:13px;color:var(--text-tertiary);}
     <div class="price-card">
       <div class="price-badge">⚡ Early Access — preço de lançamento</div>
       <div class="price-old">De R$197</div>
-      <div class="price-main"><span>R$</span><em>97</em></div>
+      <div class="price-main"><span>R$</span><em>147</em></div>
       <div class="price-period">pagamento único · acesso imediato</div>
       <ul class="price-includes">
         <li>7 capítulos completos com exemplos reais executados</li>
+        <li>Versão em áudio dos 7 capítulos (narração MP3 completa)</li>
         <li>Acesso aos 3 repos open source do ecossistema Benni OS</li>
         <li>MCP Starter Kit com mcp-forge — estrutura pronta (bônus)</li>
         <li>Dashboard de saúde de projetos em HTML (bônus)</li>
@@ -480,7 +555,7 @@ footer p{font-size:13px;color:var(--text-tertiary);}
       </ul>
       <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width:100%;justify-content:center;font-size:18px;padding:18px;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        Quero acesso por R$97
+        Quero acesso por R$147
       </a>
       <div class="price-guarantee">🔒 Pagamento seguro via Cakto · Garantia de 7 dias</div>
     </div>
@@ -529,7 +604,7 @@ footer p{font-size:13px;color:var(--text-tertiary);}
   <p>Esse é o teste de um sistema soberano. O Modo Operador te ensina a passar nele.</p>
   <a href="https://pay.cakto.com.br/pfuibmt_999515" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:18px;padding:18px 48px;">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-    Quero acesso por R$97 →
+    Quero acesso por R$147 →
   </a>
   <p style="margin-top:16px;font-size:13px;color:var(--text-tertiary);">🔒 Pagamento seguro via Cakto · Acesso imediato · Garantia de 7 dias</p>
 </section>
